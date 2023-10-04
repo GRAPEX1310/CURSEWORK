@@ -21,27 +21,7 @@ void Recipe::SetDishName(std::string newDishName)
 
 bool Recipe::DeleteRecipeFolder(std::string directoryName)
 {
-	directoryName = "C:\\Users\\sasha\\source\\repos\\RECIPEBOOK\\RECIPEBOOK\\RECIPEBOOK\\Recipes\\" + directoryName;
-	struct stat stat_info;
-	stat(directoryName.c_str(), &stat_info);
-
-	if (stat_info.st_mode & S_IFDIR)
-	{
-		//int result = 
-		remove(directoryName.c_str());
-		/*
-		if (result == 0) 
-		{
-			return true;
-		}
-		*/
-	}
-
-	else 
-	{
-		return false;
-	}
-
+	return 0;
 }
 bool Recipe::CreateRecipeFolder(std::string directoryName)
 {
