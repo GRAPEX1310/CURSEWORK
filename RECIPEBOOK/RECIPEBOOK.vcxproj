@@ -123,12 +123,15 @@
   <ItemGroup>
     <ClCompile Include="GRAPHICS.cpp" />
     <ClCompile Include="Recipe.cpp" />
+    <ClCompile Include="SearchEngine.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GRAPHICS.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Recipe.h" />
+    <ClInclude Include="SearchEngine.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

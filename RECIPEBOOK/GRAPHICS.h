@@ -45,20 +45,23 @@ namespace RECIPEBOOK {
 
 	private: System::Windows::Forms::Label^ dishNameSearchLabel;
 	private: System::Windows::Forms::Label^ commentSearchLabel;
-	private: System::Windows::Forms::TextBox^ commentSearchTextBox;
+	private: System::Windows::Forms::TextBox^ categoriesSearchTextBox;
+
 	private: System::Windows::Forms::Label^ stepPhraseSearchLabel;
 	private: System::Windows::Forms::TextBox^ commentTextBox;
 
 	private: System::Windows::Forms::TextBox^ maxMarkTextBox;
 	private: System::Windows::Forms::TextBox^ minCookingTimeTextBox;
+	private: System::Windows::Forms::TextBox^ minAllTimeTextBox;
 
 
-	private: System::Windows::Forms::TextBox^ textBox4;
+
 	private: System::Windows::Forms::TextBox^ minMarkTextBox;
 	private: System::Windows::Forms::TextBox^ maxCookingTimeTextBox;
+	private: System::Windows::Forms::TextBox^ maxAllTimeTextBox;
 
 
-	private: System::Windows::Forms::TextBox^ textBox7;
+
 	private: System::Windows::Forms::TextBox^ maxPreparingTimeTextBox;
 
 	private: System::Windows::Forms::TextBox^ minPreparingTimeTextBox;
@@ -90,7 +93,8 @@ namespace RECIPEBOOK {
 	private: System::Windows::Forms::ListBox^ listBox1;
 	private: System::Windows::Forms::Label^ currentRecipeLabel;
 	private: System::Windows::Forms::PictureBox^ currentRecipePictureBox;
-	private: System::Windows::Forms::Label^ currentReciepeComment;
+	private: System::Windows::Forms::Label^ currentReciepeCommentLabel;
+
 	private: System::Windows::Forms::Label^ currentRecipeCategoryLabel;
 	private: System::Windows::Forms::Label^ currentRecipePreparingTimeLabel;
 
@@ -105,6 +109,9 @@ namespace RECIPEBOOK {
 
 	private: System::Windows::Forms::Label^ currentRecipeMarkLabel;
 	private: System::Windows::Forms::Button^ startSearchButton;
+	private: System::Windows::Forms::GroupBox^ radioButtonsGroupBox;
+
+
 
 
 
@@ -132,15 +139,15 @@ namespace RECIPEBOOK {
 			this->dashLabel1 = (gcnew System::Windows::Forms::Label());
 			this->dishNameSearchLabel = (gcnew System::Windows::Forms::Label());
 			this->commentSearchLabel = (gcnew System::Windows::Forms::Label());
-			this->commentSearchTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->categoriesSearchTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->stepPhraseSearchLabel = (gcnew System::Windows::Forms::Label());
 			this->commentTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->maxMarkTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->minCookingTimeTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->minAllTimeTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->minMarkTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->maxCookingTimeTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
+			this->maxAllTimeTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->maxPreparingTimeTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->minPreparingTimeTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->categoriesLabel = (gcnew System::Windows::Forms::Label());
@@ -162,7 +169,7 @@ namespace RECIPEBOOK {
 			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->currentRecipeLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipePictureBox = (gcnew System::Windows::Forms::PictureBox());
-			this->currentReciepeComment = (gcnew System::Windows::Forms::Label());
+			this->currentReciepeCommentLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipeCategoryLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipePreparingTimeLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipeIngridientsLabel = (gcnew System::Windows::Forms::Label());
@@ -171,7 +178,9 @@ namespace RECIPEBOOK {
 			this->currentREcipeCaloriesLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipeMarkLabel = (gcnew System::Windows::Forms::Label());
 			this->startSearchButton = (gcnew System::Windows::Forms::Button());
+			this->radioButtonsGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentRecipePictureBox))->BeginInit();
+			this->radioButtonsGroupBox->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// searchLabel
@@ -254,12 +263,12 @@ namespace RECIPEBOOK {
 			this->commentSearchLabel->TabIndex = 7;
 			this->commentSearchLabel->Text = L"Фраза из личного комментария";
 			// 
-			// commentSearchTextBox
+			// categoriesSearchTextBox
 			// 
-			this->commentSearchTextBox->Location = System::Drawing::Point(48, 157);
-			this->commentSearchTextBox->Name = L"commentSearchTextBox";
-			this->commentSearchTextBox->Size = System::Drawing::Size(224, 20);
-			this->commentSearchTextBox->TabIndex = 8;
+			this->categoriesSearchTextBox->Location = System::Drawing::Point(48, 157);
+			this->categoriesSearchTextBox->Name = L"categoriesSearchTextBox";
+			this->categoriesSearchTextBox->Size = System::Drawing::Size(224, 20);
+			this->categoriesSearchTextBox->TabIndex = 8;
 			// 
 			// stepPhraseSearchLabel
 			// 
@@ -293,12 +302,12 @@ namespace RECIPEBOOK {
 			this->minCookingTimeTextBox->Size = System::Drawing::Size(63, 20);
 			this->minCookingTimeTextBox->TabIndex = 12;
 			// 
-			// textBox4
+			// minAllTimeTextBox
 			// 
-			this->textBox4->Location = System::Drawing::Point(48, 609);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(66, 20);
-			this->textBox4->TabIndex = 13;
+			this->minAllTimeTextBox->Location = System::Drawing::Point(48, 609);
+			this->minAllTimeTextBox->Name = L"minAllTimeTextBox";
+			this->minAllTimeTextBox->Size = System::Drawing::Size(66, 20);
+			this->minAllTimeTextBox->TabIndex = 13;
 			// 
 			// minMarkTextBox
 			// 
@@ -314,12 +323,12 @@ namespace RECIPEBOOK {
 			this->maxCookingTimeTextBox->Size = System::Drawing::Size(60, 20);
 			this->maxCookingTimeTextBox->TabIndex = 15;
 			// 
-			// textBox7
+			// maxAllTimeTextBox
 			// 
-			this->textBox7->Location = System::Drawing::Point(212, 609);
-			this->textBox7->Name = L"textBox7";
-			this->textBox7->Size = System::Drawing::Size(60, 20);
-			this->textBox7->TabIndex = 16;
+			this->maxAllTimeTextBox->Location = System::Drawing::Point(212, 609);
+			this->maxAllTimeTextBox->Name = L"maxAllTimeTextBox";
+			this->maxAllTimeTextBox->Size = System::Drawing::Size(60, 20);
+			this->maxAllTimeTextBox->TabIndex = 16;
 			// 
 			// maxPreparingTimeTextBox
 			// 
@@ -470,7 +479,7 @@ namespace RECIPEBOOK {
 			// selectUnionRadioButton
 			// 
 			this->selectUnionRadioButton->AutoSize = true;
-			this->selectUnionRadioButton->Location = System::Drawing::Point(104, 834);
+			this->selectUnionRadioButton->Location = System::Drawing::Point(43, 19);
 			this->selectUnionRadioButton->Name = L"selectUnionRadioButton";
 			this->selectUnionRadioButton->Size = System::Drawing::Size(105, 17);
 			this->selectUnionRadioButton->TabIndex = 32;
@@ -481,7 +490,7 @@ namespace RECIPEBOOK {
 			// selectIntersectionRadioButton
 			// 
 			this->selectIntersectionRadioButton->AutoSize = true;
-			this->selectIntersectionRadioButton->Location = System::Drawing::Point(104, 857);
+			this->selectIntersectionRadioButton->Location = System::Drawing::Point(43, 52);
 			this->selectIntersectionRadioButton->Name = L"selectIntersectionRadioButton";
 			this->selectIntersectionRadioButton->Size = System::Drawing::Size(103, 17);
 			this->selectIntersectionRadioButton->TabIndex = 33;
@@ -494,7 +503,7 @@ namespace RECIPEBOOK {
 			this->selectModeLabel->AutoSize = true;
 			this->selectModeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->selectModeLabel->Location = System::Drawing::Point(76, 800);
+			this->selectModeLabel->Location = System::Drawing::Point(71, 799);
 			this->selectModeLabel->Name = L"selectModeLabel";
 			this->selectModeLabel->Size = System::Drawing::Size(167, 20);
 			this->selectModeLabel->TabIndex = 34;
@@ -527,16 +536,16 @@ namespace RECIPEBOOK {
 			this->currentRecipePictureBox->TabIndex = 37;
 			this->currentRecipePictureBox->TabStop = false;
 			// 
-			// currentReciepeComment
+			// currentReciepeCommentLabel
 			// 
-			this->currentReciepeComment->AutoSize = true;
-			this->currentReciepeComment->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->currentReciepeComment->Location = System::Drawing::Point(1388, 19);
-			this->currentReciepeComment->Name = L"currentReciepeComment";
-			this->currentReciepeComment->Size = System::Drawing::Size(365, 20);
-			this->currentReciepeComment->TabIndex = 38;
-			this->currentReciepeComment->Text = L"Личный комментарий к текущему рецепту";
+			this->currentReciepeCommentLabel->AutoSize = true;
+			this->currentReciepeCommentLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->currentReciepeCommentLabel->Location = System::Drawing::Point(1333, 85);
+			this->currentReciepeCommentLabel->Name = L"currentReciepeCommentLabel";
+			this->currentReciepeCommentLabel->Size = System::Drawing::Size(365, 20);
+			this->currentReciepeCommentLabel->TabIndex = 38;
+			this->currentReciepeCommentLabel->Text = L"Личный комментарий к текущему рецепту";
 			// 
 			// currentRecipeCategoryLabel
 			// 
@@ -623,6 +632,17 @@ namespace RECIPEBOOK {
 			this->startSearchButton->TabIndex = 46;
 			this->startSearchButton->Text = L"поиск";
 			this->startSearchButton->UseVisualStyleBackColor = true;
+			this->startSearchButton->Click += gcnew System::EventHandler(this, &GRAPHICS::startSearchButton_Click);
+			// 
+			// radioButtonsGroupBox
+			// 
+			this->radioButtonsGroupBox->Controls->Add(this->selectUnionRadioButton);
+			this->radioButtonsGroupBox->Controls->Add(this->selectIntersectionRadioButton);
+			this->radioButtonsGroupBox->Location = System::Drawing::Point(48, 834);
+			this->radioButtonsGroupBox->Name = L"radioButtonsGroupBox";
+			this->radioButtonsGroupBox->Size = System::Drawing::Size(215, 85);
+			this->radioButtonsGroupBox->TabIndex = 47;
+			this->radioButtonsGroupBox->TabStop = false;
 			// 
 			// GRAPHICS
 			// 
@@ -630,6 +650,7 @@ namespace RECIPEBOOK {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
 			this->ClientSize = System::Drawing::Size(1904, 1041);
+			this->Controls->Add(this->radioButtonsGroupBox);
 			this->Controls->Add(this->startSearchButton);
 			this->Controls->Add(this->currentRecipeMarkLabel);
 			this->Controls->Add(this->currentREcipeCaloriesLabel);
@@ -638,13 +659,11 @@ namespace RECIPEBOOK {
 			this->Controls->Add(this->currentRecipeIngridientsLabel);
 			this->Controls->Add(this->currentRecipePreparingTimeLabel);
 			this->Controls->Add(this->currentRecipeCategoryLabel);
-			this->Controls->Add(this->currentReciepeComment);
+			this->Controls->Add(this->currentReciepeCommentLabel);
 			this->Controls->Add(this->currentRecipePictureBox);
 			this->Controls->Add(this->currentRecipeLabel);
 			this->Controls->Add(this->listBox1);
 			this->Controls->Add(this->selectModeLabel);
-			this->Controls->Add(this->selectIntersectionRadioButton);
-			this->Controls->Add(this->selectUnionRadioButton);
 			this->Controls->Add(this->resultLabel);
 			this->Controls->Add(this->ingridientsSearchTextBox);
 			this->Controls->Add(this->ingridientLabel);
@@ -660,15 +679,15 @@ namespace RECIPEBOOK {
 			this->Controls->Add(this->categoriesLabel);
 			this->Controls->Add(this->minPreparingTimeTextBox);
 			this->Controls->Add(this->maxPreparingTimeTextBox);
-			this->Controls->Add(this->textBox7);
+			this->Controls->Add(this->maxAllTimeTextBox);
 			this->Controls->Add(this->maxCookingTimeTextBox);
 			this->Controls->Add(this->minMarkTextBox);
-			this->Controls->Add(this->textBox4);
+			this->Controls->Add(this->minAllTimeTextBox);
 			this->Controls->Add(this->minCookingTimeTextBox);
 			this->Controls->Add(this->maxMarkTextBox);
 			this->Controls->Add(this->commentTextBox);
 			this->Controls->Add(this->stepPhraseSearchLabel);
-			this->Controls->Add(this->commentSearchTextBox);
+			this->Controls->Add(this->categoriesSearchTextBox);
 			this->Controls->Add(this->commentSearchLabel);
 			this->Controls->Add(this->dishNameSearchLabel);
 			this->Controls->Add(this->dashLabel1);
@@ -684,11 +703,14 @@ namespace RECIPEBOOK {
 			this->Text = L"RECIPEBOOK";
 			this->Load += gcnew System::EventHandler(this, &GRAPHICS::GRAPHICS_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentRecipePictureBox))->EndInit();
+			this->radioButtonsGroupBox->ResumeLayout(false);
+			this->radioButtonsGroupBox->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void GRAPHICS_Load(System::Object^ sender, System::EventArgs^ e);
+private: System::Void startSearchButton_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
