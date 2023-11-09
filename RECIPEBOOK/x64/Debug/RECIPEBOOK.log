@@ -1,4 +1,6 @@
 ﻿  GRAPHICS.cpp
-  The contents of <filesystem> are available only with C++17 or later.
+  Recipe.cpp
+C:\Users\sasha\Рабочий стол\CWORK\RECIPEBOOK\Recipe.cpp(41,2): warning C4996: 'mkdir': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _mkdir. See online help for details.
+  Generating Code...
   GRAPHICS.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  RECIPEBOOK.vcxproj -> C:\Users\sasha\source\repos\RECIPEBOOK\RECIPEBOOK\x64\Debug\RECIPEBOOK.exe
+  RECIPEBOOK.vcxproj -> C:\Users\sasha\Рабочий стол\CWORK\x64\Debug\RECIPEBOOK.exe

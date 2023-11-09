@@ -23,6 +23,7 @@ bool Recipe::DeleteRecipeFolder(std::string directoryName)
 {
 	return 0;
 }
+
 bool Recipe::CreateRecipeFolder(std::string directoryName)
 {
 	// Проверяем, существует ли уже папка

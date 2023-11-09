@@ -24,8 +24,10 @@ private:
 	std::string comment;
 	int preparingTime;
 	int cookingTime;
+	int allTime;
 	int dishCalories;
 	int dishRate;
+	int mark;
 
 	std::vector<Ingridient> ingridients;
 

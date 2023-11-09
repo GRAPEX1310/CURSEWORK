@@ -2,3 +2,7 @@ C:\Users\sasha\source\repos\RECIPEBOOK\RECIPEBOOK\RECIPEBOOK\x64\Debug\RECIPEBOO
 C:\Users\sasha\source\repos\RECIPEBOOK\RECIPEBOOK\RECIPEBOOK\x64\Debug\RECIPEBOOK.vcxproj.SuggestedBindingRedirects.cache
 C:\Users\sasha\source\repos\RECIPEBOOK\RECIPEBOOK\RECIPEBOOK\x64\Debug\RECIPEBOOK.GRAPHICS.resources
 C:\Users\sasha\source\repos\RECIPEBOOK\RECIPEBOOK\RECIPEBOOK\x64\Debug\RECIPEBOOK.vcxproj.GenerateResource.cache
+C:\Users\sasha\Рабочий стол\CWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.vcxproj.AssemblyReference.cache
+C:\Users\sasha\Рабочий стол\CWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\sasha\Рабочий стол\CWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.GRAPHICS.resources
+C:\Users\sasha\Рабочий стол\CWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.vcxproj.GenerateResource.cache
