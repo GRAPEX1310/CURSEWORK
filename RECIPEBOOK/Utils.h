@@ -1,13 +1,16 @@
 #pragma once
 #include <msclr\marshal_cppstd.h>	
 #include <sys/stat.h>
+#include <filesystem>
 #include <algorithm>
 #include <windows.h>
-#include <cstdio>
 #include <Lmcons.h>
 #include <direct.h>
+#include <iostream>
+#include <fstream> 
 #include <stdio.h> 
 #include <math.h>
+#include <cstdio>
 #include <string>
 #include <vector>
 #include <stack>
@@ -23,7 +26,8 @@ class Utils
 public:
 
 	static std::string ConvertToSTDString(String^ givenString);
-	static std::vector<std::string> ConvertToArray(String^ givenString);
+	static std::vector<std::string> ConvertFromSysSrtToArray(String^ givenString);
 	static std::pair<std::string, std::string> ConvertToPair(String^ givenString);
+	static std::vector<std::string> ConvertToArray(std::string givenString);
 	
 };

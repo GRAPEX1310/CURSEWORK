@@ -4,6 +4,7 @@
 
 using namespace System;
 using namespace System::Windows::Forms;
+namespace fs = std::filesystem;
 
 struct SearchData
 {
@@ -35,9 +36,10 @@ class SearchEngine
 public:
 	static std::vector<Recipe> Start(SearchData searchData);
 
-
 private:
 
 	static std::vector<Recipe> SearchUnion(SearchData searchData);
 	static std::vector<Recipe> SearchIntersection(SearchData searchData);
+	static Recipe ReadFile(fs::path path);
+	static std::vector<Ingridient> ConvertToIngridients(std::string givenString);
 };

@@ -131,6 +131,7 @@ namespace RECIPEBOOK {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GRAPHICS::typeid));
 			this->searchLabel = (gcnew System::Windows::Forms::Label());
 			this->nameSearchTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->caloriesLabel = (gcnew System::Windows::Forms::Label());
@@ -186,12 +187,11 @@ namespace RECIPEBOOK {
 			// searchLabel
 			// 
 			this->searchLabel->AutoSize = true;
-			this->searchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->searchLabel->Location = System::Drawing::Point(39, 9);
-			this->searchLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->searchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->searchLabel->Location = System::Drawing::Point(33, 9);
 			this->searchLabel->Name = L"searchLabel";
-			this->searchLabel->Size = System::Drawing::Size(230, 31);
+			this->searchLabel->Size = System::Drawing::Size(186, 25);
 			this->searchLabel->TabIndex = 0;
 			this->searchLabel->Text = L"Поиск рецептов";
 			// 
@@ -201,10 +201,9 @@ namespace RECIPEBOOK {
 			this->nameSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.749998F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->nameSearchTextBox->ForeColor = System::Drawing::SystemColors::MenuText;
-			this->nameSearchTextBox->Location = System::Drawing::Point(45, 85);
-			this->nameSearchTextBox->Margin = System::Windows::Forms::Padding(4, 3, 4, 3);
+			this->nameSearchTextBox->Location = System::Drawing::Point(39, 85);
 			this->nameSearchTextBox->Name = L"nameSearchTextBox";
-			this->nameSearchTextBox->Size = System::Drawing::Size(224, 22);
+			this->nameSearchTextBox->Size = System::Drawing::Size(193, 22);
 			this->nameSearchTextBox->TabIndex = 1;
 			// 
 			// caloriesLabel
@@ -212,7 +211,7 @@ namespace RECIPEBOOK {
 			this->caloriesLabel->AutoSize = true;
 			this->caloriesLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->caloriesLabel->Location = System::Drawing::Point(55, 345);
+			this->caloriesLabel->Location = System::Drawing::Point(47, 345);
 			this->caloriesLabel->Name = L"caloriesLabel";
 			this->caloriesLabel->Size = System::Drawing::Size(205, 20);
 			this->caloriesLabel->TabIndex = 2;
@@ -220,24 +219,28 @@ namespace RECIPEBOOK {
 			// 
 			// minCaloriesTextBox
 			// 
-			this->minCaloriesTextBox->Location = System::Drawing::Point(48, 378);
+			this->minCaloriesTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->minCaloriesTextBox->Location = System::Drawing::Point(41, 378);
 			this->minCaloriesTextBox->Name = L"minCaloriesTextBox";
-			this->minCaloriesTextBox->Size = System::Drawing::Size(63, 20);
+			this->minCaloriesTextBox->Size = System::Drawing::Size(55, 20);
 			this->minCaloriesTextBox->TabIndex = 3;
 			// 
 			// maxCaloriesTextBox
 			// 
-			this->maxCaloriesTextBox->Location = System::Drawing::Point(212, 382);
+			this->maxCaloriesTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->maxCaloriesTextBox->Location = System::Drawing::Point(182, 382);
 			this->maxCaloriesTextBox->Name = L"maxCaloriesTextBox";
-			this->maxCaloriesTextBox->Size = System::Drawing::Size(60, 20);
+			this->maxCaloriesTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxCaloriesTextBox->TabIndex = 4;
 			// 
 			// dashLabel1
 			// 
 			this->dashLabel1->AutoSize = true;
-			this->dashLabel1->Location = System::Drawing::Point(144, 612);
+			this->dashLabel1->Location = System::Drawing::Point(123, 612);
 			this->dashLabel1->Name = L"dashLabel1";
-			this->dashLabel1->Size = System::Drawing::Size(23, 13);
+			this->dashLabel1->Size = System::Drawing::Size(19, 13);
 			this->dashLabel1->TabIndex = 5;
 			this->dashLabel1->Text = L"----";
 			// 
@@ -246,7 +249,7 @@ namespace RECIPEBOOK {
 			this->dishNameSearchLabel->AutoSize = true;
 			this->dishNameSearchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->dishNameSearchLabel->Location = System::Drawing::Point(71, 52);
+			this->dishNameSearchLabel->Location = System::Drawing::Point(61, 52);
 			this->dishNameSearchLabel->Name = L"dishNameSearchLabel";
 			this->dishNameSearchLabel->Size = System::Drawing::Size(152, 20);
 			this->dishNameSearchLabel->TabIndex = 6;
@@ -257,7 +260,7 @@ namespace RECIPEBOOK {
 			this->commentSearchLabel->AutoSize = true;
 			this->commentSearchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->commentSearchLabel->Location = System::Drawing::Point(24, 649);
+			this->commentSearchLabel->Location = System::Drawing::Point(21, 649);
 			this->commentSearchLabel->Name = L"commentSearchLabel";
 			this->commentSearchLabel->Size = System::Drawing::Size(280, 20);
 			this->commentSearchLabel->TabIndex = 7;
@@ -265,9 +268,11 @@ namespace RECIPEBOOK {
 			// 
 			// categoriesSearchTextBox
 			// 
-			this->categoriesSearchTextBox->Location = System::Drawing::Point(48, 157);
+			this->categoriesSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->categoriesSearchTextBox->Location = System::Drawing::Point(41, 157);
 			this->categoriesSearchTextBox->Name = L"categoriesSearchTextBox";
-			this->categoriesSearchTextBox->Size = System::Drawing::Size(224, 20);
+			this->categoriesSearchTextBox->Size = System::Drawing::Size(193, 20);
 			this->categoriesSearchTextBox->TabIndex = 8;
 			// 
 			// stepPhraseSearchLabel
@@ -275,7 +280,7 @@ namespace RECIPEBOOK {
 			this->stepPhraseSearchLabel->AutoSize = true;
 			this->stepPhraseSearchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->stepPhraseSearchLabel->Location = System::Drawing::Point(63, 724);
+			this->stepPhraseSearchLabel->Location = System::Drawing::Point(54, 724);
 			this->stepPhraseSearchLabel->Name = L"stepPhraseSearchLabel";
 			this->stepPhraseSearchLabel->Size = System::Drawing::Size(189, 20);
 			this->stepPhraseSearchLabel->TabIndex = 9;
@@ -283,65 +288,83 @@ namespace RECIPEBOOK {
 			// 
 			// commentTextBox
 			// 
-			this->commentTextBox->Location = System::Drawing::Point(48, 683);
+			this->commentTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->commentTextBox->Location = System::Drawing::Point(41, 683);
 			this->commentTextBox->Name = L"commentTextBox";
-			this->commentTextBox->Size = System::Drawing::Size(215, 20);
+			this->commentTextBox->Size = System::Drawing::Size(185, 20);
 			this->commentTextBox->TabIndex = 10;
 			// 
 			// maxMarkTextBox
 			// 
-			this->maxMarkTextBox->Location = System::Drawing::Point(212, 307);
+			this->maxMarkTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->maxMarkTextBox->Location = System::Drawing::Point(182, 307);
 			this->maxMarkTextBox->Name = L"maxMarkTextBox";
-			this->maxMarkTextBox->Size = System::Drawing::Size(60, 20);
+			this->maxMarkTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxMarkTextBox->TabIndex = 11;
 			// 
 			// minCookingTimeTextBox
 			// 
-			this->minCookingTimeTextBox->Location = System::Drawing::Point(48, 535);
+			this->minCookingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->minCookingTimeTextBox->Location = System::Drawing::Point(41, 535);
 			this->minCookingTimeTextBox->Name = L"minCookingTimeTextBox";
-			this->minCookingTimeTextBox->Size = System::Drawing::Size(63, 20);
+			this->minCookingTimeTextBox->Size = System::Drawing::Size(55, 20);
 			this->minCookingTimeTextBox->TabIndex = 12;
 			// 
 			// minAllTimeTextBox
 			// 
-			this->minAllTimeTextBox->Location = System::Drawing::Point(48, 609);
+			this->minAllTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->minAllTimeTextBox->Location = System::Drawing::Point(41, 609);
 			this->minAllTimeTextBox->Name = L"minAllTimeTextBox";
-			this->minAllTimeTextBox->Size = System::Drawing::Size(66, 20);
+			this->minAllTimeTextBox->Size = System::Drawing::Size(57, 20);
 			this->minAllTimeTextBox->TabIndex = 13;
 			// 
 			// minMarkTextBox
 			// 
-			this->minMarkTextBox->Location = System::Drawing::Point(48, 307);
+			this->minMarkTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->minMarkTextBox->Location = System::Drawing::Point(41, 307);
 			this->minMarkTextBox->Name = L"minMarkTextBox";
-			this->minMarkTextBox->Size = System::Drawing::Size(63, 20);
+			this->minMarkTextBox->Size = System::Drawing::Size(55, 20);
 			this->minMarkTextBox->TabIndex = 14;
 			// 
 			// maxCookingTimeTextBox
 			// 
-			this->maxCookingTimeTextBox->Location = System::Drawing::Point(212, 535);
+			this->maxCookingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->maxCookingTimeTextBox->Location = System::Drawing::Point(182, 535);
 			this->maxCookingTimeTextBox->Name = L"maxCookingTimeTextBox";
-			this->maxCookingTimeTextBox->Size = System::Drawing::Size(60, 20);
+			this->maxCookingTimeTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxCookingTimeTextBox->TabIndex = 15;
 			// 
 			// maxAllTimeTextBox
 			// 
-			this->maxAllTimeTextBox->Location = System::Drawing::Point(212, 609);
+			this->maxAllTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->maxAllTimeTextBox->Location = System::Drawing::Point(182, 609);
 			this->maxAllTimeTextBox->Name = L"maxAllTimeTextBox";
-			this->maxAllTimeTextBox->Size = System::Drawing::Size(60, 20);
+			this->maxAllTimeTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxAllTimeTextBox->TabIndex = 16;
 			// 
 			// maxPreparingTimeTextBox
 			// 
-			this->maxPreparingTimeTextBox->Location = System::Drawing::Point(212, 456);
+			this->maxPreparingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->maxPreparingTimeTextBox->Location = System::Drawing::Point(182, 456);
 			this->maxPreparingTimeTextBox->Name = L"maxPreparingTimeTextBox";
-			this->maxPreparingTimeTextBox->Size = System::Drawing::Size(60, 20);
+			this->maxPreparingTimeTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxPreparingTimeTextBox->TabIndex = 17;
 			// 
 			// minPreparingTimeTextBox
 			// 
-			this->minPreparingTimeTextBox->Location = System::Drawing::Point(48, 456);
+			this->minPreparingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->minPreparingTimeTextBox->Location = System::Drawing::Point(41, 456);
 			this->minPreparingTimeTextBox->Name = L"minPreparingTimeTextBox";
-			this->minPreparingTimeTextBox->Size = System::Drawing::Size(63, 20);
+			this->minPreparingTimeTextBox->Size = System::Drawing::Size(55, 20);
 			this->minPreparingTimeTextBox->TabIndex = 18;
 			// 
 			// categoriesLabel
@@ -349,7 +372,7 @@ namespace RECIPEBOOK {
 			this->categoriesLabel->AutoSize = true;
 			this->categoriesLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->categoriesLabel->Location = System::Drawing::Point(100, 121);
+			this->categoriesLabel->Location = System::Drawing::Point(86, 121);
 			this->categoriesLabel->Name = L"categoriesLabel";
 			this->categoriesLabel->Size = System::Drawing::Size(98, 20);
 			this->categoriesLabel->TabIndex = 19;
@@ -360,7 +383,7 @@ namespace RECIPEBOOK {
 			this->cookingTimeLabel->AutoSize = true;
 			this->cookingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->cookingTimeLabel->Location = System::Drawing::Point(63, 494);
+			this->cookingTimeLabel->Location = System::Drawing::Point(54, 494);
 			this->cookingTimeLabel->Name = L"cookingTimeLabel";
 			this->cookingTimeLabel->Size = System::Drawing::Size(197, 20);
 			this->cookingTimeLabel->TabIndex = 20;
@@ -371,7 +394,7 @@ namespace RECIPEBOOK {
 			this->preparingTimeLabel->AutoSize = true;
 			this->preparingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->preparingTimeLabel->Location = System::Drawing::Point(76, 419);
+			this->preparingTimeLabel->Location = System::Drawing::Point(65, 419);
 			this->preparingTimeLabel->Name = L"preparingTimeLabel";
 			this->preparingTimeLabel->Size = System::Drawing::Size(167, 20);
 			this->preparingTimeLabel->TabIndex = 21;
@@ -382,7 +405,7 @@ namespace RECIPEBOOK {
 			this->markLabel->AutoSize = true;
 			this->markLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->markLabel->Location = System::Drawing::Point(87, 273);
+			this->markLabel->Location = System::Drawing::Point(75, 273);
 			this->markLabel->Name = L"markLabel";
 			this->markLabel->Size = System::Drawing::Size(136, 20);
 			this->markLabel->TabIndex = 22;
@@ -393,7 +416,7 @@ namespace RECIPEBOOK {
 			this->allTimeLabel->AutoSize = true;
 			this->allTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->allTimeLabel->Location = System::Drawing::Point(38, 576);
+			this->allTimeLabel->Location = System::Drawing::Point(33, 576);
 			this->allTimeLabel->Name = L"allTimeLabel";
 			this->allTimeLabel->Size = System::Drawing::Size(257, 20);
 			this->allTimeLabel->TabIndex = 23;
@@ -401,44 +424,46 @@ namespace RECIPEBOOK {
 			// 
 			// stepTextBox
 			// 
-			this->stepTextBox->Location = System::Drawing::Point(48, 764);
+			this->stepTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->stepTextBox->Location = System::Drawing::Point(41, 764);
 			this->stepTextBox->Name = L"stepTextBox";
-			this->stepTextBox->Size = System::Drawing::Size(215, 20);
+			this->stepTextBox->Size = System::Drawing::Size(185, 20);
 			this->stepTextBox->TabIndex = 24;
 			// 
 			// dashLabel2
 			// 
 			this->dashLabel2->AutoSize = true;
-			this->dashLabel2->Location = System::Drawing::Point(144, 310);
+			this->dashLabel2->Location = System::Drawing::Point(123, 310);
 			this->dashLabel2->Name = L"dashLabel2";
-			this->dashLabel2->Size = System::Drawing::Size(23, 13);
+			this->dashLabel2->Size = System::Drawing::Size(19, 13);
 			this->dashLabel2->TabIndex = 25;
 			this->dashLabel2->Text = L"----";
 			// 
 			// dashLabel3
 			// 
 			this->dashLabel3->AutoSize = true;
-			this->dashLabel3->Location = System::Drawing::Point(144, 385);
+			this->dashLabel3->Location = System::Drawing::Point(123, 385);
 			this->dashLabel3->Name = L"dashLabel3";
-			this->dashLabel3->Size = System::Drawing::Size(23, 13);
+			this->dashLabel3->Size = System::Drawing::Size(19, 13);
 			this->dashLabel3->TabIndex = 26;
 			this->dashLabel3->Text = L"----";
 			// 
 			// dashLabel4
 			// 
 			this->dashLabel4->AutoSize = true;
-			this->dashLabel4->Location = System::Drawing::Point(144, 459);
+			this->dashLabel4->Location = System::Drawing::Point(123, 459);
 			this->dashLabel4->Name = L"dashLabel4";
-			this->dashLabel4->Size = System::Drawing::Size(23, 13);
+			this->dashLabel4->Size = System::Drawing::Size(19, 13);
 			this->dashLabel4->TabIndex = 27;
 			this->dashLabel4->Text = L"----";
 			// 
 			// dashLabel5
 			// 
 			this->dashLabel5->AutoSize = true;
-			this->dashLabel5->Location = System::Drawing::Point(144, 538);
+			this->dashLabel5->Location = System::Drawing::Point(123, 538);
 			this->dashLabel5->Name = L"dashLabel5";
-			this->dashLabel5->Size = System::Drawing::Size(23, 13);
+			this->dashLabel5->Size = System::Drawing::Size(19, 13);
 			this->dashLabel5->TabIndex = 28;
 			this->dashLabel5->Text = L"----";
 			// 
@@ -447,7 +472,7 @@ namespace RECIPEBOOK {
 			this->ingridientLabel->AutoSize = true;
 			this->ingridientLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->ingridientLabel->Location = System::Drawing::Point(100, 194);
+			this->ingridientLabel->Location = System::Drawing::Point(75, 198);
 			this->ingridientLabel->Name = L"ingridientLabel";
 			this->ingridientLabel->Size = System::Drawing::Size(123, 20);
 			this->ingridientLabel->TabIndex = 29;
@@ -456,13 +481,12 @@ namespace RECIPEBOOK {
 			// ingridientsSearchTextBox
 			// 
 			this->ingridientsSearchTextBox->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->ingridientsSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.749998F, System::Drawing::FontStyle::Bold,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->ingridientsSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->ingridientsSearchTextBox->ForeColor = System::Drawing::SystemColors::MenuText;
-			this->ingridientsSearchTextBox->Location = System::Drawing::Point(48, 232);
-			this->ingridientsSearchTextBox->Margin = System::Windows::Forms::Padding(4, 3, 4, 3);
+			this->ingridientsSearchTextBox->Location = System::Drawing::Point(41, 232);
 			this->ingridientsSearchTextBox->Name = L"ingridientsSearchTextBox";
-			this->ingridientsSearchTextBox->Size = System::Drawing::Size(224, 22);
+			this->ingridientsSearchTextBox->Size = System::Drawing::Size(193, 22);
 			this->ingridientsSearchTextBox->TabIndex = 30;
 			// 
 			// resultLabel
@@ -470,7 +494,7 @@ namespace RECIPEBOOK {
 			this->resultLabel->AutoSize = true;
 			this->resultLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->resultLabel->Location = System::Drawing::Point(367, 9);
+			this->resultLabel->Location = System::Drawing::Point(315, 9);
 			this->resultLabel->Name = L"resultLabel";
 			this->resultLabel->Size = System::Drawing::Size(274, 31);
 			this->resultLabel->TabIndex = 31;
@@ -479,7 +503,9 @@ namespace RECIPEBOOK {
 			// selectUnionRadioButton
 			// 
 			this->selectUnionRadioButton->AutoSize = true;
-			this->selectUnionRadioButton->Location = System::Drawing::Point(43, 19);
+			this->selectUnionRadioButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->selectUnionRadioButton->Location = System::Drawing::Point(37, 19);
 			this->selectUnionRadioButton->Name = L"selectUnionRadioButton";
 			this->selectUnionRadioButton->Size = System::Drawing::Size(105, 17);
 			this->selectUnionRadioButton->TabIndex = 32;
@@ -490,7 +516,9 @@ namespace RECIPEBOOK {
 			// selectIntersectionRadioButton
 			// 
 			this->selectIntersectionRadioButton->AutoSize = true;
-			this->selectIntersectionRadioButton->Location = System::Drawing::Point(43, 52);
+			this->selectIntersectionRadioButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->selectIntersectionRadioButton->Location = System::Drawing::Point(37, 52);
 			this->selectIntersectionRadioButton->Name = L"selectIntersectionRadioButton";
 			this->selectIntersectionRadioButton->Size = System::Drawing::Size(103, 17);
 			this->selectIntersectionRadioButton->TabIndex = 33;
@@ -503,7 +531,7 @@ namespace RECIPEBOOK {
 			this->selectModeLabel->AutoSize = true;
 			this->selectModeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->selectModeLabel->Location = System::Drawing::Point(71, 799);
+			this->selectModeLabel->Location = System::Drawing::Point(61, 799);
 			this->selectModeLabel->Name = L"selectModeLabel";
 			this->selectModeLabel->Size = System::Drawing::Size(167, 20);
 			this->selectModeLabel->TabIndex = 34;
@@ -511,10 +539,12 @@ namespace RECIPEBOOK {
 			// 
 			// listBox1
 			// 
+			this->listBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
 			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Location = System::Drawing::Point(373, 85);
+			this->listBox1->Location = System::Drawing::Point(320, 85);
 			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(268, 797);
+			this->listBox1->Size = System::Drawing::Size(230, 797);
 			this->listBox1->TabIndex = 35;
 			// 
 			// currentRecipeLabel
@@ -522,7 +552,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeLabel->AutoSize = true;
 			this->currentRecipeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeLabel->Location = System::Drawing::Point(724, 9);
+			this->currentRecipeLabel->Location = System::Drawing::Point(621, 9);
 			this->currentRecipeLabel->Name = L"currentRecipeLabel";
 			this->currentRecipeLabel->Size = System::Drawing::Size(235, 31);
 			this->currentRecipeLabel->TabIndex = 36;
@@ -530,9 +560,9 @@ namespace RECIPEBOOK {
 			// 
 			// currentRecipePictureBox
 			// 
-			this->currentRecipePictureBox->Location = System::Drawing::Point(730, 85);
+			this->currentRecipePictureBox->Location = System::Drawing::Point(626, 85);
 			this->currentRecipePictureBox->Name = L"currentRecipePictureBox";
-			this->currentRecipePictureBox->Size = System::Drawing::Size(150, 200);
+			this->currentRecipePictureBox->Size = System::Drawing::Size(129, 200);
 			this->currentRecipePictureBox->TabIndex = 37;
 			this->currentRecipePictureBox->TabStop = false;
 			// 
@@ -541,7 +571,7 @@ namespace RECIPEBOOK {
 			this->currentReciepeCommentLabel->AutoSize = true;
 			this->currentReciepeCommentLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentReciepeCommentLabel->Location = System::Drawing::Point(1333, 85);
+			this->currentReciepeCommentLabel->Location = System::Drawing::Point(1143, 85);
 			this->currentReciepeCommentLabel->Name = L"currentReciepeCommentLabel";
 			this->currentReciepeCommentLabel->Size = System::Drawing::Size(365, 20);
 			this->currentReciepeCommentLabel->TabIndex = 38;
@@ -552,7 +582,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeCategoryLabel->AutoSize = true;
 			this->currentRecipeCategoryLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCategoryLabel->Location = System::Drawing::Point(886, 85);
+			this->currentRecipeCategoryLabel->Location = System::Drawing::Point(759, 85);
 			this->currentRecipeCategoryLabel->Name = L"currentRecipeCategoryLabel";
 			this->currentRecipeCategoryLabel->Size = System::Drawing::Size(103, 20);
 			this->currentRecipeCategoryLabel->TabIndex = 39;
@@ -563,7 +593,7 @@ namespace RECIPEBOOK {
 			this->currentRecipePreparingTimeLabel->AutoSize = true;
 			this->currentRecipePreparingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipePreparingTimeLabel->Location = System::Drawing::Point(886, 185);
+			this->currentRecipePreparingTimeLabel->Location = System::Drawing::Point(759, 185);
 			this->currentRecipePreparingTimeLabel->Name = L"currentRecipePreparingTimeLabel";
 			this->currentRecipePreparingTimeLabel->Size = System::Drawing::Size(177, 20);
 			this->currentRecipePreparingTimeLabel->TabIndex = 40;
@@ -574,7 +604,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeIngridientsLabel->AutoSize = true;
 			this->currentRecipeIngridientsLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeIngridientsLabel->Location = System::Drawing::Point(886, 110);
+			this->currentRecipeIngridientsLabel->Location = System::Drawing::Point(759, 110);
 			this->currentRecipeIngridientsLabel->Name = L"currentRecipeIngridientsLabel";
 			this->currentRecipeIngridientsLabel->Size = System::Drawing::Size(128, 20);
 			this->currentRecipeIngridientsLabel->TabIndex = 41;
@@ -585,7 +615,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeAllTimeLabel->AutoSize = true;
 			this->currentRecipeAllTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeAllTimeLabel->Location = System::Drawing::Point(886, 235);
+			this->currentRecipeAllTimeLabel->Location = System::Drawing::Point(759, 235);
 			this->currentRecipeAllTimeLabel->Name = L"currentRecipeAllTimeLabel";
 			this->currentRecipeAllTimeLabel->Size = System::Drawing::Size(133, 20);
 			this->currentRecipeAllTimeLabel->TabIndex = 42;
@@ -596,7 +626,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeCookingTimeLabel->AutoSize = true;
 			this->currentRecipeCookingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCookingTimeLabel->Location = System::Drawing::Point(886, 210);
+			this->currentRecipeCookingTimeLabel->Location = System::Drawing::Point(759, 210);
 			this->currentRecipeCookingTimeLabel->Name = L"currentRecipeCookingTimeLabel";
 			this->currentRecipeCookingTimeLabel->Size = System::Drawing::Size(202, 20);
 			this->currentRecipeCookingTimeLabel->TabIndex = 43;
@@ -607,7 +637,7 @@ namespace RECIPEBOOK {
 			this->currentREcipeCaloriesLabel->AutoSize = true;
 			this->currentREcipeCaloriesLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentREcipeCaloriesLabel->Location = System::Drawing::Point(886, 160);
+			this->currentREcipeCaloriesLabel->Location = System::Drawing::Point(759, 160);
 			this->currentREcipeCaloriesLabel->Name = L"currentREcipeCaloriesLabel";
 			this->currentREcipeCaloriesLabel->Size = System::Drawing::Size(135, 20);
 			this->currentREcipeCaloriesLabel->TabIndex = 44;
@@ -618,7 +648,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeMarkLabel->AutoSize = true;
 			this->currentRecipeMarkLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeMarkLabel->Location = System::Drawing::Point(886, 135);
+			this->currentRecipeMarkLabel->Location = System::Drawing::Point(759, 135);
 			this->currentRecipeMarkLabel->Name = L"currentRecipeMarkLabel";
 			this->currentRecipeMarkLabel->Size = System::Drawing::Size(141, 20);
 			this->currentRecipeMarkLabel->TabIndex = 45;
@@ -626,9 +656,11 @@ namespace RECIPEBOOK {
 			// 
 			// startSearchButton
 			// 
-			this->startSearchButton->Location = System::Drawing::Point(277, 16);
+			this->startSearchButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->startSearchButton->Location = System::Drawing::Point(237, 16);
 			this->startSearchButton->Name = L"startSearchButton";
-			this->startSearchButton->Size = System::Drawing::Size(75, 23);
+			this->startSearchButton->Size = System::Drawing::Size(64, 23);
 			this->startSearchButton->TabIndex = 46;
 			this->startSearchButton->Text = L"поиск";
 			this->startSearchButton->UseVisualStyleBackColor = true;
@@ -638,18 +670,18 @@ namespace RECIPEBOOK {
 			// 
 			this->radioButtonsGroupBox->Controls->Add(this->selectUnionRadioButton);
 			this->radioButtonsGroupBox->Controls->Add(this->selectIntersectionRadioButton);
-			this->radioButtonsGroupBox->Location = System::Drawing::Point(48, 834);
+			this->radioButtonsGroupBox->Location = System::Drawing::Point(41, 834);
 			this->radioButtonsGroupBox->Name = L"radioButtonsGroupBox";
-			this->radioButtonsGroupBox->Size = System::Drawing::Size(215, 85);
+			this->radioButtonsGroupBox->Size = System::Drawing::Size(184, 85);
 			this->radioButtonsGroupBox->TabIndex = 47;
 			this->radioButtonsGroupBox->TabStop = false;
 			// 
 			// GRAPHICS
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(7, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->ClientSize = System::Drawing::Size(1904, 1041);
+			this->ClientSize = System::Drawing::Size(1632, 1041);
 			this->Controls->Add(this->radioButtonsGroupBox);
 			this->Controls->Add(this->startSearchButton);
 			this->Controls->Add(this->currentRecipeMarkLabel);
@@ -696,9 +728,7 @@ namespace RECIPEBOOK {
 			this->Controls->Add(this->caloriesLabel);
 			this->Controls->Add(this->nameSearchTextBox);
 			this->Controls->Add(this->searchLabel);
-			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.249999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->Margin = System::Windows::Forms::Padding(4, 3, 4, 3);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"GRAPHICS";
 			this->Text = L"RECIPEBOOK";
 			this->Load += gcnew System::EventHandler(this, &GRAPHICS::GRAPHICS_Load);
