@@ -5,17 +5,30 @@ std::string Utils::ConvertToSTDString(String^ givenString)
 	return msclr::interop::marshal_as<std::string>(givenString);
 }
 
-std::vector<std::string> Utils::ConvertToArray(String^ givenString)
+std::vector<std::string> Utils::ConvertFromSysSrtToArray(String^ givenString)
+{
+	return ConvertToArray(ConvertToSTDString(givenString));
+}
+
+std::pair<std::string, std::string> Utils::ConvertToPair(String^ givenString)
+{
+	std::pair<std::string, std::string> result;
+
+	std::vector<std::string> convertArray = ConvertFromSysSrtToArray(givenString);
+
+	result.first = convertArray[0];
+	result.second = convertArray[1];
+	return result;
+}
+
+std::vector<std::string> Utils::ConvertToArray(std::string givenString)
 {
 	std::vector<std::string> result;
-
-	std::string newString = ConvertToSTDString(givenString);
-
 	std::string currentString = "";
 
-	for (int i = 0; i < newString.size(); i++)
+	for (int i = 0; i < givenString.size(); i++)
 	{
-		char currentChar = newString[i];
+		char currentChar = givenString[i];
 		if (currentChar == ' ')
 		{
 			result.push_back(currentString);
@@ -27,16 +40,17 @@ std::vector<std::string> Utils::ConvertToArray(String^ givenString)
 		}
 	}
 
+	if (currentString.size() > 2) result.push_back(currentString);
+
 	return result;
 }
 
-std::pair<std::string, std::string> Utils::ConvertToPair(String^ givenString)
+String^ Utils::ConvertToSysString(std::string givenString)
 {
-	std::pair<std::string, std::string> result;
+	return msclr::interop::marshal_as<System::String^>(givenString);
+}
 
-	std::vector<std::string> convertArray = ConvertToArray(givenString);
-
-	result.first = convertArray[0];
-	result.second = convertArray[1];
-	return result;
+std::string Utils::GetExtension(const fs::path& path)
+{
+	return path.extension().string();
 }

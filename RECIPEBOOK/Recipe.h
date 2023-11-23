@@ -4,6 +4,7 @@
 
 using namespace System;
 using namespace System::Windows::Forms;
+namespace fs = std::filesystem;
 
 struct Ingridient
 {
@@ -13,20 +14,22 @@ struct Ingridient
 
 struct DishCookingStep
 {
-	std::string cookingText;
-	std::string picture;
+	std::string stepText;
+	fs::path picturePath;
 };
 
 class Recipe
 {
-private:
+public:
+	fs::path recipePath;
+	fs::path picturePath;
+
 	std::string dishName;
 	std::string comment;
 	int preparingTime;
 	int cookingTime;
 	int allTime;
 	int dishCalories;
-	int dishRate;
 	int mark;
 
 	std::vector<Ingridient> ingridients;
@@ -35,13 +38,10 @@ private:
 
 	std::vector<std::string> dishTypes;
 
-public:
-	Recipe(std::string dishName, std::string dishType, 
-		std::vector<Ingridient> ingridients, std::vector<DishCookingStep> stepByStepManual);
 	Recipe() = default;
 
-	std::string GetDishName();
-	void SetDishName(std::string newDishName);
-	bool CreateRecipeFolder(std::string directoryName);
-	bool DeleteRecipeFolder(std::string directoryName);
+	bool CreateRecipe();
+	bool DeleteRecipe();
+	static std::string MakeCategoryOutput(std::vector<std::string> givenArray);
+	static std::string MakeIngridientsOutput(std::vector<Ingridient> givenArray);
 };
