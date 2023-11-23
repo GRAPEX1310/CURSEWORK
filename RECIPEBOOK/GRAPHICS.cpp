@@ -78,9 +78,9 @@ System::Void RECIPEBOOK::GRAPHICS::startSearchButton_Click(System::Object^ sende
 	
 	searchData.ingridients = Utils::ConvertFromSysSrtToArray(ingridientsSearchTextBox->Text);
 	
-	searchData.phraseFromComment = Utils::ConvertFromSysSrtToArray(commentTextBox->Text);
+	searchData.phraseFromComment = Utils::ConvertToSTDString(commentTextBox->Text);
 	
-	searchData.phraseFromSteps = Utils::ConvertFromSysSrtToArray(stepTextBox->Text);
+	searchData.phraseFromSteps = Utils::ConvertToSTDString(stepTextBox->Text);
 	
 	searchData.dishMark =
 		std::make_pair(Utils::ConvertToSTDString(minMarkTextBox->Text), 
@@ -103,11 +103,46 @@ System::Void RECIPEBOOK::GRAPHICS::startSearchButton_Click(System::Object^ sende
 			Utils::ConvertToSTDString(maxAllTimeTextBox->Text));
 
 
-	searchData.operationType = false;
+	searchData.operationType = true;
 	if (selectUnionRadioButton->Checked) searchData.operationType = true;
 	else if (selectIntersectionRadioButton->Checked) searchData.operationType = false;
 
-	SearchEngine::Start(searchData);
+	std::vector<Recipe> searchResult = SearchEngine::Start(searchData);
+
+	resultRecipeListBox->Items->Clear();
+
+	if (!searchResult.empty())
+	{
+		for (int i = 0; i < searchResult.size(); i++)
+		{
+			resultRecipeListBox->Items->Add(Utils::ConvertToSysString(searchResult[i].dishName));
+		}
+	}
 
 	return System::Void();
 }
+
+System::Void RECIPEBOOK::GRAPHICS::resultRecipeListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+{
+	//get selected recipe
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+
+	//output recipe data
+	currentRecipeLabel->Text = Utils::ConvertToSysString(currentRecipe.dishName);
+	currentRecipeCommentTextLabel->Text = Utils::ConvertToSysString(currentRecipe.comment);
+	currentRecipeMarkLabel->Text = Utils::ConvertToSysString("Личная оценка: " + std::to_string(currentRecipe.dishCalories) + "/10");
+	currentRecipeCategoryLabel->Text = Utils::ConvertToSysString(Recipe::MakeCategoryOutput(currentRecipe.dishTypes));
+	currentRecipeCaloriesLabel->Text = Utils::ConvertToSysString("Калорийность: " + std::to_string(currentRecipe.dishCalories));
+	currentRecipePreparingTimeLabel->Text = Utils::ConvertToSysString("Время подготовки: " + std::to_string(currentRecipe.preparingTime));
+	currentRecipeCookingTimeLabel->Text = Utils::ConvertToSysString("Время приготовления: " + std::to_string(currentRecipe.cookingTime));
+	currentRecipeAllTimeLabel->Text = Utils::ConvertToSysString("Общее время: " + std::to_string(currentRecipe.allTime));
+	currentRecipeIngridientsLabel->Text = Utils::ConvertToSysString(Recipe::MakeIngridientsOutput(currentRecipe.ingridients));
+
+	//main image work
+	currentRecipePictureBox->Image = currentRecipePictureBox->Image->FromFile(Utils::ConvertToSysString(currentRecipe.picturePath.string()));
+
+
+	return System::Void();
+}
+

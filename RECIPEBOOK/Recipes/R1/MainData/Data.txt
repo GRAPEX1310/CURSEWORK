@@ -1,0 +1,9 @@
+pizza
+good pizza
+1
+2
+3
+20
+10
+meat 123 water 22 bread 33
+hot mainDish

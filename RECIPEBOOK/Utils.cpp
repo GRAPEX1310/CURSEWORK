@@ -44,3 +44,13 @@ std::vector<std::string> Utils::ConvertToArray(std::string givenString)
 
 	return result;
 }
+
+String^ Utils::ConvertToSysString(std::string givenString)
+{
+	return msclr::interop::marshal_as<System::String^>(givenString);
+}
+
+std::string Utils::GetExtension(const fs::path& path)
+{
+	return path.extension().string();
+}

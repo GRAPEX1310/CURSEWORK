@@ -14,13 +14,16 @@ struct Ingridient
 
 struct DishCookingStep
 {
-	std::string cookingText;
-	std::string picture;
+	std::string stepText;
+	fs::path picturePath;
 };
 
 class Recipe
 {
 public:
+	fs::path recipePath;
+	fs::path picturePath;
+
 	std::string dishName;
 	std::string comment;
 	int preparingTime;
@@ -31,13 +34,14 @@ public:
 
 	std::vector<Ingridient> ingridients;
 
-	std::vector<std::string> stepByStepManual;
+	std::vector<DishCookingStep> stepByStepManual;
 
 	std::vector<std::string> dishTypes;
 
 	Recipe() = default;
 
-	bool CreateFolder(const std::string directoryName);
-	bool DeleteFolder(std::string directoryName);
-	//bool CreateFile();
+	bool CreateRecipe();
+	bool DeleteRecipe();
+	static std::string MakeCategoryOutput(std::vector<std::string> givenArray);
+	static std::string MakeIngridientsOutput(std::vector<Ingridient> givenArray);
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include "Recipe.h"
 
 namespace RECIPEBOOK {
 
@@ -90,10 +91,12 @@ namespace RECIPEBOOK {
 	private: System::Windows::Forms::RadioButton^ selectUnionRadioButton;
 	private: System::Windows::Forms::RadioButton^ selectIntersectionRadioButton;
 	private: System::Windows::Forms::Label^ selectModeLabel;
-	private: System::Windows::Forms::ListBox^ listBox1;
+	private: System::Windows::Forms::ListBox^ resultRecipeListBox;
+
 	private: System::Windows::Forms::Label^ currentRecipeLabel;
 	private: System::Windows::Forms::PictureBox^ currentRecipePictureBox;
-	private: System::Windows::Forms::Label^ currentReciepeCommentLabel;
+	private: System::Windows::Forms::Label^ currentRecipeCommentLabel;
+
 
 	private: System::Windows::Forms::Label^ currentRecipeCategoryLabel;
 	private: System::Windows::Forms::Label^ currentRecipePreparingTimeLabel;
@@ -104,12 +107,14 @@ namespace RECIPEBOOK {
 
 
 	private: System::Windows::Forms::Label^ currentRecipeCookingTimeLabel;
+	private: System::Windows::Forms::Label^ currentRecipeCaloriesLabel;
 
-	private: System::Windows::Forms::Label^ currentREcipeCaloriesLabel;
+
 
 	private: System::Windows::Forms::Label^ currentRecipeMarkLabel;
 	private: System::Windows::Forms::Button^ startSearchButton;
 	private: System::Windows::Forms::GroupBox^ radioButtonsGroupBox;
+	private: System::Windows::Forms::Label^ currentRecipeCommentTextLabel;
 
 
 
@@ -167,19 +172,20 @@ namespace RECIPEBOOK {
 			this->selectUnionRadioButton = (gcnew System::Windows::Forms::RadioButton());
 			this->selectIntersectionRadioButton = (gcnew System::Windows::Forms::RadioButton());
 			this->selectModeLabel = (gcnew System::Windows::Forms::Label());
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->resultRecipeListBox = (gcnew System::Windows::Forms::ListBox());
 			this->currentRecipeLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipePictureBox = (gcnew System::Windows::Forms::PictureBox());
-			this->currentReciepeCommentLabel = (gcnew System::Windows::Forms::Label());
+			this->currentRecipeCommentLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipeCategoryLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipePreparingTimeLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipeIngridientsLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipeAllTimeLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipeCookingTimeLabel = (gcnew System::Windows::Forms::Label());
-			this->currentREcipeCaloriesLabel = (gcnew System::Windows::Forms::Label());
+			this->currentRecipeCaloriesLabel = (gcnew System::Windows::Forms::Label());
 			this->currentRecipeMarkLabel = (gcnew System::Windows::Forms::Label());
 			this->startSearchButton = (gcnew System::Windows::Forms::Button());
 			this->radioButtonsGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->currentRecipeCommentTextLabel = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentRecipePictureBox))->BeginInit();
 			this->radioButtonsGroupBox->SuspendLayout();
 			this->SuspendLayout();
@@ -189,7 +195,7 @@ namespace RECIPEBOOK {
 			this->searchLabel->AutoSize = true;
 			this->searchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->searchLabel->Location = System::Drawing::Point(33, 9);
+			this->searchLabel->Location = System::Drawing::Point(48, 15);
 			this->searchLabel->Name = L"searchLabel";
 			this->searchLabel->Size = System::Drawing::Size(186, 25);
 			this->searchLabel->TabIndex = 0;
@@ -537,15 +543,16 @@ namespace RECIPEBOOK {
 			this->selectModeLabel->TabIndex = 34;
 			this->selectModeLabel->Text = L"Связь параметров";
 			// 
-			// listBox1
+			// resultRecipeListBox
 			// 
-			this->listBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Location = System::Drawing::Point(320, 85);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(230, 797);
-			this->listBox1->TabIndex = 35;
+			this->resultRecipeListBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->resultRecipeListBox->FormattingEnabled = true;
+			this->resultRecipeListBox->Location = System::Drawing::Point(320, 85);
+			this->resultRecipeListBox->Name = L"resultRecipeListBox";
+			this->resultRecipeListBox->Size = System::Drawing::Size(230, 836);
+			this->resultRecipeListBox->TabIndex = 35;
+			this->resultRecipeListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GRAPHICS::resultRecipeListBox_SelectedIndexChanged);
 			// 
 			// currentRecipeLabel
 			// 
@@ -560,29 +567,32 @@ namespace RECIPEBOOK {
 			// 
 			// currentRecipePictureBox
 			// 
-			this->currentRecipePictureBox->Location = System::Drawing::Point(626, 85);
+			this->currentRecipePictureBox->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->currentRecipePictureBox->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"currentRecipePictureBox.Image")));
+			this->currentRecipePictureBox->Location = System::Drawing::Point(583, 85);
 			this->currentRecipePictureBox->Name = L"currentRecipePictureBox";
-			this->currentRecipePictureBox->Size = System::Drawing::Size(129, 200);
+			this->currentRecipePictureBox->Size = System::Drawing::Size(300, 200);
+			this->currentRecipePictureBox->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->currentRecipePictureBox->TabIndex = 37;
 			this->currentRecipePictureBox->TabStop = false;
 			// 
-			// currentReciepeCommentLabel
+			// currentRecipeCommentLabel
 			// 
-			this->currentReciepeCommentLabel->AutoSize = true;
-			this->currentReciepeCommentLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
+			this->currentRecipeCommentLabel->AutoSize = true;
+			this->currentRecipeCommentLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentReciepeCommentLabel->Location = System::Drawing::Point(1143, 85);
-			this->currentReciepeCommentLabel->Name = L"currentReciepeCommentLabel";
-			this->currentReciepeCommentLabel->Size = System::Drawing::Size(365, 20);
-			this->currentReciepeCommentLabel->TabIndex = 38;
-			this->currentReciepeCommentLabel->Text = L"Личный комментарий к текущему рецепту";
+			this->currentRecipeCommentLabel->Location = System::Drawing::Point(579, 305);
+			this->currentRecipeCommentLabel->Name = L"currentRecipeCommentLabel";
+			this->currentRecipeCommentLabel->Size = System::Drawing::Size(365, 20);
+			this->currentRecipeCommentLabel->TabIndex = 38;
+			this->currentRecipeCommentLabel->Text = L"Личный комментарий к текущему рецепту";
 			// 
 			// currentRecipeCategoryLabel
 			// 
 			this->currentRecipeCategoryLabel->AutoSize = true;
 			this->currentRecipeCategoryLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCategoryLabel->Location = System::Drawing::Point(759, 85);
+			this->currentRecipeCategoryLabel->Location = System::Drawing::Point(899, 85);
 			this->currentRecipeCategoryLabel->Name = L"currentRecipeCategoryLabel";
 			this->currentRecipeCategoryLabel->Size = System::Drawing::Size(103, 20);
 			this->currentRecipeCategoryLabel->TabIndex = 39;
@@ -593,7 +603,7 @@ namespace RECIPEBOOK {
 			this->currentRecipePreparingTimeLabel->AutoSize = true;
 			this->currentRecipePreparingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipePreparingTimeLabel->Location = System::Drawing::Point(759, 185);
+			this->currentRecipePreparingTimeLabel->Location = System::Drawing::Point(899, 145);
 			this->currentRecipePreparingTimeLabel->Name = L"currentRecipePreparingTimeLabel";
 			this->currentRecipePreparingTimeLabel->Size = System::Drawing::Size(177, 20);
 			this->currentRecipePreparingTimeLabel->TabIndex = 40;
@@ -604,7 +614,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeIngridientsLabel->AutoSize = true;
 			this->currentRecipeIngridientsLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeIngridientsLabel->Location = System::Drawing::Point(759, 110);
+			this->currentRecipeIngridientsLabel->Location = System::Drawing::Point(899, 205);
 			this->currentRecipeIngridientsLabel->Name = L"currentRecipeIngridientsLabel";
 			this->currentRecipeIngridientsLabel->Size = System::Drawing::Size(128, 20);
 			this->currentRecipeIngridientsLabel->TabIndex = 41;
@@ -615,7 +625,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeAllTimeLabel->AutoSize = true;
 			this->currentRecipeAllTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeAllTimeLabel->Location = System::Drawing::Point(759, 235);
+			this->currentRecipeAllTimeLabel->Location = System::Drawing::Point(899, 185);
 			this->currentRecipeAllTimeLabel->Name = L"currentRecipeAllTimeLabel";
 			this->currentRecipeAllTimeLabel->Size = System::Drawing::Size(133, 20);
 			this->currentRecipeAllTimeLabel->TabIndex = 42;
@@ -626,29 +636,29 @@ namespace RECIPEBOOK {
 			this->currentRecipeCookingTimeLabel->AutoSize = true;
 			this->currentRecipeCookingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCookingTimeLabel->Location = System::Drawing::Point(759, 210);
+			this->currentRecipeCookingTimeLabel->Location = System::Drawing::Point(899, 165);
 			this->currentRecipeCookingTimeLabel->Name = L"currentRecipeCookingTimeLabel";
 			this->currentRecipeCookingTimeLabel->Size = System::Drawing::Size(202, 20);
 			this->currentRecipeCookingTimeLabel->TabIndex = 43;
 			this->currentRecipeCookingTimeLabel->Text = L"Время приготовления:";
 			// 
-			// currentREcipeCaloriesLabel
+			// currentRecipeCaloriesLabel
 			// 
-			this->currentREcipeCaloriesLabel->AutoSize = true;
-			this->currentREcipeCaloriesLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
+			this->currentRecipeCaloriesLabel->AutoSize = true;
+			this->currentRecipeCaloriesLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentREcipeCaloriesLabel->Location = System::Drawing::Point(759, 160);
-			this->currentREcipeCaloriesLabel->Name = L"currentREcipeCaloriesLabel";
-			this->currentREcipeCaloriesLabel->Size = System::Drawing::Size(135, 20);
-			this->currentREcipeCaloriesLabel->TabIndex = 44;
-			this->currentREcipeCaloriesLabel->Text = L"Калорийность:";
+			this->currentRecipeCaloriesLabel->Location = System::Drawing::Point(899, 125);
+			this->currentRecipeCaloriesLabel->Name = L"currentRecipeCaloriesLabel";
+			this->currentRecipeCaloriesLabel->Size = System::Drawing::Size(135, 20);
+			this->currentRecipeCaloriesLabel->TabIndex = 44;
+			this->currentRecipeCaloriesLabel->Text = L"Калорийность:";
 			// 
 			// currentRecipeMarkLabel
 			// 
 			this->currentRecipeMarkLabel->AutoSize = true;
 			this->currentRecipeMarkLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeMarkLabel->Location = System::Drawing::Point(759, 135);
+			this->currentRecipeMarkLabel->Location = System::Drawing::Point(899, 105);
 			this->currentRecipeMarkLabel->Name = L"currentRecipeMarkLabel";
 			this->currentRecipeMarkLabel->Size = System::Drawing::Size(141, 20);
 			this->currentRecipeMarkLabel->TabIndex = 45;
@@ -676,25 +686,38 @@ namespace RECIPEBOOK {
 			this->radioButtonsGroupBox->TabIndex = 47;
 			this->radioButtonsGroupBox->TabStop = false;
 			// 
+			// currentRecipeCommentTextLabel
+			// 
+			this->currentRecipeCommentTextLabel->AutoSize = true;
+			this->currentRecipeCommentTextLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->currentRecipeCommentTextLabel->Location = System::Drawing::Point(579, 345);
+			this->currentRecipeCommentTextLabel->Name = L"currentRecipeCommentTextLabel";
+			this->currentRecipeCommentTextLabel->Size = System::Drawing::Size(422, 40);
+			this->currentRecipeCommentTextLabel->TabIndex = 48;
+			this->currentRecipeCommentTextLabel->Text = L"Здесь будет личный комментарий\r\nНе то что бы по ввкусу вкусно, но по сути вкусно\r"
+				L"\n";
+			// 
 			// GRAPHICS
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
 			this->ClientSize = System::Drawing::Size(1632, 1041);
+			this->Controls->Add(this->currentRecipeCommentTextLabel);
 			this->Controls->Add(this->radioButtonsGroupBox);
 			this->Controls->Add(this->startSearchButton);
 			this->Controls->Add(this->currentRecipeMarkLabel);
-			this->Controls->Add(this->currentREcipeCaloriesLabel);
+			this->Controls->Add(this->currentRecipeCaloriesLabel);
 			this->Controls->Add(this->currentRecipeCookingTimeLabel);
 			this->Controls->Add(this->currentRecipeAllTimeLabel);
 			this->Controls->Add(this->currentRecipeIngridientsLabel);
 			this->Controls->Add(this->currentRecipePreparingTimeLabel);
 			this->Controls->Add(this->currentRecipeCategoryLabel);
-			this->Controls->Add(this->currentReciepeCommentLabel);
+			this->Controls->Add(this->currentRecipeCommentLabel);
 			this->Controls->Add(this->currentRecipePictureBox);
 			this->Controls->Add(this->currentRecipeLabel);
-			this->Controls->Add(this->listBox1);
+			this->Controls->Add(this->resultRecipeListBox);
 			this->Controls->Add(this->selectModeLabel);
 			this->Controls->Add(this->resultLabel);
 			this->Controls->Add(this->ingridientsSearchTextBox);
@@ -741,6 +764,7 @@ namespace RECIPEBOOK {
 		}
 #pragma endregion
 	private: System::Void GRAPHICS_Load(System::Object^ sender, System::EventArgs^ e);
-private: System::Void startSearchButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void startSearchButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void resultRecipeListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 };
 }

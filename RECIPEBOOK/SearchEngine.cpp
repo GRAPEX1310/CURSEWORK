@@ -2,32 +2,245 @@
 
 std::vector<Recipe> SearchEngine::Start(SearchData searchData)
 {
-    if (searchData.operationType) return SearchUnion(searchData);
-    else return SearchIntersection(searchData);
-}
-
-std::vector<Recipe> SearchEngine::SearchUnion(SearchData searchData)
-{
     std::vector<Recipe> searchResultArray;
+    const fs::path folderPath = fs::current_path() / "Recipes";
+    Recipe currentRecipe;
+
+    for (const auto& entry : fs::directory_iterator(folderPath))
+    {
+        if (fs::is_directory(entry))
+        {
+            if (searchData.operationType)
+            {
+                currentRecipe = SearchUnion(searchData, entry);
+            }
+            else
+            {
+                currentRecipe = SearchIntersection(searchData, entry);
+            }
+            
+            if (currentRecipe.dishName != "-1")
+            {
+                currentRecipe.recipePath = folderPath / entry;
+
+                const fs::path middlePath = currentRecipe.recipePath / "MainData" / "Pic";
+
+                for (const auto& file : fs::directory_iterator(middlePath))
+                {
+                    if (Utils::GetExtension(file) == ".jpg")
+                    {
+                        currentRecipe.picturePath = middlePath / file;
+                    }
+                }
+
+                searchResultArray.push_back(currentRecipe);
+            }
+            
+        }
+    }
 
     return searchResultArray;
 }
 
-std::vector<Recipe> SearchEngine::SearchIntersection(SearchData searchData)
+//Searchers
+Recipe SearchEngine::SearchUnion(SearchData searchData, const fs::directory_entry& recipePath)
 {
-    std::vector<Recipe> searchResultArray;
+    std::fstream fstr;
+
+    Recipe recipe = ParseRecipeData(recipePath);
     
-    return searchResultArray;
+    if (!UnionComparator(recipe, searchData, recipePath))
+    {
+        recipe.dishName = "-1";
+    }
+    
+
+    return recipe;
 }
 
-Recipe SearchEngine::ReadFile(fs::path path)
+Recipe SearchEngine::SearchIntersection(SearchData searchData, const fs::directory_entry& recipePath)
+{
+    std::fstream fstr;
+
+    Recipe recipe = ParseRecipeData(recipePath);
+    
+    if (!IntersectionComparator(recipe, searchData, recipePath))
+    {
+        recipe.dishName = "-1";
+    }
+    
+
+    return recipe;
+}
+
+Recipe SearchEngine::FindCurrentRecipe(std::string name)
+{
+    SearchData searchData;
+    searchData.name = name;
+    std::vector<Recipe> result = Start(searchData);
+    if (!result.empty()) return result[0];
+    else return Recipe();
+}
+
+//Comparators
+bool SearchEngine::UnionComparator(Recipe recipe, SearchData searchData, const fs::path& stepsPath)
+{
+    //name and comment
+    if (searchData.name != "" && !IsSubstring(recipe.dishName, searchData.name)) { return false; }
+    if (searchData.phraseFromComment != "" && !IsSubstring(recipe.comment, searchData.phraseFromComment)) { return false; }
+
+    //preparing time
+    if (searchData.preparingTime.first != "" && searchData.preparingTime.second != "" && 
+        !(recipe.preparingTime >= std::stoi(searchData.preparingTime.first) &&
+            recipe.preparingTime <= std::stoi(searchData.preparingTime.second))) { return false; }
+
+    //cooking time
+    if (searchData.cookingTime.first != "" && searchData.cookingTime.second != "" &&
+        !(recipe.cookingTime >= std::stoi(searchData.cookingTime.first) &&
+            recipe.cookingTime <= std::stoi(searchData.cookingTime.second))) { return false; }
+
+    //all time
+    if (searchData.allTime.first != "" && searchData.allTime.second != "" &&
+        !(recipe.allTime >= std::stoi(searchData.allTime.first) &&
+            recipe.allTime <= std::stoi(searchData.allTime.second))) { return false; }
+
+    //calories
+    if (searchData.calories.first != "" && searchData.calories.second != "" &&
+        !(recipe.dishCalories >= std::stoi(searchData.calories.first) &&
+            recipe.dishCalories <= std::stoi(searchData.calories.second))) { return false; }
+
+    //mark
+    if (searchData.dishMark.first != "" && searchData.dishMark.second != "" &&
+        !(recipe.mark >= std::stoi(searchData.dishMark.first) &&
+            recipe.mark <= std::stoi(searchData.dishMark.second))) { return false; }
+
+    
+    auto recipeIngridients = recipe.ingridients;
+    auto searchIngridients = searchData.ingridients;
+    
+    if (searchIngridients.size() != 0 && !ContainsIngridients(recipeIngridients, searchIngridients)) return false;
+
+    auto recipeTypes = recipe.dishTypes;
+    auto searchTypes = searchData.categories;
+
+    if (searchTypes.size() != 0 && !ContainsVector(recipeTypes, searchTypes)) return false;
+
+    auto recipeSteps = recipe.stepByStepManual;
+    auto searchSteps = searchData.phraseFromSteps;
+
+    if (searchSteps.size() != 0 && !ContainsInstruction(recipeSteps, searchSteps)) return false;
+    
+    return true;
+}
+
+bool SearchEngine::IntersectionComparator(Recipe recipe, SearchData searchData, const fs::path& stepsPath)
+{
+    //name and comment
+    if (searchData.name != "" && IsSubstring(recipe.dishName, searchData.name)) return true;
+    if (searchData.phraseFromComment != "" && IsSubstring(recipe.comment, searchData.phraseFromComment)) return true;
+
+    //preparing time
+    if (searchData.preparingTime.first != "" && searchData.preparingTime.second != "" &&
+        (recipe.preparingTime >= std::stoi(searchData.preparingTime.first) &&
+            recipe.preparingTime <= std::stoi(searchData.preparingTime.second))) return true;
+    
+    //cooking time
+    if (searchData.cookingTime.first != "" && searchData.cookingTime.second != "" &&
+        (recipe.cookingTime >= std::stoi(searchData.cookingTime.first) &&
+            recipe.cookingTime <= std::stoi(searchData.cookingTime.second))) return true;
+
+    //all time
+    if (searchData.allTime.first != "" && searchData.allTime.second != "" &&
+        (recipe.allTime >= std::stoi(searchData.allTime.first) &&
+            recipe.allTime <= std::stoi(searchData.allTime.second))) return true;
+    
+    //calories
+    if (searchData.calories.first != "" && searchData.calories.second != "" &&
+        (recipe.dishCalories >= std::stoi(searchData.calories.first) &&
+            recipe.dishCalories <= std::stoi(searchData.calories.second))) return true;
+    
+    //mark
+    if (searchData.dishMark.first != "" && searchData.dishMark.second != "" &&
+        (recipe.mark >= std::stoi(searchData.dishMark.first) &&
+            recipe.mark <= std::stoi(searchData.dishMark.second))) return true;
+
+
+    auto recipeIngridients = recipe.ingridients;
+    auto searchIngridients = searchData.ingridients;
+
+    if (searchIngridients.size() != 0 && ContainsIngridients(recipeIngridients, searchIngridients)) return true;
+
+    auto recipeTypes = recipe.dishTypes;
+    auto searchTypes = searchData.categories;
+
+    if (searchTypes.size() != 0 && ContainsVector(recipeTypes, searchTypes)) return true;
+
+    auto recipeSteps = recipe.stepByStepManual;
+    auto searchSteps = searchData.phraseFromSteps;
+
+    if (searchSteps.size() != 0 && ContainsInstruction(recipeSteps, searchSteps)) return true;
+
+    return false;
+}
+
+//Validation
+bool SearchEngine::ContainsIngridients(std::vector<Ingridient> v1, std::vector<std::string> v2)
+{
+    int i = 0, j = 0;
+    while (i < v1.size() && j < v2.size()) 
+    {
+        if (v1[i].name == v2[j])
+            j++;
+        i++;
+    }
+    return j == v2.size();
+}
+
+bool SearchEngine::ContainsInstruction(std::vector<DishCookingStep> v1, std::string s2)
+{
+    for (int i = 0; i < v1.size(); i++)
+    {
+        if (IsSubstring(v1[i].stepText, s2)) return true;
+    }
+    return false;
+}
+
+bool SearchEngine::ContainsVector(std::vector<std::string> v1, std::vector<std::string> v2)
+{
+    int i = 0, j = 0;
+    while (i < v1.size() && j < v2.size())
+    {
+        if (v1[i] == v2[j])
+            j++;
+        i++;
+    }
+    return j == v2.size();
+}
+
+bool SearchEngine::IsSubstring(std::string& text, std::string& str)
+{
+    for (int i = 0; i < text.length(); i++)
+    {
+        if (text.substr(i, str.length()) == str)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//Parsing & convertation
+Recipe SearchEngine::ParseRecipeData(const fs::path& recipePath)
 {
     Recipe recipe;
-    std::fstream fs;
+    std::fstream fstr;
 
-    fs.open(path, std::fstream::in);
-    
-    if (!fs.good())
+    const fs::path dataPath = recipePath / "MainData" / "Data.txt";
+    const fs::path instructionPath = recipePath / "Steps";
+
+    fstr.open(dataPath, std::fstream::in);
+
+    if (!fstr.good())
     {
         recipe.dishName = "-1";
         return recipe;
@@ -36,7 +249,7 @@ Recipe SearchEngine::ReadFile(fs::path path)
     std::string field;
     int fieldsCounter = 0;
 
-    while (std::getline(fs, field))
+    while (std::getline(fstr, field) || fieldsCounter < 9)
     {
         switch (fieldsCounter)
         {
@@ -67,9 +280,6 @@ Recipe SearchEngine::ReadFile(fs::path path)
         case 8:
             recipe.dishTypes = Utils::ConvertToArray(field);
             break;
-        case 9:
-            recipe.stepByStepManual = Utils::ConvertToArray(field);
-            break;
         default:
             break;
         }
@@ -77,7 +287,83 @@ Recipe SearchEngine::ReadFile(fs::path path)
         fieldsCounter++;
     }
 
+    recipe.stepByStepManual = ParseInstruction(instructionPath);
+
     return recipe;
+}
+
+std::vector<DishCookingStep> SearchEngine::ParseInstruction(const fs::path& instructionPath)
+{
+    const fs::path textPath = instructionPath / "Text";
+
+    std::vector<DishCookingStep> result;
+    std::vector<std::string> stepPicNames;
+
+    for (const auto& entry : fs::directory_iterator(textPath))
+    {
+        DishCookingStep currentStep;
+
+        if (fs::is_regular_file(entry))
+        {
+            std::fstream fstr;
+            fstr.open(entry, std::fstream::in);
+            
+            if (!fstr.good())
+            {
+                continue;
+            }
+
+            std::string line;
+
+            std::string pictureName = "";
+            while (std::getline(fstr, line))
+            {
+                std::string currentstr = "";
+                for (int i = 0; i < line.size(); i++)
+                {
+                    if (line[i] == '[')
+                    {
+                        while (line[i] != ']')
+                        {
+                            i++;
+                            pictureName += line[i];
+                        }
+                        pictureName.erase(pictureName.begin() + pictureName.size() - 1);
+                    }
+
+                    else
+                    {
+                        currentstr += line[i];
+                    }
+                }
+
+                currentStep.stepText += currentstr + '\n';
+            }
+                stepPicNames.push_back(pictureName);
+        } 
+
+        result.push_back(currentStep);
+    }
+    result = ParseStepsPicturesPaths(instructionPath, result, stepPicNames);
+
+    return result;
+}
+
+std::vector<DishCookingStep> SearchEngine::ParseStepsPicturesPaths(const fs::path& instructionPath, std::vector<DishCookingStep> steps, std::vector<std::string> pictureNames)
+{
+    for (int i = 0; i < steps.size(); i++)
+    {
+        if (pictureNames[i] == "!")
+        {
+            steps[i].picturePath = "none";
+        }
+        else
+        {
+            steps[i].picturePath = instructionPath / (pictureNames[i] + ".jpg");
+        }
+    }
+
+    return steps;
 }
 
 std::vector<Ingridient> SearchEngine::ConvertToIngridients(std::string givenString)
@@ -86,7 +372,7 @@ std::vector<Ingridient> SearchEngine::ConvertToIngridients(std::string givenStri
 
     std::string currentString = "";
     Ingridient currentIngridient;
-    bool counter = 1;
+    bool counter = 0;
 
     for (int i = 0; i < givenString.size(); i++)
     {
