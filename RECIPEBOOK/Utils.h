@@ -32,5 +32,6 @@ public:
 	static std::vector<std::string> ConvertToArray(std::string givenString);
 	static String^ ConvertToSysString(std::string givenString);
 	static std::string GetExtension(const fs::path& path);
+	static int GetCurrentStep(std::string step);
 	
 };

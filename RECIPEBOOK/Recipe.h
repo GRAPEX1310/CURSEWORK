@@ -40,8 +40,28 @@ public:
 
 	Recipe() = default;
 
+	//Recipe edit 
 	bool CreateRecipe();
 	bool DeleteRecipe();
+	bool UpdateStepText(int step, std::string text);
+
+	//Formatted output
 	static std::string MakeCategoryOutput(std::vector<std::string> givenArray);
 	static std::string MakeIngridientsOutput(std::vector<Ingridient> givenArray);
+
+private:
+	//Auxiliary functions
+	 std::string GetNewRecipeFolder();
+	 bool CreateRecipeFolder(const fs::path& path);
+	 void CreateRecipeTxt(const fs::path& path, std::string fileName);
+	 const fs::path GenerateRecipeFiles();
+	 
+	 //Converters
+	 std::string ConvertIngridients();
+	 std::string ConvertDishTypes();
+
+	 //Data writers
+	 void WriteMainData(const fs::path& path);
+	 void WriteStepsData(const fs::path& path);
+	 void Foo(std::vector<std::string> vector);
 };

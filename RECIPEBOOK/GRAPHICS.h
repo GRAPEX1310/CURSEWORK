@@ -115,6 +115,16 @@ namespace RECIPEBOOK {
 	private: System::Windows::Forms::Button^ startSearchButton;
 	private: System::Windows::Forms::GroupBox^ radioButtonsGroupBox;
 	private: System::Windows::Forms::Label^ currentRecipeCommentTextLabel;
+	private: System::Windows::Forms::Label^ currentRecipeStepLabel;
+	private: System::Windows::Forms::Label^ currentStepTextLabel;
+	private: System::Windows::Forms::PictureBox^ currentStepPictureBox;
+	private: System::Windows::Forms::Label^ currentStepLabel;
+	private: System::Windows::Forms::Button^ previousStepButton;
+	private: System::Windows::Forms::Button^ nextStepButton;
+	private: System::Windows::Forms::Button^ currentStepButton;
+private: System::Windows::Forms::RichTextBox^ stepEditTextBox;
+private: System::Windows::Forms::Button^ addNewRecipeButton;
+private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 
 
 
@@ -186,8 +196,19 @@ namespace RECIPEBOOK {
 			this->startSearchButton = (gcnew System::Windows::Forms::Button());
 			this->radioButtonsGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->currentRecipeCommentTextLabel = (gcnew System::Windows::Forms::Label());
+			this->currentRecipeStepLabel = (gcnew System::Windows::Forms::Label());
+			this->currentStepTextLabel = (gcnew System::Windows::Forms::Label());
+			this->currentStepPictureBox = (gcnew System::Windows::Forms::PictureBox());
+			this->currentStepLabel = (gcnew System::Windows::Forms::Label());
+			this->previousStepButton = (gcnew System::Windows::Forms::Button());
+			this->nextStepButton = (gcnew System::Windows::Forms::Button());
+			this->currentStepButton = (gcnew System::Windows::Forms::Button());
+			this->stepEditTextBox = (gcnew System::Windows::Forms::RichTextBox());
+			this->addNewRecipeButton = (gcnew System::Windows::Forms::Button());
+			this->saveCurrentRecipeButton = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentRecipePictureBox))->BeginInit();
 			this->radioButtonsGroupBox->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentStepPictureBox))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// searchLabel
@@ -498,11 +519,11 @@ namespace RECIPEBOOK {
 			// resultLabel
 			// 
 			this->resultLabel->AutoSize = true;
-			this->resultLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->resultLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->resultLabel->Location = System::Drawing::Point(315, 9);
+			this->resultLabel->Location = System::Drawing::Point(327, 15);
 			this->resultLabel->Name = L"resultLabel";
-			this->resultLabel->Size = System::Drawing::Size(274, 31);
+			this->resultLabel->Size = System::Drawing::Size(223, 25);
 			this->resultLabel->TabIndex = 31;
 			this->resultLabel->Text = L"Результаты поиска";
 			// 
@@ -559,7 +580,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeLabel->AutoSize = true;
 			this->currentRecipeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeLabel->Location = System::Drawing::Point(621, 9);
+			this->currentRecipeLabel->Location = System::Drawing::Point(1215, 52);
 			this->currentRecipeLabel->Name = L"currentRecipeLabel";
 			this->currentRecipeLabel->Size = System::Drawing::Size(235, 31);
 			this->currentRecipeLabel->TabIndex = 36;
@@ -575,15 +596,20 @@ namespace RECIPEBOOK {
 			this->currentRecipePictureBox->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->currentRecipePictureBox->TabIndex = 37;
 			this->currentRecipePictureBox->TabStop = false;
+			this->currentRecipePictureBox->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &GRAPHICS::currentRecipePictureBox_DragDrop);
+			this->currentRecipePictureBox->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &GRAPHICS::currentRecipePictureBox_DragEnter);
+			this->currentRecipePictureBox->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &GRAPHICS::currentRecipePictureBox_DragOver);
+			this->currentRecipePictureBox->DragLeave += gcnew System::EventHandler(this, &GRAPHICS::currentRecipePictureBox_DragLeave);
+			this->currentRecipePictureBox->QueryContinueDrag += gcnew System::Windows::Forms::QueryContinueDragEventHandler(this, &GRAPHICS::currentRecipePictureBox_QueryContinueDrag);
 			// 
 			// currentRecipeCommentLabel
 			// 
 			this->currentRecipeCommentLabel->AutoSize = true;
-			this->currentRecipeCommentLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
+			this->currentRecipeCommentLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->currentRecipeCommentLabel->Location = System::Drawing::Point(579, 305);
 			this->currentRecipeCommentLabel->Name = L"currentRecipeCommentLabel";
-			this->currentRecipeCommentLabel->Size = System::Drawing::Size(365, 20);
+			this->currentRecipeCommentLabel->Size = System::Drawing::Size(476, 25);
 			this->currentRecipeCommentLabel->TabIndex = 38;
 			this->currentRecipeCommentLabel->Text = L"Личный комментарий к текущему рецепту";
 			// 
@@ -592,7 +618,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeCategoryLabel->AutoSize = true;
 			this->currentRecipeCategoryLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCategoryLabel->Location = System::Drawing::Point(899, 85);
+			this->currentRecipeCategoryLabel->Location = System::Drawing::Point(899, 117);
 			this->currentRecipeCategoryLabel->Name = L"currentRecipeCategoryLabel";
 			this->currentRecipeCategoryLabel->Size = System::Drawing::Size(103, 20);
 			this->currentRecipeCategoryLabel->TabIndex = 39;
@@ -603,7 +629,7 @@ namespace RECIPEBOOK {
 			this->currentRecipePreparingTimeLabel->AutoSize = true;
 			this->currentRecipePreparingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipePreparingTimeLabel->Location = System::Drawing::Point(899, 145);
+			this->currentRecipePreparingTimeLabel->Location = System::Drawing::Point(899, 174);
 			this->currentRecipePreparingTimeLabel->Name = L"currentRecipePreparingTimeLabel";
 			this->currentRecipePreparingTimeLabel->Size = System::Drawing::Size(177, 20);
 			this->currentRecipePreparingTimeLabel->TabIndex = 40;
@@ -614,7 +640,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeIngridientsLabel->AutoSize = true;
 			this->currentRecipeIngridientsLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeIngridientsLabel->Location = System::Drawing::Point(899, 205);
+			this->currentRecipeIngridientsLabel->Location = System::Drawing::Point(899, 234);
 			this->currentRecipeIngridientsLabel->Name = L"currentRecipeIngridientsLabel";
 			this->currentRecipeIngridientsLabel->Size = System::Drawing::Size(128, 20);
 			this->currentRecipeIngridientsLabel->TabIndex = 41;
@@ -625,7 +651,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeAllTimeLabel->AutoSize = true;
 			this->currentRecipeAllTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeAllTimeLabel->Location = System::Drawing::Point(899, 185);
+			this->currentRecipeAllTimeLabel->Location = System::Drawing::Point(899, 214);
 			this->currentRecipeAllTimeLabel->Name = L"currentRecipeAllTimeLabel";
 			this->currentRecipeAllTimeLabel->Size = System::Drawing::Size(133, 20);
 			this->currentRecipeAllTimeLabel->TabIndex = 42;
@@ -636,7 +662,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeCookingTimeLabel->AutoSize = true;
 			this->currentRecipeCookingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCookingTimeLabel->Location = System::Drawing::Point(899, 165);
+			this->currentRecipeCookingTimeLabel->Location = System::Drawing::Point(899, 194);
 			this->currentRecipeCookingTimeLabel->Name = L"currentRecipeCookingTimeLabel";
 			this->currentRecipeCookingTimeLabel->Size = System::Drawing::Size(202, 20);
 			this->currentRecipeCookingTimeLabel->TabIndex = 43;
@@ -647,7 +673,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeCaloriesLabel->AutoSize = true;
 			this->currentRecipeCaloriesLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCaloriesLabel->Location = System::Drawing::Point(899, 125);
+			this->currentRecipeCaloriesLabel->Location = System::Drawing::Point(899, 157);
 			this->currentRecipeCaloriesLabel->Name = L"currentRecipeCaloriesLabel";
 			this->currentRecipeCaloriesLabel->Size = System::Drawing::Size(135, 20);
 			this->currentRecipeCaloriesLabel->TabIndex = 44;
@@ -658,7 +684,7 @@ namespace RECIPEBOOK {
 			this->currentRecipeMarkLabel->AutoSize = true;
 			this->currentRecipeMarkLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeMarkLabel->Location = System::Drawing::Point(899, 105);
+			this->currentRecipeMarkLabel->Location = System::Drawing::Point(899, 137);
 			this->currentRecipeMarkLabel->Name = L"currentRecipeMarkLabel";
 			this->currentRecipeMarkLabel->Size = System::Drawing::Size(141, 20);
 			this->currentRecipeMarkLabel->TabIndex = 45;
@@ -670,7 +696,7 @@ namespace RECIPEBOOK {
 				static_cast<System::Byte>(204)));
 			this->startSearchButton->Location = System::Drawing::Point(237, 16);
 			this->startSearchButton->Name = L"startSearchButton";
-			this->startSearchButton->Size = System::Drawing::Size(64, 23);
+			this->startSearchButton->Size = System::Drawing::Size(64, 25);
 			this->startSearchButton->TabIndex = 46;
 			this->startSearchButton->Text = L"поиск";
 			this->startSearchButton->UseVisualStyleBackColor = true;
@@ -693,10 +719,125 @@ namespace RECIPEBOOK {
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->currentRecipeCommentTextLabel->Location = System::Drawing::Point(579, 345);
 			this->currentRecipeCommentTextLabel->Name = L"currentRecipeCommentTextLabel";
-			this->currentRecipeCommentTextLabel->Size = System::Drawing::Size(422, 40);
+			this->currentRecipeCommentTextLabel->Size = System::Drawing::Size(412, 40);
 			this->currentRecipeCommentTextLabel->TabIndex = 48;
-			this->currentRecipeCommentTextLabel->Text = L"Здесь будет личный комментарий\r\nНе то что бы по ввкусу вкусно, но по сути вкусно\r"
-				L"\n";
+			this->currentRecipeCommentTextLabel->Text = L"Здесь будет личный комментарий\r\nНе то что бы по вкусу вкусно, но по сути вкусно\r\n"
+				L"";
+			// 
+			// currentRecipeStepLabel
+			// 
+			this->currentRecipeStepLabel->AutoSize = true;
+			this->currentRecipeStepLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->currentRecipeStepLabel->Location = System::Drawing::Point(583, 419);
+			this->currentRecipeStepLabel->Name = L"currentRecipeStepLabel";
+			this->currentRecipeStepLabel->Size = System::Drawing::Size(467, 25);
+			this->currentRecipeStepLabel->TabIndex = 49;
+			this->currentRecipeStepLabel->Text = L"Инструкиция по приготовлению по шагам";
+			// 
+			// currentStepTextLabel
+			// 
+			this->currentStepTextLabel->AutoSize = true;
+			this->currentStepTextLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->currentStepTextLabel->Location = System::Drawing::Point(584, 683);
+			this->currentStepTextLabel->Name = L"currentStepTextLabel";
+			this->currentStepTextLabel->Size = System::Drawing::Size(470, 80);
+			this->currentStepTextLabel->TabIndex = 50;
+			this->currentStepTextLabel->Text = L"Здесь будет текст шага выбранного рецепта\r\nБудет вкусно\r\nПотому что почти из чего"
+				L" угодно можно сварить пиво\r\nА пиво, как мы знаем, лучший продукт\r\n";
+			// 
+			// currentStepPictureBox
+			// 
+			this->currentStepPictureBox->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->currentStepPictureBox->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"currentStepPictureBox.Image")));
+			this->currentStepPictureBox->Location = System::Drawing::Point(583, 459);
+			this->currentStepPictureBox->Name = L"currentStepPictureBox";
+			this->currentStepPictureBox->Size = System::Drawing::Size(300, 200);
+			this->currentStepPictureBox->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->currentStepPictureBox->TabIndex = 51;
+			this->currentStepPictureBox->TabStop = false;
+			// 
+			// currentStepLabel
+			// 
+			this->currentStepLabel->AutoSize = true;
+			this->currentStepLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->currentStepLabel->Location = System::Drawing::Point(1056, 419);
+			this->currentStepLabel->Name = L"currentStepLabel";
+			this->currentStepLabel->Size = System::Drawing::Size(180, 25);
+			this->currentStepLabel->TabIndex = 52;
+			this->currentStepLabel->Text = L"Шаг Undefinded";
+			// 
+			// previousStepButton
+			// 
+			this->previousStepButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->previousStepButton->Location = System::Drawing::Point(584, 920);
+			this->previousStepButton->Name = L"previousStepButton";
+			this->previousStepButton->Size = System::Drawing::Size(312, 55);
+			this->previousStepButton->TabIndex = 53;
+			this->previousStepButton->Text = L"<< Предыдущий шаг";
+			this->previousStepButton->UseVisualStyleBackColor = true;
+			this->previousStepButton->Click += gcnew System::EventHandler(this, &GRAPHICS::previousStepButton_Click);
+			// 
+			// nextStepButton
+			// 
+			this->nextStepButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->nextStepButton->Location = System::Drawing::Point(1221, 920);
+			this->nextStepButton->Name = L"nextStepButton";
+			this->nextStepButton->Size = System::Drawing::Size(312, 55);
+			this->nextStepButton->TabIndex = 54;
+			this->nextStepButton->Text = L"Следующий шаг >>";
+			this->nextStepButton->UseVisualStyleBackColor = true;
+			this->nextStepButton->Click += gcnew System::EventHandler(this, &GRAPHICS::nextStepButton_Click);
+			// 
+			// currentStepButton
+			// 
+			this->currentStepButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->currentStepButton->Location = System::Drawing::Point(903, 920);
+			this->currentStepButton->Name = L"currentStepButton";
+			this->currentStepButton->Size = System::Drawing::Size(312, 55);
+			this->currentStepButton->TabIndex = 55;
+			this->currentStepButton->Text = L"Шаг N/N (редактировать шаг)";
+			this->currentStepButton->UseVisualStyleBackColor = true;
+			this->currentStepButton->Click += gcnew System::EventHandler(this, &GRAPHICS::currentStepButton_Click);
+			// 
+			// stepEditTextBox
+			// 
+			this->stepEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->stepEditTextBox->Location = System::Drawing::Point(903, 459);
+			this->stepEditTextBox->Name = L"stepEditTextBox";
+			this->stepEditTextBox->Size = System::Drawing::Size(630, 200);
+			this->stepEditTextBox->TabIndex = 56;
+			this->stepEditTextBox->Text = L"Вы не должны видеть этот текст просто так";
+			this->stepEditTextBox->Visible = false;
+			this->stepEditTextBox->TextChanged += gcnew System::EventHandler(this, &GRAPHICS::stepEditTextBox_TextChanged);
+			// 
+			// addNewRecipeButton
+			// 
+			this->addNewRecipeButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->addNewRecipeButton->Location = System::Drawing::Point(583, 15);
+			this->addNewRecipeButton->Name = L"addNewRecipeButton";
+			this->addNewRecipeButton->Size = System::Drawing::Size(145, 25);
+			this->addNewRecipeButton->TabIndex = 57;
+			this->addNewRecipeButton->Text = L"+ новый рецепт";
+			this->addNewRecipeButton->UseVisualStyleBackColor = true;
+			// 
+			// saveCurrentRecipeButton
+			// 
+			this->saveCurrentRecipeButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->saveCurrentRecipeButton->Location = System::Drawing::Point(738, 15);
+			this->saveCurrentRecipeButton->Name = L"saveCurrentRecipeButton";
+			this->saveCurrentRecipeButton->Size = System::Drawing::Size(145, 25);
+			this->saveCurrentRecipeButton->TabIndex = 58;
+			this->saveCurrentRecipeButton->Text = L"сохранить рецепт";
+			this->saveCurrentRecipeButton->UseVisualStyleBackColor = true;
 			// 
 			// GRAPHICS
 			// 
@@ -704,6 +845,16 @@ namespace RECIPEBOOK {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
 			this->ClientSize = System::Drawing::Size(1632, 1041);
+			this->Controls->Add(this->saveCurrentRecipeButton);
+			this->Controls->Add(this->addNewRecipeButton);
+			this->Controls->Add(this->stepEditTextBox);
+			this->Controls->Add(this->currentStepButton);
+			this->Controls->Add(this->nextStepButton);
+			this->Controls->Add(this->previousStepButton);
+			this->Controls->Add(this->currentStepLabel);
+			this->Controls->Add(this->currentStepPictureBox);
+			this->Controls->Add(this->currentStepTextLabel);
+			this->Controls->Add(this->currentRecipeStepLabel);
 			this->Controls->Add(this->currentRecipeCommentTextLabel);
 			this->Controls->Add(this->radioButtonsGroupBox);
 			this->Controls->Add(this->startSearchButton);
@@ -758,6 +909,7 @@ namespace RECIPEBOOK {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentRecipePictureBox))->EndInit();
 			this->radioButtonsGroupBox->ResumeLayout(false);
 			this->radioButtonsGroupBox->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentStepPictureBox))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -766,5 +918,26 @@ namespace RECIPEBOOK {
 	private: System::Void GRAPHICS_Load(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void startSearchButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void resultRecipeListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void nextStepButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void previousStepButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void currentStepButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void stepEditTextBox_TextChanged(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void currentRecipePictureBox_DragEnter(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
+	private: System::Void currentRecipePictureBox_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
+private: System::Void currentRecipePictureBox_DragLeave(System::Object^ sender, System::EventArgs^ e) {
+	currentRecipePictureBox->Image;
+	int a = 0;
+	return System::Void();
+}
+private: System::Void currentRecipePictureBox_DragOver(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e) {
+	currentRecipePictureBox->Image;
+	int a = 0;
+	return System::Void();
+}
+private: System::Void currentRecipePictureBox_QueryContinueDrag(System::Object^ sender, System::Windows::Forms::QueryContinueDragEventArgs^ e) {
+	currentRecipePictureBox->Image;
+	int a = 0;
+	return System::Void();
+}
 };
 }

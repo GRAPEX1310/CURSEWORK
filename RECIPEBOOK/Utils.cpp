@@ -54,3 +54,16 @@ std::string Utils::GetExtension(const fs::path& path)
 {
 	return path.extension().string();
 }
+
+int Utils::GetCurrentStep(std::string step)
+{
+	std::string result = "";
+	for (int i = 0; i < step.size(); i++)
+	{
+		if (i > 3)
+		{
+			result += step[i];
+		}
+	}
+	return std::stoi(result);
+}

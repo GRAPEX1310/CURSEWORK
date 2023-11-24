@@ -20,53 +20,17 @@ void Main(array<String^>^ args) {
 	
 }
 
+//Load form
 System::Void RECIPEBOOK::GRAPHICS::GRAPHICS_Load(System::Object^ sender, System::EventArgs^ e)
 {
-	/*
-	Recipe recipe;
-	recipe.SetDishName("ASDASD");
-	recipe.CreateRecipeFolder(recipe.GetDishName());
-	recipe.DeleteRecipeFolder(recipe.GetDishName());
-	//recipe.CreateRecipeFolder("TTT");
-
-	bool aa = recipe.CreateRecipeFolder("AAA");
-	String^ ss;
-	if (aa)
+	if (currentRecipePictureBox->AllowDrop)
 	{
-		ss = "ok";
+		searchLabel->Text = "GJFADSUH<TDFAJWDYG";
 	}
-	else
-	{
-		ss = "!";
-	}
-	searchLabel->Text = ss;
-
-	bool bb = recipe.CreateRecipeFolder("BBB");
-	
-	if (bb)
-	{
-		ss = "ok";
-	}
-	else
-	{
-		ss = "!";
-	}
-	markLabel->Text = ss;
-	bool cc = recipe.DeleteRecipeFolder("TTT");
-
-	if (cc)
-	{
-		ss = "ok";
-	}
-	else
-	{
-		ss = "!";
-	}
-	preparingTimeLabel->Text = ss;
-	*/
 	return System::Void();
 }
 
+//Search start
 System::Void RECIPEBOOK::GRAPHICS::startSearchButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 
@@ -122,13 +86,16 @@ System::Void RECIPEBOOK::GRAPHICS::startSearchButton_Click(System::Object^ sende
 	return System::Void();
 }
 
+//ListBox selection changed
 System::Void RECIPEBOOK::GRAPHICS::resultRecipeListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 {
+	stepEditTextBox->Visible = false;
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	//get selected recipe
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
 	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
 
-	//output recipe data
+	//output recipe data init
 	currentRecipeLabel->Text = Utils::ConvertToSysString(currentRecipe.dishName);
 	currentRecipeCommentTextLabel->Text = Utils::ConvertToSysString(currentRecipe.comment);
 	currentRecipeMarkLabel->Text = Utils::ConvertToSysString("Личная оценка: " + std::to_string(currentRecipe.dishCalories) + "/10");
@@ -139,10 +106,128 @@ System::Void RECIPEBOOK::GRAPHICS::resultRecipeListBox_SelectedIndexChanged(Syst
 	currentRecipeAllTimeLabel->Text = Utils::ConvertToSysString("Общее время: " + std::to_string(currentRecipe.allTime));
 	currentRecipeIngridientsLabel->Text = Utils::ConvertToSysString(Recipe::MakeIngridientsOutput(currentRecipe.ingridients));
 
-	//main image work
-	currentRecipePictureBox->Image = currentRecipePictureBox->Image->FromFile(Utils::ConvertToSysString(currentRecipe.picturePath.string()));
+	//main image load
+	if (currentRecipe.picturePath != "none")
+	{
+		currentRecipePictureBox->Image = currentRecipePictureBox->Image->FromFile(Utils::ConvertToSysString(currentRecipe.picturePath.string()));
+	}
+	else
+	{
+		currentRecipePictureBox->Image = currentRecipePictureBox->Image->FromFile(defaultPicture);
+	}
 
+	//first step init
+	currentStepLabel->Text = "Шаг 1";
+	currentStepButton->Text = "Шаг 1/" + Utils::ConvertToSysString(std::to_string(currentRecipe.stepByStepManual.size())) + " (редактировать шаг)";
+	currentStepTextLabel->Text = Utils::ConvertToSysString(currentRecipe.stepByStepManual[0].stepText);
+
+	//first step image load
+	if (currentRecipe.stepByStepManual[0].picturePath != "none")
+	{
+		currentStepPictureBox->Image = currentStepPictureBox->Image->FromFile(Utils::ConvertToSysString(currentRecipe.stepByStepManual[0].picturePath.string()));
+	}
+	else
+	{
+		currentRecipePictureBox->Image = currentRecipePictureBox->Image->FromFile(defaultPicture);
+	}
+
+	//currentRecipe.CreateRecipe();
+	return System::Void();
+}
+
+//Step changed
+System::Void RECIPEBOOK::GRAPHICS::nextStepButton_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	int currentStep = Utils::GetCurrentStep(Utils::ConvertToSTDString(currentStepLabel->Text));
+	if (currentStep < currentRecipe.stepByStepManual.size())
+	{
+		stepEditTextBox->Visible = false;
+		currentStep++;
+
+		//next step init
+		currentStepLabel->Text = "Шаг " + Utils::ConvertToSysString(std::to_string(currentStep));
+		currentStepButton->Text = currentStepLabel->Text + "/" + Utils::ConvertToSysString(std::to_string(currentRecipe.stepByStepManual.size())) + " (редактировать шаг)";
+		currentStepTextLabel->Text = Utils::ConvertToSysString(currentRecipe.stepByStepManual[currentStep - 1].stepText);
+
+		//next step image load
+		if (currentRecipe.stepByStepManual[currentStep - 1].picturePath != "none")
+		{
+			currentStepPictureBox->Image = currentStepPictureBox->Image->FromFile(Utils::ConvertToSysString(currentRecipe.stepByStepManual[currentStep - 1].picturePath.string()));
+		}
+		else
+		{
+			currentStepPictureBox->Image = currentStepPictureBox->Image->FromFile(defaultPicture);
+		}
+	}
 
 	return System::Void();
 }
 
+System::Void RECIPEBOOK::GRAPHICS::previousStepButton_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	int currentStep = Utils::GetCurrentStep(Utils::ConvertToSTDString(currentStepLabel->Text));
+	if (currentStep > 1)
+	{
+		stepEditTextBox->Visible = false;
+		currentStep--;
+
+		//previous step init
+		currentStepLabel->Text = "Шаг " + Utils::ConvertToSysString(std::to_string(currentStep));
+		currentStepButton->Text = currentStepLabel->Text + "/" + Utils::ConvertToSysString(std::to_string(currentRecipe.stepByStepManual.size())) + " (редактировать шаг)";
+		currentStepTextLabel->Text = Utils::ConvertToSysString(currentRecipe.stepByStepManual[currentStep - 1].stepText);
+
+		//next step image load
+		if (currentRecipe.stepByStepManual[currentStep - 1].picturePath != "none")
+		{
+			currentStepPictureBox->Image = currentStepPictureBox->Image->FromFile(Utils::ConvertToSysString(currentRecipe.stepByStepManual[currentStep - 1].picturePath.string()));
+		}
+		else
+		{
+			currentStepPictureBox->Image = currentStepPictureBox->Image->FromFile(defaultPicture);
+		}
+	}
+
+	return System::Void();
+}
+
+//Step edit
+System::Void RECIPEBOOK::GRAPHICS::currentStepButton_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	int currentStep = Utils::GetCurrentStep(Utils::ConvertToSTDString(currentStepLabel->Text));
+	stepEditTextBox->Text = Utils::ConvertToSysString(currentRecipe.stepByStepManual[currentStep - 1].stepText);
+	stepEditTextBox->Visible = true;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::stepEditTextBox_TextChanged(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	int currentStep = Utils::GetCurrentStep(Utils::ConvertToSTDString(currentStepLabel->Text));
+	currentRecipe.UpdateStepText(currentStep, Utils::ConvertToSTDString(stepEditTextBox->Text));
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::currentRecipePictureBox_DragEnter(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e)
+{
+	currentRecipePictureBox->Image;
+	int a = 0;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::currentRecipePictureBox_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e)
+{
+	currentRecipePictureBox->Image;
+	int a = 0;
+	return System::Void();
+}

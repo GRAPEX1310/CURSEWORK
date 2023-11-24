@@ -25,14 +25,17 @@ std::vector<Recipe> SearchEngine::Start(SearchData searchData)
 
                 const fs::path middlePath = currentRecipe.recipePath / "MainData" / "Pic";
 
+                int i = 0;
+
                 for (const auto& file : fs::directory_iterator(middlePath))
                 {
+                    i++;
                     if (Utils::GetExtension(file) == ".jpg")
                     {
                         currentRecipe.picturePath = middlePath / file;
                     }
                 }
-
+                if (!i) currentRecipe.picturePath = "none";
                 searchResultArray.push_back(currentRecipe);
             }
             
@@ -54,7 +57,6 @@ Recipe SearchEngine::SearchUnion(SearchData searchData, const fs::directory_entr
         recipe.dishName = "-1";
     }
     
-
     return recipe;
 }
 
