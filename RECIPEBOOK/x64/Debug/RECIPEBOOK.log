@@ -1,7 +1,5 @@
-﻿  GRAPHICS.cpp
-  Recipe.cpp
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(106,32): warning C4101: 'ex': unreferenced local variable
-  SearchEngine.cpp
-  Generating Code...
+﻿  Recipe.cpp
+C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(111,32): warning C4101: 'ex': unreferenced local variable
+C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(294,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   GRAPHICS.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   RECIPEBOOK.vcxproj -> C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.exe

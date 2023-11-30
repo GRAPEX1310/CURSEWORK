@@ -108,6 +108,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -122,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GRAPHICS.cpp" />
+    <ClCompile Include="NEWRECIPE.cpp" />
     <ClCompile Include="Recipe.cpp" />
     <ClCompile Include="SearchEngine.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -130,13 +132,20 @@
     <ClInclude Include="GRAPHICS.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="NEWRECIPE.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Recipe.h" />
+    <ClInclude Include="RecipeCreator.h" />
     <ClInclude Include="SearchEngine.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GRAPHICS.resx">
       <DependentUpon>GRAPHICS.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NEWRECIPE.resx">
+      <DependentUpon>NEWRECIPE.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

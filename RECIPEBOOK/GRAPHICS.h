@@ -1,5 +1,6 @@
 #pragma once
 #include "Recipe.h"
+#include "NEWRECIPE.h"
 
 namespace RECIPEBOOK {
 
@@ -124,7 +125,8 @@ namespace RECIPEBOOK {
 	private: System::Windows::Forms::Button^ currentStepButton;
 private: System::Windows::Forms::RichTextBox^ stepEditTextBox;
 private: System::Windows::Forms::Button^ addNewRecipeButton;
-private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
+private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
+
 
 
 
@@ -205,7 +207,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentStepButton = (gcnew System::Windows::Forms::Button());
 			this->stepEditTextBox = (gcnew System::Windows::Forms::RichTextBox());
 			this->addNewRecipeButton = (gcnew System::Windows::Forms::Button());
-			this->saveCurrentRecipeButton = (gcnew System::Windows::Forms::Button());
+			this->deleteCurrentRecipeButton = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentRecipePictureBox))->BeginInit();
 			this->radioButtonsGroupBox->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentStepPictureBox))->BeginInit();
@@ -216,7 +218,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->searchLabel->AutoSize = true;
 			this->searchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->searchLabel->Location = System::Drawing::Point(48, 15);
+			this->searchLabel->Location = System::Drawing::Point(66, 47);
 			this->searchLabel->Name = L"searchLabel";
 			this->searchLabel->Size = System::Drawing::Size(186, 25);
 			this->searchLabel->TabIndex = 0;
@@ -228,7 +230,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->nameSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.749998F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->nameSearchTextBox->ForeColor = System::Drawing::SystemColors::MenuText;
-			this->nameSearchTextBox->Location = System::Drawing::Point(39, 85);
+			this->nameSearchTextBox->Location = System::Drawing::Point(59, 108);
 			this->nameSearchTextBox->Name = L"nameSearchTextBox";
 			this->nameSearchTextBox->Size = System::Drawing::Size(193, 22);
 			this->nameSearchTextBox->TabIndex = 1;
@@ -238,7 +240,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->caloriesLabel->AutoSize = true;
 			this->caloriesLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->caloriesLabel->Location = System::Drawing::Point(47, 345);
+			this->caloriesLabel->Location = System::Drawing::Point(57, 344);
 			this->caloriesLabel->Name = L"caloriesLabel";
 			this->caloriesLabel->Size = System::Drawing::Size(205, 20);
 			this->caloriesLabel->TabIndex = 2;
@@ -248,7 +250,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->minCaloriesTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->minCaloriesTextBox->Location = System::Drawing::Point(41, 378);
+			this->minCaloriesTextBox->Location = System::Drawing::Point(59, 367);
 			this->minCaloriesTextBox->Name = L"minCaloriesTextBox";
 			this->minCaloriesTextBox->Size = System::Drawing::Size(55, 20);
 			this->minCaloriesTextBox->TabIndex = 3;
@@ -257,7 +259,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->maxCaloriesTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->maxCaloriesTextBox->Location = System::Drawing::Point(182, 382);
+			this->maxCaloriesTextBox->Location = System::Drawing::Point(200, 367);
 			this->maxCaloriesTextBox->Name = L"maxCaloriesTextBox";
 			this->maxCaloriesTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxCaloriesTextBox->TabIndex = 4;
@@ -265,7 +267,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// dashLabel1
 			// 
 			this->dashLabel1->AutoSize = true;
-			this->dashLabel1->Location = System::Drawing::Point(123, 612);
+			this->dashLabel1->Location = System::Drawing::Point(140, 605);
 			this->dashLabel1->Name = L"dashLabel1";
 			this->dashLabel1->Size = System::Drawing::Size(19, 13);
 			this->dashLabel1->TabIndex = 5;
@@ -276,7 +278,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->dishNameSearchLabel->AutoSize = true;
 			this->dishNameSearchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->dishNameSearchLabel->Location = System::Drawing::Point(61, 52);
+			this->dishNameSearchLabel->Location = System::Drawing::Point(80, 85);
 			this->dishNameSearchLabel->Name = L"dishNameSearchLabel";
 			this->dishNameSearchLabel->Size = System::Drawing::Size(152, 20);
 			this->dishNameSearchLabel->TabIndex = 6;
@@ -287,7 +289,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->commentSearchLabel->AutoSize = true;
 			this->commentSearchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->commentSearchLabel->Location = System::Drawing::Point(21, 649);
+			this->commentSearchLabel->Location = System::Drawing::Point(25, 664);
 			this->commentSearchLabel->Name = L"commentSearchLabel";
 			this->commentSearchLabel->Size = System::Drawing::Size(280, 20);
 			this->commentSearchLabel->TabIndex = 7;
@@ -297,7 +299,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->categoriesSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->categoriesSearchTextBox->Location = System::Drawing::Point(41, 157);
+			this->categoriesSearchTextBox->Location = System::Drawing::Point(59, 170);
 			this->categoriesSearchTextBox->Name = L"categoriesSearchTextBox";
 			this->categoriesSearchTextBox->Size = System::Drawing::Size(193, 20);
 			this->categoriesSearchTextBox->TabIndex = 8;
@@ -307,7 +309,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->stepPhraseSearchLabel->AutoSize = true;
 			this->stepPhraseSearchLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->stepPhraseSearchLabel->Location = System::Drawing::Point(54, 724);
+			this->stepPhraseSearchLabel->Location = System::Drawing::Point(63, 746);
 			this->stepPhraseSearchLabel->Name = L"stepPhraseSearchLabel";
 			this->stepPhraseSearchLabel->Size = System::Drawing::Size(189, 20);
 			this->stepPhraseSearchLabel->TabIndex = 9;
@@ -317,16 +319,16 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->commentTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->commentTextBox->Location = System::Drawing::Point(41, 683);
+			this->commentTextBox->Location = System::Drawing::Point(59, 687);
 			this->commentTextBox->Name = L"commentTextBox";
-			this->commentTextBox->Size = System::Drawing::Size(185, 20);
+			this->commentTextBox->Size = System::Drawing::Size(193, 20);
 			this->commentTextBox->TabIndex = 10;
 			// 
 			// maxMarkTextBox
 			// 
 			this->maxMarkTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->maxMarkTextBox->Location = System::Drawing::Point(182, 307);
+			this->maxMarkTextBox->Location = System::Drawing::Point(200, 293);
 			this->maxMarkTextBox->Name = L"maxMarkTextBox";
 			this->maxMarkTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxMarkTextBox->TabIndex = 11;
@@ -335,7 +337,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->minCookingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->minCookingTimeTextBox->Location = System::Drawing::Point(41, 535);
+			this->minCookingTimeTextBox->Location = System::Drawing::Point(59, 520);
 			this->minCookingTimeTextBox->Name = L"minCookingTimeTextBox";
 			this->minCookingTimeTextBox->Size = System::Drawing::Size(55, 20);
 			this->minCookingTimeTextBox->TabIndex = 12;
@@ -344,16 +346,16 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->minAllTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->minAllTimeTextBox->Location = System::Drawing::Point(41, 609);
+			this->minAllTimeTextBox->Location = System::Drawing::Point(59, 602);
 			this->minAllTimeTextBox->Name = L"minAllTimeTextBox";
-			this->minAllTimeTextBox->Size = System::Drawing::Size(57, 20);
+			this->minAllTimeTextBox->Size = System::Drawing::Size(55, 20);
 			this->minAllTimeTextBox->TabIndex = 13;
 			// 
 			// minMarkTextBox
 			// 
 			this->minMarkTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->minMarkTextBox->Location = System::Drawing::Point(41, 307);
+			this->minMarkTextBox->Location = System::Drawing::Point(59, 296);
 			this->minMarkTextBox->Name = L"minMarkTextBox";
 			this->minMarkTextBox->Size = System::Drawing::Size(55, 20);
 			this->minMarkTextBox->TabIndex = 14;
@@ -362,7 +364,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->maxCookingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->maxCookingTimeTextBox->Location = System::Drawing::Point(182, 535);
+			this->maxCookingTimeTextBox->Location = System::Drawing::Point(200, 520);
 			this->maxCookingTimeTextBox->Name = L"maxCookingTimeTextBox";
 			this->maxCookingTimeTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxCookingTimeTextBox->TabIndex = 15;
@@ -371,7 +373,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->maxAllTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->maxAllTimeTextBox->Location = System::Drawing::Point(182, 609);
+			this->maxAllTimeTextBox->Location = System::Drawing::Point(200, 602);
 			this->maxAllTimeTextBox->Name = L"maxAllTimeTextBox";
 			this->maxAllTimeTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxAllTimeTextBox->TabIndex = 16;
@@ -380,7 +382,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->maxPreparingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->maxPreparingTimeTextBox->Location = System::Drawing::Point(182, 456);
+			this->maxPreparingTimeTextBox->Location = System::Drawing::Point(200, 443);
 			this->maxPreparingTimeTextBox->Name = L"maxPreparingTimeTextBox";
 			this->maxPreparingTimeTextBox->Size = System::Drawing::Size(52, 20);
 			this->maxPreparingTimeTextBox->TabIndex = 17;
@@ -389,7 +391,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->minPreparingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->minPreparingTimeTextBox->Location = System::Drawing::Point(41, 456);
+			this->minPreparingTimeTextBox->Location = System::Drawing::Point(59, 443);
 			this->minPreparingTimeTextBox->Name = L"minPreparingTimeTextBox";
 			this->minPreparingTimeTextBox->Size = System::Drawing::Size(55, 20);
 			this->minPreparingTimeTextBox->TabIndex = 18;
@@ -399,7 +401,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->categoriesLabel->AutoSize = true;
 			this->categoriesLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->categoriesLabel->Location = System::Drawing::Point(86, 121);
+			this->categoriesLabel->Location = System::Drawing::Point(102, 147);
 			this->categoriesLabel->Name = L"categoriesLabel";
 			this->categoriesLabel->Size = System::Drawing::Size(98, 20);
 			this->categoriesLabel->TabIndex = 19;
@@ -410,7 +412,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->cookingTimeLabel->AutoSize = true;
 			this->cookingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->cookingTimeLabel->Location = System::Drawing::Point(54, 494);
+			this->cookingTimeLabel->Location = System::Drawing::Point(57, 497);
 			this->cookingTimeLabel->Name = L"cookingTimeLabel";
 			this->cookingTimeLabel->Size = System::Drawing::Size(197, 20);
 			this->cookingTimeLabel->TabIndex = 20;
@@ -421,7 +423,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->preparingTimeLabel->AutoSize = true;
 			this->preparingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->preparingTimeLabel->Location = System::Drawing::Point(65, 419);
+			this->preparingTimeLabel->Location = System::Drawing::Point(67, 420);
 			this->preparingTimeLabel->Name = L"preparingTimeLabel";
 			this->preparingTimeLabel->Size = System::Drawing::Size(167, 20);
 			this->preparingTimeLabel->TabIndex = 21;
@@ -432,7 +434,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->markLabel->AutoSize = true;
 			this->markLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->markLabel->Location = System::Drawing::Point(75, 273);
+			this->markLabel->Location = System::Drawing::Point(80, 273);
 			this->markLabel->Name = L"markLabel";
 			this->markLabel->Size = System::Drawing::Size(136, 20);
 			this->markLabel->TabIndex = 22;
@@ -443,7 +445,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->allTimeLabel->AutoSize = true;
 			this->allTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->allTimeLabel->Location = System::Drawing::Point(33, 576);
+			this->allTimeLabel->Location = System::Drawing::Point(35, 579);
 			this->allTimeLabel->Name = L"allTimeLabel";
 			this->allTimeLabel->Size = System::Drawing::Size(257, 20);
 			this->allTimeLabel->TabIndex = 23;
@@ -453,15 +455,15 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->stepTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->stepTextBox->Location = System::Drawing::Point(41, 764);
+			this->stepTextBox->Location = System::Drawing::Point(59, 769);
 			this->stepTextBox->Name = L"stepTextBox";
-			this->stepTextBox->Size = System::Drawing::Size(185, 20);
+			this->stepTextBox->Size = System::Drawing::Size(193, 20);
 			this->stepTextBox->TabIndex = 24;
 			// 
 			// dashLabel2
 			// 
 			this->dashLabel2->AutoSize = true;
-			this->dashLabel2->Location = System::Drawing::Point(123, 310);
+			this->dashLabel2->Location = System::Drawing::Point(140, 299);
 			this->dashLabel2->Name = L"dashLabel2";
 			this->dashLabel2->Size = System::Drawing::Size(19, 13);
 			this->dashLabel2->TabIndex = 25;
@@ -470,7 +472,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// dashLabel3
 			// 
 			this->dashLabel3->AutoSize = true;
-			this->dashLabel3->Location = System::Drawing::Point(123, 385);
+			this->dashLabel3->Location = System::Drawing::Point(141, 370);
 			this->dashLabel3->Name = L"dashLabel3";
 			this->dashLabel3->Size = System::Drawing::Size(19, 13);
 			this->dashLabel3->TabIndex = 26;
@@ -479,7 +481,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// dashLabel4
 			// 
 			this->dashLabel4->AutoSize = true;
-			this->dashLabel4->Location = System::Drawing::Point(123, 459);
+			this->dashLabel4->Location = System::Drawing::Point(141, 446);
 			this->dashLabel4->Name = L"dashLabel4";
 			this->dashLabel4->Size = System::Drawing::Size(19, 13);
 			this->dashLabel4->TabIndex = 27;
@@ -488,7 +490,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// dashLabel5
 			// 
 			this->dashLabel5->AutoSize = true;
-			this->dashLabel5->Location = System::Drawing::Point(123, 538);
+			this->dashLabel5->Location = System::Drawing::Point(140, 523);
 			this->dashLabel5->Name = L"dashLabel5";
 			this->dashLabel5->Size = System::Drawing::Size(19, 13);
 			this->dashLabel5->TabIndex = 28;
@@ -499,7 +501,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->ingridientLabel->AutoSize = true;
 			this->ingridientLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->ingridientLabel->Location = System::Drawing::Point(75, 198);
+			this->ingridientLabel->Location = System::Drawing::Point(93, 207);
 			this->ingridientLabel->Name = L"ingridientLabel";
 			this->ingridientLabel->Size = System::Drawing::Size(123, 20);
 			this->ingridientLabel->TabIndex = 29;
@@ -511,7 +513,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->ingridientsSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->ingridientsSearchTextBox->ForeColor = System::Drawing::SystemColors::MenuText;
-			this->ingridientsSearchTextBox->Location = System::Drawing::Point(41, 232);
+			this->ingridientsSearchTextBox->Location = System::Drawing::Point(59, 230);
 			this->ingridientsSearchTextBox->Name = L"ingridientsSearchTextBox";
 			this->ingridientsSearchTextBox->Size = System::Drawing::Size(193, 22);
 			this->ingridientsSearchTextBox->TabIndex = 30;
@@ -521,7 +523,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->resultLabel->AutoSize = true;
 			this->resultLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->resultLabel->Location = System::Drawing::Point(327, 15);
+			this->resultLabel->Location = System::Drawing::Point(399, 44);
 			this->resultLabel->Name = L"resultLabel";
 			this->resultLabel->Size = System::Drawing::Size(223, 25);
 			this->resultLabel->TabIndex = 31;
@@ -532,7 +534,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->selectUnionRadioButton->AutoSize = true;
 			this->selectUnionRadioButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->selectUnionRadioButton->Location = System::Drawing::Point(37, 19);
+			this->selectUnionRadioButton->Location = System::Drawing::Point(37, 29);
 			this->selectUnionRadioButton->Name = L"selectUnionRadioButton";
 			this->selectUnionRadioButton->Size = System::Drawing::Size(105, 17);
 			this->selectUnionRadioButton->TabIndex = 32;
@@ -558,7 +560,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->selectModeLabel->AutoSize = true;
 			this->selectModeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->selectModeLabel->Location = System::Drawing::Point(61, 799);
+			this->selectModeLabel->Location = System::Drawing::Point(67, 819);
 			this->selectModeLabel->Name = L"selectModeLabel";
 			this->selectModeLabel->Size = System::Drawing::Size(167, 20);
 			this->selectModeLabel->TabIndex = 34;
@@ -569,9 +571,9 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->resultRecipeListBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->resultRecipeListBox->FormattingEnabled = true;
-			this->resultRecipeListBox->Location = System::Drawing::Point(320, 85);
+			this->resultRecipeListBox->Location = System::Drawing::Point(404, 87);
 			this->resultRecipeListBox->Name = L"resultRecipeListBox";
-			this->resultRecipeListBox->Size = System::Drawing::Size(230, 836);
+			this->resultRecipeListBox->Size = System::Drawing::Size(218, 836);
 			this->resultRecipeListBox->TabIndex = 35;
 			this->resultRecipeListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GRAPHICS::resultRecipeListBox_SelectedIndexChanged);
 			// 
@@ -580,7 +582,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipeLabel->AutoSize = true;
 			this->currentRecipeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeLabel->Location = System::Drawing::Point(1215, 52);
+			this->currentRecipeLabel->Location = System::Drawing::Point(1491, 41);
 			this->currentRecipeLabel->Name = L"currentRecipeLabel";
 			this->currentRecipeLabel->Size = System::Drawing::Size(235, 31);
 			this->currentRecipeLabel->TabIndex = 36;
@@ -590,24 +592,19 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->currentRecipePictureBox->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->currentRecipePictureBox->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"currentRecipePictureBox.Image")));
-			this->currentRecipePictureBox->Location = System::Drawing::Point(583, 85);
+			this->currentRecipePictureBox->Location = System::Drawing::Point(691, 85);
 			this->currentRecipePictureBox->Name = L"currentRecipePictureBox";
-			this->currentRecipePictureBox->Size = System::Drawing::Size(300, 200);
+			this->currentRecipePictureBox->Size = System::Drawing::Size(450, 300);
 			this->currentRecipePictureBox->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->currentRecipePictureBox->TabIndex = 37;
 			this->currentRecipePictureBox->TabStop = false;
-			this->currentRecipePictureBox->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &GRAPHICS::currentRecipePictureBox_DragDrop);
-			this->currentRecipePictureBox->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &GRAPHICS::currentRecipePictureBox_DragEnter);
-			this->currentRecipePictureBox->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &GRAPHICS::currentRecipePictureBox_DragOver);
-			this->currentRecipePictureBox->DragLeave += gcnew System::EventHandler(this, &GRAPHICS::currentRecipePictureBox_DragLeave);
-			this->currentRecipePictureBox->QueryContinueDrag += gcnew System::Windows::Forms::QueryContinueDragEventHandler(this, &GRAPHICS::currentRecipePictureBox_QueryContinueDrag);
 			// 
 			// currentRecipeCommentLabel
 			// 
 			this->currentRecipeCommentLabel->AutoSize = true;
 			this->currentRecipeCommentLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCommentLabel->Location = System::Drawing::Point(579, 305);
+			this->currentRecipeCommentLabel->Location = System::Drawing::Point(1153, 232);
 			this->currentRecipeCommentLabel->Name = L"currentRecipeCommentLabel";
 			this->currentRecipeCommentLabel->Size = System::Drawing::Size(476, 25);
 			this->currentRecipeCommentLabel->TabIndex = 38;
@@ -618,7 +615,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipeCategoryLabel->AutoSize = true;
 			this->currentRecipeCategoryLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCategoryLabel->Location = System::Drawing::Point(899, 117);
+			this->currentRecipeCategoryLabel->Location = System::Drawing::Point(1154, 87);
 			this->currentRecipeCategoryLabel->Name = L"currentRecipeCategoryLabel";
 			this->currentRecipeCategoryLabel->Size = System::Drawing::Size(103, 20);
 			this->currentRecipeCategoryLabel->TabIndex = 39;
@@ -629,7 +626,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipePreparingTimeLabel->AutoSize = true;
 			this->currentRecipePreparingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipePreparingTimeLabel->Location = System::Drawing::Point(899, 174);
+			this->currentRecipePreparingTimeLabel->Location = System::Drawing::Point(1154, 147);
 			this->currentRecipePreparingTimeLabel->Name = L"currentRecipePreparingTimeLabel";
 			this->currentRecipePreparingTimeLabel->Size = System::Drawing::Size(177, 20);
 			this->currentRecipePreparingTimeLabel->TabIndex = 40;
@@ -640,7 +637,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipeIngridientsLabel->AutoSize = true;
 			this->currentRecipeIngridientsLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeIngridientsLabel->Location = System::Drawing::Point(899, 234);
+			this->currentRecipeIngridientsLabel->Location = System::Drawing::Point(1154, 207);
 			this->currentRecipeIngridientsLabel->Name = L"currentRecipeIngridientsLabel";
 			this->currentRecipeIngridientsLabel->Size = System::Drawing::Size(128, 20);
 			this->currentRecipeIngridientsLabel->TabIndex = 41;
@@ -651,7 +648,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipeAllTimeLabel->AutoSize = true;
 			this->currentRecipeAllTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeAllTimeLabel->Location = System::Drawing::Point(899, 214);
+			this->currentRecipeAllTimeLabel->Location = System::Drawing::Point(1154, 187);
 			this->currentRecipeAllTimeLabel->Name = L"currentRecipeAllTimeLabel";
 			this->currentRecipeAllTimeLabel->Size = System::Drawing::Size(133, 20);
 			this->currentRecipeAllTimeLabel->TabIndex = 42;
@@ -662,7 +659,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipeCookingTimeLabel->AutoSize = true;
 			this->currentRecipeCookingTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCookingTimeLabel->Location = System::Drawing::Point(899, 194);
+			this->currentRecipeCookingTimeLabel->Location = System::Drawing::Point(1154, 167);
 			this->currentRecipeCookingTimeLabel->Name = L"currentRecipeCookingTimeLabel";
 			this->currentRecipeCookingTimeLabel->Size = System::Drawing::Size(202, 20);
 			this->currentRecipeCookingTimeLabel->TabIndex = 43;
@@ -673,7 +670,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipeCaloriesLabel->AutoSize = true;
 			this->currentRecipeCaloriesLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCaloriesLabel->Location = System::Drawing::Point(899, 157);
+			this->currentRecipeCaloriesLabel->Location = System::Drawing::Point(1154, 127);
 			this->currentRecipeCaloriesLabel->Name = L"currentRecipeCaloriesLabel";
 			this->currentRecipeCaloriesLabel->Size = System::Drawing::Size(135, 20);
 			this->currentRecipeCaloriesLabel->TabIndex = 44;
@@ -684,7 +681,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipeMarkLabel->AutoSize = true;
 			this->currentRecipeMarkLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeMarkLabel->Location = System::Drawing::Point(899, 137);
+			this->currentRecipeMarkLabel->Location = System::Drawing::Point(1154, 107);
 			this->currentRecipeMarkLabel->Name = L"currentRecipeMarkLabel";
 			this->currentRecipeMarkLabel->Size = System::Drawing::Size(141, 20);
 			this->currentRecipeMarkLabel->TabIndex = 45;
@@ -694,7 +691,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->startSearchButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->startSearchButton->Location = System::Drawing::Point(237, 16);
+			this->startSearchButton->Location = System::Drawing::Point(314, 44);
 			this->startSearchButton->Name = L"startSearchButton";
 			this->startSearchButton->Size = System::Drawing::Size(64, 25);
 			this->startSearchButton->TabIndex = 46;
@@ -706,7 +703,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->radioButtonsGroupBox->Controls->Add(this->selectUnionRadioButton);
 			this->radioButtonsGroupBox->Controls->Add(this->selectIntersectionRadioButton);
-			this->radioButtonsGroupBox->Location = System::Drawing::Point(41, 834);
+			this->radioButtonsGroupBox->Location = System::Drawing::Point(61, 842);
 			this->radioButtonsGroupBox->Name = L"radioButtonsGroupBox";
 			this->radioButtonsGroupBox->Size = System::Drawing::Size(184, 85);
 			this->radioButtonsGroupBox->TabIndex = 47;
@@ -717,7 +714,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipeCommentTextLabel->AutoSize = true;
 			this->currentRecipeCommentTextLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeCommentTextLabel->Location = System::Drawing::Point(579, 345);
+			this->currentRecipeCommentTextLabel->Location = System::Drawing::Point(1154, 273);
 			this->currentRecipeCommentTextLabel->Name = L"currentRecipeCommentTextLabel";
 			this->currentRecipeCommentTextLabel->Size = System::Drawing::Size(412, 40);
 			this->currentRecipeCommentTextLabel->TabIndex = 48;
@@ -729,18 +726,18 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentRecipeStepLabel->AutoSize = true;
 			this->currentRecipeStepLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->currentRecipeStepLabel->Location = System::Drawing::Point(583, 419);
+			this->currentRecipeStepLabel->Location = System::Drawing::Point(686, 415);
 			this->currentRecipeStepLabel->Name = L"currentRecipeStepLabel";
-			this->currentRecipeStepLabel->Size = System::Drawing::Size(467, 25);
+			this->currentRecipeStepLabel->Size = System::Drawing::Size(454, 25);
 			this->currentRecipeStepLabel->TabIndex = 49;
-			this->currentRecipeStepLabel->Text = L"Инструкиция по приготовлению по шагам";
+			this->currentRecipeStepLabel->Text = L"Инструкция по приготовлению по шагам";
 			// 
 			// currentStepTextLabel
 			// 
 			this->currentStepTextLabel->AutoSize = true;
 			this->currentStepTextLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->currentStepTextLabel->Location = System::Drawing::Point(584, 683);
+			this->currentStepTextLabel->Location = System::Drawing::Point(1154, 456);
 			this->currentStepTextLabel->Name = L"currentStepTextLabel";
 			this->currentStepTextLabel->Size = System::Drawing::Size(470, 80);
 			this->currentStepTextLabel->TabIndex = 50;
@@ -751,9 +748,9 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->currentStepPictureBox->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->currentStepPictureBox->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"currentStepPictureBox.Image")));
-			this->currentStepPictureBox->Location = System::Drawing::Point(583, 459);
+			this->currentStepPictureBox->Location = System::Drawing::Point(691, 456);
 			this->currentStepPictureBox->Name = L"currentStepPictureBox";
-			this->currentStepPictureBox->Size = System::Drawing::Size(300, 200);
+			this->currentStepPictureBox->Size = System::Drawing::Size(450, 300);
 			this->currentStepPictureBox->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->currentStepPictureBox->TabIndex = 51;
 			this->currentStepPictureBox->TabStop = false;
@@ -763,7 +760,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->currentStepLabel->AutoSize = true;
 			this->currentStepLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->currentStepLabel->Location = System::Drawing::Point(1056, 419);
+			this->currentStepLabel->Location = System::Drawing::Point(1264, 415);
 			this->currentStepLabel->Name = L"currentStepLabel";
 			this->currentStepLabel->Size = System::Drawing::Size(180, 25);
 			this->currentStepLabel->TabIndex = 52;
@@ -773,7 +770,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->previousStepButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->previousStepButton->Location = System::Drawing::Point(584, 920);
+			this->previousStepButton->Location = System::Drawing::Point(691, 920);
 			this->previousStepButton->Name = L"previousStepButton";
 			this->previousStepButton->Size = System::Drawing::Size(312, 55);
 			this->previousStepButton->TabIndex = 53;
@@ -785,7 +782,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->nextStepButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->nextStepButton->Location = System::Drawing::Point(1221, 920);
+			this->nextStepButton->Location = System::Drawing::Point(1515, 920);
 			this->nextStepButton->Name = L"nextStepButton";
 			this->nextStepButton->Size = System::Drawing::Size(312, 55);
 			this->nextStepButton->TabIndex = 54;
@@ -797,7 +794,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->currentStepButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->currentStepButton->Location = System::Drawing::Point(903, 920);
+			this->currentStepButton->Location = System::Drawing::Point(1106, 920);
 			this->currentStepButton->Name = L"currentStepButton";
 			this->currentStepButton->Size = System::Drawing::Size(312, 55);
 			this->currentStepButton->TabIndex = 55;
@@ -809,9 +806,9 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->stepEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->stepEditTextBox->Location = System::Drawing::Point(903, 459);
+			this->stepEditTextBox->Location = System::Drawing::Point(691, 769);
 			this->stepEditTextBox->Name = L"stepEditTextBox";
-			this->stepEditTextBox->Size = System::Drawing::Size(630, 200);
+			this->stepEditTextBox->Size = System::Drawing::Size(1136, 126);
 			this->stepEditTextBox->TabIndex = 56;
 			this->stepEditTextBox->Text = L"Вы не должны видеть этот текст просто так";
 			this->stepEditTextBox->Visible = false;
@@ -821,32 +818,35 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			// 
 			this->addNewRecipeButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->addNewRecipeButton->Location = System::Drawing::Point(583, 15);
+			this->addNewRecipeButton->Location = System::Drawing::Point(691, 47);
 			this->addNewRecipeButton->Name = L"addNewRecipeButton";
-			this->addNewRecipeButton->Size = System::Drawing::Size(145, 25);
+			this->addNewRecipeButton->Size = System::Drawing::Size(200, 25);
 			this->addNewRecipeButton->TabIndex = 57;
 			this->addNewRecipeButton->Text = L"+ новый рецепт";
 			this->addNewRecipeButton->UseVisualStyleBackColor = true;
+			this->addNewRecipeButton->Click += gcnew System::EventHandler(this, &GRAPHICS::addNewRecipeButton_Click);
 			// 
-			// saveCurrentRecipeButton
+			// deleteCurrentRecipeButton
 			// 
-			this->saveCurrentRecipeButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+			this->deleteCurrentRecipeButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->saveCurrentRecipeButton->Location = System::Drawing::Point(738, 15);
-			this->saveCurrentRecipeButton->Name = L"saveCurrentRecipeButton";
-			this->saveCurrentRecipeButton->Size = System::Drawing::Size(145, 25);
-			this->saveCurrentRecipeButton->TabIndex = 58;
-			this->saveCurrentRecipeButton->Text = L"сохранить рецепт";
-			this->saveCurrentRecipeButton->UseVisualStyleBackColor = true;
+			this->deleteCurrentRecipeButton->Location = System::Drawing::Point(941, 47);
+			this->deleteCurrentRecipeButton->Name = L"deleteCurrentRecipeButton";
+			this->deleteCurrentRecipeButton->Size = System::Drawing::Size(200, 25);
+			this->deleteCurrentRecipeButton->TabIndex = 58;
+			this->deleteCurrentRecipeButton->Text = L"- удалить рецепт";
+			this->deleteCurrentRecipeButton->UseVisualStyleBackColor = true;
+			this->deleteCurrentRecipeButton->Click += gcnew System::EventHandler(this, &GRAPHICS::deleteCurrentRecipeButton_Click);
 			// 
 			// GRAPHICS
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->ClientSize = System::Drawing::Size(1632, 1041);
-			this->Controls->Add(this->saveCurrentRecipeButton);
+			this->ClientSize = System::Drawing::Size(1904, 1041);
+			this->Controls->Add(this->deleteCurrentRecipeButton);
 			this->Controls->Add(this->addNewRecipeButton);
+			this->Controls->Add(this->selectModeLabel);
 			this->Controls->Add(this->stepEditTextBox);
 			this->Controls->Add(this->currentStepButton);
 			this->Controls->Add(this->nextStepButton);
@@ -869,7 +869,6 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 			this->Controls->Add(this->currentRecipePictureBox);
 			this->Controls->Add(this->currentRecipeLabel);
 			this->Controls->Add(this->resultRecipeListBox);
-			this->Controls->Add(this->selectModeLabel);
 			this->Controls->Add(this->resultLabel);
 			this->Controls->Add(this->ingridientsSearchTextBox);
 			this->Controls->Add(this->ingridientLabel);
@@ -922,22 +921,7 @@ private: System::Windows::Forms::Button^ saveCurrentRecipeButton;
 	private: System::Void previousStepButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void currentStepButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void stepEditTextBox_TextChanged(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void currentRecipePictureBox_DragEnter(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
-	private: System::Void currentRecipePictureBox_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
-private: System::Void currentRecipePictureBox_DragLeave(System::Object^ sender, System::EventArgs^ e) {
-	currentRecipePictureBox->Image;
-	int a = 0;
-	return System::Void();
-}
-private: System::Void currentRecipePictureBox_DragOver(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e) {
-	currentRecipePictureBox->Image;
-	int a = 0;
-	return System::Void();
-}
-private: System::Void currentRecipePictureBox_QueryContinueDrag(System::Object^ sender, System::Windows::Forms::QueryContinueDragEventArgs^ e) {
-	currentRecipePictureBox->Image;
-	int a = 0;
-	return System::Void();
-}
+	private: System::Void addNewRecipeButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void deleteCurrentRecipeButton_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

@@ -63,6 +63,11 @@ bool Recipe::UpdateStepText(int step, std::string text)
 	return 1;
 }
 
+bool Recipe::UpdateRecipeData(int mode, std::string text)
+{
+	return false;
+}
+
 //Auxiliary functions
 std::string Recipe::GetNewRecipeFolder()
 {
@@ -230,5 +235,114 @@ std::string Recipe::ConvertDishTypes()
 	{
 		result += this->dishTypes[i] + " ";
 	}
+	return result;
+}
+
+//Updates
+bool Recipe::UpdateCategories(std::string text)
+{
+	std::fstream fstr;
+	const fs::path path = this->recipePath / "MainData" / "Data.txt";
+	fstr.open(path);
+
+
+
+	std::string newCategories;
+	return false;
+}
+
+std::string Recipe::ParseCategories(std::string text)
+{
+	std::string result = "";
+	std::string current = "";
+	for (int i = 12; i < text.size(); i++)
+	{
+		char a = text[i];
+
+		if (a == ',')
+		{
+			result += current + " ";
+			i++;
+			current = " ";
+		}
+
+		else
+		{
+			current += a;
+		}
+	}
+	if (!current.empty()) result += current;
+	//result.erase(result.begin() + result.size() - 1);
+	return result;
+}
+
+std::string Recipe::ParseMark(std::string text)
+{
+	std::string result = "";
+
+	for (int i = 15; i < text.size() - 3; i++)
+	{
+		result += text[i];
+	}
+
+	return result;
+}
+
+std::string Recipe::ParseCaloriesAndTime(std::string text)
+{
+	std::string result = "";
+	int i = text.size() - 1;
+	while (text[i] != ' ')
+	{
+		result += text[i];
+		i--;
+	}
+	reverse(result.begin(), result.end());
+	return result;
+}
+
+std::string Recipe::ParseIngridients(std::string text)
+{
+	std::string result = "";
+	std::string current = "";
+
+	for (int i = 14; i < text.size(); i++) 
+	{
+		char a = text[i];
+		while (a != '(')
+		{
+			a = text[i];
+			current += a;
+			i++;
+		}
+
+		i++;
+		a = text[i];
+		
+		current += " ";
+
+		while (a != ')')
+		{
+			a = text[i];
+			current += a;
+			i++;
+		}
+		a = text[i];
+		if (i < text.size() - 1)
+		{
+			current += " ";
+		
+		i++;
+		a = text[i];
+		if (a == ',')
+		{
+			result += current;
+			current = "";
+		}
+		}
+	}
+
+	if (!current.empty()) result += current;
+
 	return result;
 }

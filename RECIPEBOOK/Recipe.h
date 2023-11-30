@@ -44,6 +44,7 @@ public:
 	bool CreateRecipe();
 	bool DeleteRecipe();
 	bool UpdateStepText(int step, std::string text);
+	bool UpdateRecipeData(int mode, std::string text);
 
 	//Formatted output
 	static std::string MakeCategoryOutput(std::vector<std::string> givenArray);
@@ -63,5 +64,13 @@ private:
 	 //Data writers
 	 void WriteMainData(const fs::path& path);
 	 void WriteStepsData(const fs::path& path);
-	 void Foo(std::vector<std::string> vector);
-};
+
+	 //Updates
+	 bool UpdateCategories(std::string text);
+public:
+	 //MainData parsing
+	 std::string ParseCategories(std::string text);
+     std::string ParseMark(std::string text);
+     std::string ParseCaloriesAndTime(std::string text);
+	 std::string ParseIngridients(std::string text);
+}; 

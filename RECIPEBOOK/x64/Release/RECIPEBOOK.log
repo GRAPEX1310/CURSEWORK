@@ -1,49 +1,10 @@
 ﻿  GRAPHICS.cpp
-  The contents of <filesystem> are available only with C++17 or later.
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.h(7,21): error C2039: 'filesystem': is not a member of 'std'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\map(25): message : see declaration of 'std'
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.h(7,31): error C2878: 'filesystem': a namespace or class of this name does not exist
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.h(7,21): error C2039: 'filesystem': is not a member of 'std'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\map(25): message : see declaration of 'std'
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.h(7,31): error C2878: 'filesystem': a namespace or class of this name does not exist
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.h(43,25): error C2653: 'fs': is not a class or namespace name
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.h(43,29): error C2061: syntax error: identifier 'path'
+  NEWRECIPE.cpp
   Recipe.cpp
-  The contents of <filesystem> are available only with C++17 or later.
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.h(7,21): error C2039: 'filesystem': is not a member of 'std'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\map(25): message : see declaration of 'std'
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.h(7,31): error C2878: 'filesystem': a namespace or class of this name does not exist
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(6,8): error C2653: 'fs': is not a class or namespace name
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(6,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(6,17): error C2146: syntax error: missing ';' before identifier 'folderPath'
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(6,17): error C2065: 'folderPath': undeclared identifier
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(6,30): error C2653: 'fs': is not a class or namespace name
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(6,34): error C3861: 'current_path': identifier not found
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(8,6): error C2653: 'fs': is not a class or namespace name
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(8,17): error C2065: 'folderPath': undeclared identifier
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(8,10): error C3861: 'exists': identifier not found
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(10,3): error C2653: 'fs': is not a class or namespace name
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(10,14): error C2065: 'folderPath': undeclared identifier
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(25,10): error C2653: 'fs': is not a class or namespace name
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(25,31): error C2653: 'fs': is not a class or namespace name
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(25,35): error C3861: 'current_path': identifier not found
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(25,14): error C3861: 'create_directory': identifier not found
+C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(111,32): warning C4101: 'ex': unreferenced local variable
   SearchEngine.cpp
-  The contents of <filesystem> are available only with C++17 or later.
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.h(7,21): error C2039: 'filesystem': is not a member of 'std'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\map(25): message : see declaration of 'std'
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.h(7,31): error C2878: 'filesystem': a namespace or class of this name does not exist
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.h(7,21): error C2039: 'filesystem': is not a member of 'std'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\map(25): message : see declaration of 'std'
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.h(7,31): error C2878: 'filesystem': a namespace or class of this name does not exist
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.h(43,25): error C2653: 'fs': is not a class or namespace name
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.h(43,29): error C2061: syntax error: identifier 'path'
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.cpp(23,31): error C2653: 'fs': is not a class or namespace name
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.cpp(23,35): error C2065: 'path': undeclared identifier
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.cpp(23,40): error C2146: syntax error: missing ')' before identifier 'path'
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.cpp(24,1): error C2143: syntax error: missing ';' before '{'
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\SearchEngine.cpp(24,1): error C2447: '{': missing function header (old-style formal list?)
   Utils.cpp
-  The contents of <filesystem> are available only with C++17 or later.
   .NETFramework,Version=v4.8.AssemblyAttributes.cpp
   Generating Code...
+  GRAPHICS.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+LINK : fatal error LNK1561: entry point must be defined
