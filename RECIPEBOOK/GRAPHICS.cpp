@@ -23,10 +23,6 @@ void Main(array<String^>^ args) {
 //Load form
 System::Void RECIPEBOOK::GRAPHICS::GRAPHICS_Load(System::Object^ sender, System::EventArgs^ e)
 {
-	if (currentRecipePictureBox->AllowDrop)
-	{
-		searchLabel->Text = "GJFADSUH<TDFAJWDYG";
-	}
 	return System::Void();
 }
 
@@ -91,6 +87,7 @@ System::Void RECIPEBOOK::GRAPHICS::resultRecipeListBox_SelectedIndexChanged(Syst
 {
 	stepEditTextBox->Visible = false;
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	
 	//get selected recipe
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
 	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
@@ -131,8 +128,6 @@ System::Void RECIPEBOOK::GRAPHICS::resultRecipeListBox_SelectedIndexChanged(Syst
 		currentRecipePictureBox->Image = currentRecipePictureBox->Image->FromFile(defaultPicture);
 	}
 
-	currentRecipe.ParseIngridients(Utils::ConvertToSTDString(currentRecipeIngridientsLabel->Text));
-	currentRecipe.ParseCaloriesAndTime(Utils::ConvertToSTDString(currentRecipeAllTimeLabel->Text));
 	
 	return System::Void();
 }
@@ -238,5 +233,193 @@ System::Void RECIPEBOOK::GRAPHICS::deleteCurrentRecipeButton_Click(System::Objec
 
 	currentRecipeLabel->ResetText();
 	*/
+	return System::Void();
+}
+
+//Update name
+System::Void RECIPEBOOK::GRAPHICS::currentRecipeLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	nameEditTextBox->Text = currentRecipeLabel->Text;
+	currentRecipeLabel->Visible = false;
+	nameEditTextBox->Visible = true;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::nameEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+
+	nameEditTextBox->Visible = false;
+	currentRecipeLabel->Text = nameEditTextBox->Text;
+	currentRecipeLabel->Visible = true;
+
+	currentRecipe.UpdateRecipeData(0, Utils::ConvertToSTDString(currentRecipeLabel->Text));
+
+	resultRecipeListBox->Items->Clear();
+	return System::Void();
+}
+
+//Update Category
+System::Void RECIPEBOOK::GRAPHICS::currentRecipeCategoryLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	categoryEditTextBox->Text = currentRecipeCategoryLabel->Text;
+	currentRecipeCategoryLabel->Visible = false;
+	categoryEditTextBox->Visible = true;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::categoryEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+
+	categoryEditTextBox->Visible = false;
+	currentRecipeCategoryLabel->Text = categoryEditTextBox->Text;
+	currentRecipeCategoryLabel->Visible = true;
+	
+	currentRecipe.UpdateRecipeData(1, Utils::ConvertToSTDString(currentRecipeCategoryLabel->Text));
+
+	return System::Void();
+}
+
+//Update Mark
+System::Void RECIPEBOOK::GRAPHICS::currentRecipeMarkLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	markEditTextBox->Text = currentRecipeMarkLabel->Text;
+	currentRecipeMarkLabel->Visible = false;
+	markEditTextBox->Visible = true;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::markEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+
+	markEditTextBox->Visible = false;
+	currentRecipeMarkLabel->Text = markEditTextBox->Text;
+	currentRecipeMarkLabel->Visible = true;
+
+	currentRecipe.UpdateRecipeData(2, Utils::ConvertToSTDString(currentRecipeMarkLabel->Text));
+
+	return System::Void();
+}
+
+//Update Calories
+System::Void RECIPEBOOK::GRAPHICS::currentRecipeCaloriesLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	caloriesEditTextBox->Text = currentRecipeCaloriesLabel->Text;
+	currentRecipeCaloriesLabel->Visible = false;
+	caloriesEditTextBox->Visible = true;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::caloriesEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+
+	caloriesEditTextBox->Visible = false;
+	currentRecipeCaloriesLabel->Text = caloriesEditTextBox->Text;
+	currentRecipeCaloriesLabel->Visible = true;
+
+	currentRecipe.UpdateRecipeData(3, Utils::ConvertToSTDString(currentRecipeCaloriesLabel->Text));
+	return System::Void();
+}
+
+//Update preparing time
+System::Void RECIPEBOOK::GRAPHICS::currentRecipePreparingTimeLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	preparingTimeEditTextBox->Text = currentRecipePreparingTimeLabel->Text;
+	currentRecipePreparingTimeLabel->Visible = false;
+	preparingTimeEditTextBox->Visible = true;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::preparingTimeEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+
+	preparingTimeEditTextBox->Visible = false;
+	currentRecipePreparingTimeLabel->Text = preparingTimeEditTextBox->Text;
+	currentRecipePreparingTimeLabel->Visible = true;
+
+	currentRecipe.UpdateRecipeData(4, Utils::ConvertToSTDString(currentRecipePreparingTimeLabel->Text));
+	return System::Void();
+}
+
+//Update cooking time
+System::Void RECIPEBOOK::GRAPHICS::currentRecipeCookingTimeLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	cookingTimeEditTextBox->Text = currentRecipeCookingTimeLabel->Text;
+	currentRecipeCookingTimeLabel->Visible = false;
+	cookingTimeEditTextBox->Visible = true;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::cookingTimeEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+
+	cookingTimeEditTextBox->Visible = false;
+	currentRecipeCookingTimeLabel->Text = cookingTimeEditTextBox->Text;
+	currentRecipeCookingTimeLabel->Visible = true;
+
+	currentRecipe.UpdateRecipeData(5, Utils::ConvertToSTDString(currentRecipeCookingTimeLabel->Text));
+	return System::Void();
+}
+
+//Update all time
+System::Void RECIPEBOOK::GRAPHICS::currentRecipeAllTimeLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	allTimeEditTextBox->Text = currentRecipeAllTimeLabel->Text;
+	currentRecipeAllTimeLabel->Visible = false;
+	allTimeEditTextBox->Visible = true;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::allTimeEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+
+	allTimeEditTextBox->Visible = false;
+	currentRecipeAllTimeLabel->Text = allTimeEditTextBox->Text;
+	currentRecipeAllTimeLabel->Visible = true;
+
+	currentRecipe.UpdateRecipeData(6, Utils::ConvertToSTDString(currentRecipeAllTimeLabel->Text));
+	return System::Void();
+}
+
+//Update ingridients
+System::Void RECIPEBOOK::GRAPHICS::currentRecipeIngridientsLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	ingridientsEditTextBox->Text = currentRecipeIngridientsLabel->Text;
+	currentRecipeIngridientsLabel->Visible = false;
+	ingridientsEditTextBox->Visible = true;
+	return System::Void();
+}
+
+System::Void RECIPEBOOK::GRAPHICS::ingridientsEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e)
+{
+	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
+	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+
+	ingridientsEditTextBox->Visible = false;
+	currentRecipeIngridientsLabel->Text = ingridientsEditTextBox->Text;
+	currentRecipeIngridientsLabel->Visible = true;
+
+	currentRecipe.UpdateRecipeData(7, Utils::ConvertToSTDString(currentRecipeIngridientsLabel->Text));
 	return System::Void();
 }

@@ -52,7 +52,7 @@ private:
 	//Comparators
 	static bool UnionComparator(Recipe recipe, SearchData searchData, const fs::path& stepsPath);
 	static bool IntersectionComparator(Recipe recipe, SearchData searchData, const fs::path& stepsPath);
-	
+
 	//Validation
 	static bool IsSubstring(std::string& text, std::string& str);
 	static bool ContainsIngridients(std::vector<Ingridient> v1, std::vector<std::string> v2);

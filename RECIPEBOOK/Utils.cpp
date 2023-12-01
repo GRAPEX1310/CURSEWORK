@@ -31,6 +31,7 @@ std::vector<std::string> Utils::ConvertToArray(std::string givenString)
 		char currentChar = givenString[i];
 		if (currentChar == ' ')
 		{
+			if (!currentString.empty() && currentString != "  " && currentString != " ")
 			result.push_back(currentString);
 			currentString = "";
 		}

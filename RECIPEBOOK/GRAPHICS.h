@@ -126,6 +126,15 @@ namespace RECIPEBOOK {
 private: System::Windows::Forms::RichTextBox^ stepEditTextBox;
 private: System::Windows::Forms::Button^ addNewRecipeButton;
 private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
+private: System::Windows::Forms::TextBox^ categoryEditTextBox;
+private: System::Windows::Forms::TextBox^ ingridientsEditTextBox;
+private: System::Windows::Forms::TextBox^ allTimeEditTextBox;
+private: System::Windows::Forms::TextBox^ cookingTimeEditTextBox;
+private: System::Windows::Forms::TextBox^ preparingTimeEditTextBox;
+private: System::Windows::Forms::TextBox^ caloriesEditTextBox;
+private: System::Windows::Forms::TextBox^ markEditTextBox;
+private: System::Windows::Forms::TextBox^ nameEditTextBox;
+
 
 
 
@@ -208,6 +217,14 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->stepEditTextBox = (gcnew System::Windows::Forms::RichTextBox());
 			this->addNewRecipeButton = (gcnew System::Windows::Forms::Button());
 			this->deleteCurrentRecipeButton = (gcnew System::Windows::Forms::Button());
+			this->categoryEditTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->ingridientsEditTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->allTimeEditTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->cookingTimeEditTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->preparingTimeEditTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->caloriesEditTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->markEditTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->nameEditTextBox = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentRecipePictureBox))->BeginInit();
 			this->radioButtonsGroupBox->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentStepPictureBox))->BeginInit();
@@ -587,6 +604,7 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->currentRecipeLabel->Size = System::Drawing::Size(235, 31);
 			this->currentRecipeLabel->TabIndex = 36;
 			this->currentRecipeLabel->Text = L"Текущий рецепт";
+			this->currentRecipeLabel->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::currentRecipeLabel_DoubleClick);
 			// 
 			// currentRecipePictureBox
 			// 
@@ -620,6 +638,7 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->currentRecipeCategoryLabel->Size = System::Drawing::Size(103, 20);
 			this->currentRecipeCategoryLabel->TabIndex = 39;
 			this->currentRecipeCategoryLabel->Text = L"Категории:";
+			this->currentRecipeCategoryLabel->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::currentRecipeCategoryLabel_DoubleClick);
 			// 
 			// currentRecipePreparingTimeLabel
 			// 
@@ -631,6 +650,7 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->currentRecipePreparingTimeLabel->Size = System::Drawing::Size(177, 20);
 			this->currentRecipePreparingTimeLabel->TabIndex = 40;
 			this->currentRecipePreparingTimeLabel->Text = L"Время подготовки: ";
+			this->currentRecipePreparingTimeLabel->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::currentRecipePreparingTimeLabel_DoubleClick);
 			// 
 			// currentRecipeIngridientsLabel
 			// 
@@ -642,6 +662,7 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->currentRecipeIngridientsLabel->Size = System::Drawing::Size(128, 20);
 			this->currentRecipeIngridientsLabel->TabIndex = 41;
 			this->currentRecipeIngridientsLabel->Text = L"Ингридиенты:";
+			this->currentRecipeIngridientsLabel->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::currentRecipeIngridientsLabel_DoubleClick);
 			// 
 			// currentRecipeAllTimeLabel
 			// 
@@ -653,6 +674,7 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->currentRecipeAllTimeLabel->Size = System::Drawing::Size(133, 20);
 			this->currentRecipeAllTimeLabel->TabIndex = 42;
 			this->currentRecipeAllTimeLabel->Text = L"Общее время: ";
+			this->currentRecipeAllTimeLabel->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::currentRecipeAllTimeLabel_DoubleClick);
 			// 
 			// currentRecipeCookingTimeLabel
 			// 
@@ -664,6 +686,7 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->currentRecipeCookingTimeLabel->Size = System::Drawing::Size(202, 20);
 			this->currentRecipeCookingTimeLabel->TabIndex = 43;
 			this->currentRecipeCookingTimeLabel->Text = L"Время приготовления:";
+			this->currentRecipeCookingTimeLabel->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::currentRecipeCookingTimeLabel_DoubleClick);
 			// 
 			// currentRecipeCaloriesLabel
 			// 
@@ -675,6 +698,7 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->currentRecipeCaloriesLabel->Size = System::Drawing::Size(135, 20);
 			this->currentRecipeCaloriesLabel->TabIndex = 44;
 			this->currentRecipeCaloriesLabel->Text = L"Калорийность:";
+			this->currentRecipeCaloriesLabel->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::currentRecipeCaloriesLabel_DoubleClick);
 			// 
 			// currentRecipeMarkLabel
 			// 
@@ -686,6 +710,7 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->currentRecipeMarkLabel->Size = System::Drawing::Size(141, 20);
 			this->currentRecipeMarkLabel->TabIndex = 45;
 			this->currentRecipeMarkLabel->Text = L"Личная оценка:";
+			this->currentRecipeMarkLabel->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::currentRecipeMarkLabel_DoubleClick);
 			// 
 			// startSearchButton
 			// 
@@ -838,6 +863,94 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->deleteCurrentRecipeButton->UseVisualStyleBackColor = true;
 			this->deleteCurrentRecipeButton->Click += gcnew System::EventHandler(this, &GRAPHICS::deleteCurrentRecipeButton_Click);
 			// 
+			// categoryEditTextBox
+			// 
+			this->categoryEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->categoryEditTextBox->Location = System::Drawing::Point(1158, 87);
+			this->categoryEditTextBox->Name = L"categoryEditTextBox";
+			this->categoryEditTextBox->Size = System::Drawing::Size(669, 20);
+			this->categoryEditTextBox->TabIndex = 59;
+			this->categoryEditTextBox->Visible = false;
+			this->categoryEditTextBox->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::categoryEditTextBox_DoubleClick);
+			// 
+			// ingridientsEditTextBox
+			// 
+			this->ingridientsEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->ingridientsEditTextBox->Location = System::Drawing::Point(1158, 207);
+			this->ingridientsEditTextBox->Name = L"ingridientsEditTextBox";
+			this->ingridientsEditTextBox->Size = System::Drawing::Size(669, 20);
+			this->ingridientsEditTextBox->TabIndex = 60;
+			this->ingridientsEditTextBox->Visible = false;
+			this->ingridientsEditTextBox->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::ingridientsEditTextBox_DoubleClick);
+			// 
+			// allTimeEditTextBox
+			// 
+			this->allTimeEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->allTimeEditTextBox->Location = System::Drawing::Point(1158, 187);
+			this->allTimeEditTextBox->Name = L"allTimeEditTextBox";
+			this->allTimeEditTextBox->Size = System::Drawing::Size(669, 20);
+			this->allTimeEditTextBox->TabIndex = 61;
+			this->allTimeEditTextBox->Visible = false;
+			this->allTimeEditTextBox->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::allTimeEditTextBox_DoubleClick);
+			// 
+			// cookingTimeEditTextBox
+			// 
+			this->cookingTimeEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->cookingTimeEditTextBox->Location = System::Drawing::Point(1158, 167);
+			this->cookingTimeEditTextBox->Name = L"cookingTimeEditTextBox";
+			this->cookingTimeEditTextBox->Size = System::Drawing::Size(669, 20);
+			this->cookingTimeEditTextBox->TabIndex = 62;
+			this->cookingTimeEditTextBox->Visible = false;
+			this->cookingTimeEditTextBox->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::cookingTimeEditTextBox_DoubleClick);
+			// 
+			// preparingTimeEditTextBox
+			// 
+			this->preparingTimeEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->preparingTimeEditTextBox->Location = System::Drawing::Point(1158, 147);
+			this->preparingTimeEditTextBox->Name = L"preparingTimeEditTextBox";
+			this->preparingTimeEditTextBox->Size = System::Drawing::Size(669, 20);
+			this->preparingTimeEditTextBox->TabIndex = 63;
+			this->preparingTimeEditTextBox->Visible = false;
+			this->preparingTimeEditTextBox->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::preparingTimeEditTextBox_DoubleClick);
+			// 
+			// caloriesEditTextBox
+			// 
+			this->caloriesEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->caloriesEditTextBox->Location = System::Drawing::Point(1158, 127);
+			this->caloriesEditTextBox->Name = L"caloriesEditTextBox";
+			this->caloriesEditTextBox->Size = System::Drawing::Size(669, 20);
+			this->caloriesEditTextBox->TabIndex = 64;
+			this->caloriesEditTextBox->Visible = false;
+			this->caloriesEditTextBox->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::caloriesEditTextBox_DoubleClick);
+			// 
+			// markEditTextBox
+			// 
+			this->markEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->markEditTextBox->Location = System::Drawing::Point(1158, 107);
+			this->markEditTextBox->Name = L"markEditTextBox";
+			this->markEditTextBox->Size = System::Drawing::Size(669, 20);
+			this->markEditTextBox->TabIndex = 65;
+			this->markEditTextBox->Visible = false;
+			this->markEditTextBox->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::markEditTextBox_DoubleClick);
+			// 
+			// nameEditTextBox
+			// 
+			this->nameEditTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->nameEditTextBox->Location = System::Drawing::Point(1158, 41);
+			this->nameEditTextBox->Name = L"nameEditTextBox";
+			this->nameEditTextBox->Size = System::Drawing::Size(669, 35);
+			this->nameEditTextBox->TabIndex = 66;
+			this->nameEditTextBox->Visible = false;
+			this->nameEditTextBox->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::nameEditTextBox_DoubleClick);
+			// 
 			// GRAPHICS
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -901,6 +1014,14 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 			this->Controls->Add(this->caloriesLabel);
 			this->Controls->Add(this->nameSearchTextBox);
 			this->Controls->Add(this->searchLabel);
+			this->Controls->Add(this->categoryEditTextBox);
+			this->Controls->Add(this->markEditTextBox);
+			this->Controls->Add(this->caloriesEditTextBox);
+			this->Controls->Add(this->preparingTimeEditTextBox);
+			this->Controls->Add(this->cookingTimeEditTextBox);
+			this->Controls->Add(this->allTimeEditTextBox);
+			this->Controls->Add(this->ingridientsEditTextBox);
+			this->Controls->Add(this->nameEditTextBox);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"GRAPHICS";
 			this->Text = L"RECIPEBOOK";
@@ -914,14 +1035,38 @@ private: System::Windows::Forms::Button^ deleteCurrentRecipeButton;
 
 		}
 #pragma endregion
+
+	//load
 	private: System::Void GRAPHICS_Load(System::Object^ sender, System::EventArgs^ e);
+
+	//search
 	private: System::Void startSearchButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void resultRecipeListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
+	//Buttons steps
 	private: System::Void nextStepButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void previousStepButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void currentStepButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void stepEditTextBox_TextChanged(System::Object^ sender, System::EventArgs^ e);
+	//New recipe/delete
 	private: System::Void addNewRecipeButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void deleteCurrentRecipeButton_Click(System::Object^ sender, System::EventArgs^ e);
+	
+	//Edit Recipe
+	private: System::Void currentRecipeCategoryLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void categoryEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void currentRecipeMarkLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void markEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void currentRecipeCaloriesLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void caloriesEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void currentRecipePreparingTimeLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void preparingTimeEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void currentRecipeCookingTimeLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void cookingTimeEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void currentRecipeAllTimeLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void allTimeEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void currentRecipeIngridientsLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void ingridientsEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void currentRecipeLabel_DoubleClick(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void nameEditTextBox_DoubleClick(System::Object^ sender, System::EventArgs^ e);
 };
 }

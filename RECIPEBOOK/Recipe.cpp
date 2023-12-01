@@ -41,7 +41,7 @@ bool Recipe::CreateRecipe()
 	const fs::path basePath = GenerateRecipeFiles();
 	const fs::path dataPath = basePath / "MainData";
 	const fs::path stepsPath = basePath / "Steps" / "Text";
-	
+
 	WriteMainData(dataPath);
 	WriteStepsData(stepsPath);
 	return 1;
@@ -49,23 +49,64 @@ bool Recipe::CreateRecipe()
 
 bool Recipe::UpdateStepText(int step, std::string text)
 {
+	std::string temp = "";
+
 	const fs::path path = this->recipePath / "Steps" / "Text" / ("Step" + std::to_string(step) + ".txt");
-	std::fstream fstr;
+	std::ifstream fstr1;
+	fstr1.open(path);
+
+	if (!fstr1.good()) return 0;
+
+	std::string s;
+	std::getline(fstr1, s);
+	fstr1.close();
+
+	std::ofstream fstr;
 	fstr.open(path);
 
 	if (!fstr.good()) return 0;
-	
-	std::string s;
-	std::getline(fstr, s);
 
+	fstr << s << '\n';
 	fstr << text;
-
+	fstr.close();
 	return 1;
 }
 
 bool Recipe::UpdateRecipeData(int mode, std::string text)
 {
-	return false;
+
+	switch (mode)
+	{
+	case 0:
+		UpdateName(text);
+		break;
+	case 1:
+		UpdateCategories(text);
+		break;
+	case 2:
+		UpdateMark(text);
+		break;
+	case 3:
+		UpdateCalories(text);
+		break;
+	case 4:
+		UpdatePreparingTime(text);
+		break;
+	case 5:
+		UpdateCookingTime(text);
+		break;
+	case 6:
+		UpdateAllTime(text);
+		break;
+	case 7:
+		UpdateIngridients(text);
+		break;
+
+	default:
+		break;
+	}
+
+	return 1;
 }
 
 //Auxiliary functions
@@ -97,18 +138,18 @@ std::string Recipe::GetNewRecipeFolder()
 
 bool Recipe::CreateRecipeFolder(const fs::path& path)
 {
-	if (std::filesystem::exists(path)) 
+	if (std::filesystem::exists(path))
 	{
 		return 0;
 	}
-	else 
+	else
 	{
-		try 
+		try
 		{
 			std::filesystem::create_directories(path);
 			return 1;
 		}
-		catch (const std::exception& ex) 
+		catch (const std::exception& ex)
 		{
 			return 0;
 		}
@@ -187,10 +228,10 @@ void Recipe::WriteMainData(const fs::path& path)
 			fstr << this->mark;
 			break;
 		case 7:
-			fstr << ConvertIngridients();
+			fstr << ConvertFromIngridients();
 			break;
 		case 8:
-			fstr << ConvertDishTypes();
+			fstr << ConvertFromDishTypes();
 			break;
 		default:
 			break;
@@ -212,7 +253,7 @@ void Recipe::WriteStepsData(const fs::path& path)
 }
 
 //Converters
-std::string Recipe::ConvertIngridients()
+std::string Recipe::ConvertFromIngridients()
 {
 	std::string result = "";
 
@@ -227,7 +268,7 @@ std::string Recipe::ConvertIngridients()
 	return result;
 }
 
-std::string Recipe::ConvertDishTypes()
+std::string Recipe::ConvertFromDishTypes()
 {
 	std::string result = "";
 
@@ -238,19 +279,177 @@ std::string Recipe::ConvertDishTypes()
 	return result;
 }
 
-//Updates
-bool Recipe::UpdateCategories(std::string text)
+std::vector<std::string> Recipe::ConvertToDishTypes(std::string text)
 {
-	std::fstream fstr;
-	const fs::path path = this->recipePath / "MainData" / "Data.txt";
-	fstr.open(path);
+	std::vector<std::string> result;
 
+	std::string current = "";
+	for (int i = 12; i < text.size(); i++)
+	{
+		char a = text[i];
 
+		if (a == ' ')
+		{
+			result.push_back(current);
+			i++;
+			current = "";
+		}
 
-	std::string newCategories;
-	return false;
+		else
+		{
+			current += a;
+		}
+	}
+
+	if (!current.empty()) result.push_back(current);
+
+	return result;
 }
 
+std::vector<Ingridient> Recipe::ConvertToIngridients(std::string givenString)
+{
+	std::vector<Ingridient> resultArray;
+
+	std::string currentString = "";
+	Ingridient currentIngridient;
+	bool counter = 0;
+
+	for (int i = 0; i < givenString.size(); i++)
+	{
+		char currentChar = givenString[i];
+
+		if (currentChar == ' ')
+		{
+			if (counter)
+			{
+				currentIngridient.weight = std::stoi(currentString);
+				resultArray.push_back(currentIngridient);
+			}
+
+			else
+			{
+				currentIngridient.name = currentString;
+			}
+
+			currentString = "";
+			counter = !counter;
+		}
+
+		else
+		{
+			currentString += currentChar;
+		}
+	}
+
+	currentIngridient.weight = std::stoi(currentString);
+	resultArray.push_back(currentIngridient);
+
+	return resultArray;
+}
+
+//Updates
+bool Recipe::UpdateName(std::string text)
+{
+	const fs::path path = this->recipePath / "MainData";
+
+	this->dishName = text;
+
+	WriteMainData(path);
+
+	return true;
+}
+
+bool Recipe::UpdateCategories(std::string text)
+{
+	const fs::path path = this->recipePath / "MainData";
+
+	std::string resultText = ParseCategories(text);
+
+	this->dishTypes = Utils::ConvertToArray(resultText);
+
+	WriteMainData(path);
+
+	return true;
+}
+
+bool Recipe::UpdateMark(std::string text)
+{
+	const fs::path path = this->recipePath / "MainData";
+
+	std::string resultText = ParseMark(text);
+
+	this->mark = std::stoi(resultText);
+
+	WriteMainData(path);
+
+	return true;
+}
+
+bool Recipe::UpdateCalories(std::string text)
+{
+	const fs::path path = this->recipePath / "MainData";
+
+	std::string resultText = ParseCaloriesAndTime(text);
+
+	this->dishCalories = std::stoi(resultText);
+
+	WriteMainData(path);
+
+	return true;
+}
+
+bool Recipe::UpdatePreparingTime(std::string text)
+{
+	const fs::path path = this->recipePath / "MainData";
+
+	std::string resultText = ParseCaloriesAndTime(text);
+
+	this->preparingTime = std::stoi(resultText);
+
+	WriteMainData(path);
+
+	return true;
+}
+
+bool Recipe::UpdateCookingTime(std::string text)
+{
+	const fs::path path = this->recipePath / "MainData";
+
+	std::string resultText = ParseCaloriesAndTime(text);
+
+	this->cookingTime = std::stoi(resultText);
+
+	WriteMainData(path);
+
+	return true;
+}
+
+bool Recipe::UpdateAllTime(std::string text)
+{
+	const fs::path path = this->recipePath / "MainData";
+
+	std::string resultText = ParseCaloriesAndTime(text);
+
+	this->allTime = std::stoi(resultText);
+
+	WriteMainData(path);
+
+	return true;
+}
+
+bool Recipe::UpdateIngridients(std::string text)
+{
+
+	const fs::path path = this->recipePath / "MainData";
+
+	this->ingridients = ConvertToIngridients(ParseIngridients(text));
+
+	WriteMainData(path);
+
+	return true;
+}
+
+//Parsers
 std::string Recipe::ParseCategories(std::string text)
 {
 	std::string result = "";
@@ -272,7 +471,7 @@ std::string Recipe::ParseCategories(std::string text)
 		}
 	}
 	if (!current.empty()) result += current;
-	//result.erase(result.begin() + result.size() - 1);
+
 	return result;
 }
 
@@ -306,39 +505,38 @@ std::string Recipe::ParseIngridients(std::string text)
 	std::string result = "";
 	std::string current = "";
 
-	for (int i = 14; i < text.size(); i++) 
+	for (int i = 14; i < text.size(); i++)
 	{
 		char a = text[i];
+
 		while (a != '(')
 		{
-			a = text[i];
 			current += a;
 			i++;
+			a = text[i];
 		}
 
 		i++;
 		a = text[i];
-		
+
 		current += " ";
 
 		while (a != ')')
 		{
-			a = text[i];
 			current += a;
 			i++;
+			a = text[i];
 		}
-		a = text[i];
+
 		if (i < text.size() - 1)
 		{
-			current += " ";
-		
-		i++;
-		a = text[i];
-		if (a == ',')
-		{
-			result += current;
-			current = "";
-		}
+			i++;
+			a = text[i];
+			if (a == ',')
+			{
+				result += current;
+				current = "";
+			}
 		}
 	}
 

@@ -31,6 +31,7 @@ public:
 	int allTime;
 	int dishCalories;
 	int mark;
+	int id;
 
 	std::vector<Ingridient> ingridients;
 
@@ -50,27 +51,36 @@ public:
 	static std::string MakeCategoryOutput(std::vector<std::string> givenArray);
 	static std::string MakeIngridientsOutput(std::vector<Ingridient> givenArray);
 
+	//MainData parsing
+	static std::string ParseCategories(std::string text);
+	static std::string ParseMark(std::string text);
+	static std::string ParseCaloriesAndTime(std::string text);
+	static std::string ParseIngridients(std::string text);
+
+	//Converters
+	std::string ConvertFromIngridients();
+	static std::vector<Ingridient> ConvertToIngridients(std::string givenString);
+	std::string ConvertFromDishTypes();
+	static std::vector<std::string> ConvertToDishTypes(std::string text);
+
 private:
 	//Auxiliary functions
-	 std::string GetNewRecipeFolder();
-	 bool CreateRecipeFolder(const fs::path& path);
-	 void CreateRecipeTxt(const fs::path& path, std::string fileName);
-	 const fs::path GenerateRecipeFiles();
-	 
-	 //Converters
-	 std::string ConvertIngridients();
-	 std::string ConvertDishTypes();
+	std::string GetNewRecipeFolder();
+	bool CreateRecipeFolder(const fs::path& path);
+	void CreateRecipeTxt(const fs::path& path, std::string fileName);
+	const fs::path GenerateRecipeFiles();
 
-	 //Data writers
-	 void WriteMainData(const fs::path& path);
-	 void WriteStepsData(const fs::path& path);
+	//Data writers
+	void WriteMainData(const fs::path& path);
+	void WriteStepsData(const fs::path& path);
 
-	 //Updates
-	 bool UpdateCategories(std::string text);
-public:
-	 //MainData parsing
-	 std::string ParseCategories(std::string text);
-     std::string ParseMark(std::string text);
-     std::string ParseCaloriesAndTime(std::string text);
-	 std::string ParseIngridients(std::string text);
-}; 
+	//Updates
+	bool UpdateName(std::string text);
+	bool UpdateCategories(std::string text);
+	bool UpdateMark(std::string text);
+	bool UpdateCalories(std::string text);
+	bool UpdatePreparingTime(std::string text);
+	bool UpdateCookingTime(std::string text);
+	bool UpdateAllTime(std::string text);
+	bool UpdateIngridients(std::string text);
+};

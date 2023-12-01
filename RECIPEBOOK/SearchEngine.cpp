@@ -18,7 +18,7 @@ std::vector<Recipe> SearchEngine::Start(SearchData searchData)
             {
                 currentRecipe = SearchIntersection(searchData, entry);
             }
-            
+
             if (currentRecipe.dishName != "-1")
             {
                 currentRecipe.recipePath = folderPath / entry;
@@ -35,10 +35,11 @@ std::vector<Recipe> SearchEngine::Start(SearchData searchData)
                         currentRecipe.picturePath = middlePath / file;
                     }
                 }
+
                 if (!i) currentRecipe.picturePath = "none";
                 searchResultArray.push_back(currentRecipe);
             }
-            
+
         }
     }
 
@@ -51,12 +52,12 @@ Recipe SearchEngine::SearchUnion(SearchData searchData, const fs::directory_entr
     std::fstream fstr;
 
     Recipe recipe = ParseRecipeData(recipePath);
-    
+
     if (!UnionComparator(recipe, searchData, recipePath))
     {
         recipe.dishName = "-1";
     }
-    
+
     return recipe;
 }
 
@@ -65,12 +66,12 @@ Recipe SearchEngine::SearchIntersection(SearchData searchData, const fs::directo
     std::fstream fstr;
 
     Recipe recipe = ParseRecipeData(recipePath);
-    
+
     if (!IntersectionComparator(recipe, searchData, recipePath))
     {
         recipe.dishName = "-1";
     }
-    
+
 
     return recipe;
 }
@@ -92,34 +93,44 @@ bool SearchEngine::UnionComparator(Recipe recipe, SearchData searchData, const f
     if (searchData.phraseFromComment != "" && !IsSubstring(recipe.comment, searchData.phraseFromComment)) { return false; }
 
     //preparing time
-    if (searchData.preparingTime.first != "" && searchData.preparingTime.second != "" && 
+    if (searchData.preparingTime.first != "" && searchData.preparingTime.second != "" &&
         !(recipe.preparingTime >= std::stoi(searchData.preparingTime.first) &&
-            recipe.preparingTime <= std::stoi(searchData.preparingTime.second))) { return false; }
+            recipe.preparingTime <= std::stoi(searchData.preparingTime.second))) {
+        return false;
+    }
 
     //cooking time
     if (searchData.cookingTime.first != "" && searchData.cookingTime.second != "" &&
         !(recipe.cookingTime >= std::stoi(searchData.cookingTime.first) &&
-            recipe.cookingTime <= std::stoi(searchData.cookingTime.second))) { return false; }
+            recipe.cookingTime <= std::stoi(searchData.cookingTime.second))) {
+        return false;
+    }
 
     //all time
     if (searchData.allTime.first != "" && searchData.allTime.second != "" &&
         !(recipe.allTime >= std::stoi(searchData.allTime.first) &&
-            recipe.allTime <= std::stoi(searchData.allTime.second))) { return false; }
+            recipe.allTime <= std::stoi(searchData.allTime.second))) {
+        return false;
+    }
 
     //calories
     if (searchData.calories.first != "" && searchData.calories.second != "" &&
         !(recipe.dishCalories >= std::stoi(searchData.calories.first) &&
-            recipe.dishCalories <= std::stoi(searchData.calories.second))) { return false; }
+            recipe.dishCalories <= std::stoi(searchData.calories.second))) {
+        return false;
+    }
 
     //mark
     if (searchData.dishMark.first != "" && searchData.dishMark.second != "" &&
         !(recipe.mark >= std::stoi(searchData.dishMark.first) &&
-            recipe.mark <= std::stoi(searchData.dishMark.second))) { return false; }
+            recipe.mark <= std::stoi(searchData.dishMark.second))) {
+        return false;
+    }
 
-    
+
     auto recipeIngridients = recipe.ingridients;
     auto searchIngridients = searchData.ingridients;
-    
+
     if (searchIngridients.size() != 0 && !ContainsIngridients(recipeIngridients, searchIngridients)) return false;
 
     auto recipeTypes = recipe.dishTypes;
@@ -131,7 +142,7 @@ bool SearchEngine::UnionComparator(Recipe recipe, SearchData searchData, const f
     auto searchSteps = searchData.phraseFromSteps;
 
     if (searchSteps.size() != 0 && !ContainsInstruction(recipeSteps, searchSteps)) return false;
-    
+
     return true;
 }
 
@@ -145,7 +156,7 @@ bool SearchEngine::IntersectionComparator(Recipe recipe, SearchData searchData, 
     if (searchData.preparingTime.first != "" && searchData.preparingTime.second != "" &&
         (recipe.preparingTime >= std::stoi(searchData.preparingTime.first) &&
             recipe.preparingTime <= std::stoi(searchData.preparingTime.second))) return true;
-    
+
     //cooking time
     if (searchData.cookingTime.first != "" && searchData.cookingTime.second != "" &&
         (recipe.cookingTime >= std::stoi(searchData.cookingTime.first) &&
@@ -155,12 +166,12 @@ bool SearchEngine::IntersectionComparator(Recipe recipe, SearchData searchData, 
     if (searchData.allTime.first != "" && searchData.allTime.second != "" &&
         (recipe.allTime >= std::stoi(searchData.allTime.first) &&
             recipe.allTime <= std::stoi(searchData.allTime.second))) return true;
-    
+
     //calories
     if (searchData.calories.first != "" && searchData.calories.second != "" &&
         (recipe.dishCalories >= std::stoi(searchData.calories.first) &&
             recipe.dishCalories <= std::stoi(searchData.calories.second))) return true;
-    
+
     //mark
     if (searchData.dishMark.first != "" && searchData.dishMark.second != "" &&
         (recipe.mark >= std::stoi(searchData.dishMark.first) &&
@@ -189,7 +200,7 @@ bool SearchEngine::IntersectionComparator(Recipe recipe, SearchData searchData, 
 bool SearchEngine::ContainsIngridients(std::vector<Ingridient> v1, std::vector<std::string> v2)
 {
     int i = 0, j = 0;
-    while (i < v1.size() && j < v2.size()) 
+    while (i < v1.size() && j < v2.size())
     {
         if (v1[i].name == v2[j])
             j++;
@@ -309,7 +320,7 @@ std::vector<DishCookingStep> SearchEngine::ParseInstruction(const fs::path& inst
         {
             std::fstream fstr;
             fstr.open(entry, std::fstream::in);
-            
+
             if (!fstr.good())
             {
                 continue;
@@ -341,8 +352,8 @@ std::vector<DishCookingStep> SearchEngine::ParseInstruction(const fs::path& inst
 
                 currentStep.stepText += currentstr + '\n';
             }
-                stepPicNames.push_back(pictureName);
-        } 
+            stepPicNames.push_back(pictureName);
+        }
 
         result.push_back(currentStep);
     }
@@ -379,7 +390,7 @@ std::vector<Ingridient> SearchEngine::ConvertToIngridients(std::string givenStri
     for (int i = 0; i < givenString.size(); i++)
     {
         char currentChar = givenString[i];
-        
+
         if (currentChar == ' ')
         {
             if (counter)
@@ -396,7 +407,7 @@ std::vector<Ingridient> SearchEngine::ConvertToIngridients(std::string givenStri
             currentString = "";
             counter = !counter;
         }
-        
+
         else
         {
             currentString += currentChar;

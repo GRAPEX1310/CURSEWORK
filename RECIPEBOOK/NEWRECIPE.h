@@ -59,6 +59,8 @@ namespace RECIPEBOOK {
 	private: System::Windows::Forms::Button^ previousStepButton;
 	private: System::Windows::Forms::Button^ nextStepButton;
 	private: System::Windows::Forms::Button^ finalButton;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ correctStatusLabel;
 
 	protected:
 
@@ -103,6 +105,8 @@ namespace RECIPEBOOK {
 			this->previousStepButton = (gcnew System::Windows::Forms::Button());
 			this->nextStepButton = (gcnew System::Windows::Forms::Button());
 			this->finalButton = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->correctStatusLabel = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// dishNameSearchLabel
@@ -318,9 +322,9 @@ namespace RECIPEBOOK {
 				static_cast<System::Byte>(204)));
 			this->currentStepLabel->Location = System::Drawing::Point(448, 102);
 			this->currentStepLabel->Name = L"currentStepLabel";
-			this->currentStepLabel->Size = System::Drawing::Size(180, 25);
+			this->currentStepLabel->Size = System::Drawing::Size(73, 25);
 			this->currentStepLabel->TabIndex = 53;
-			this->currentStepLabel->Text = L"Шаг Undefinded";
+			this->currentStepLabel->Text = L"Шаг 1";
 			// 
 			// stepEditTextBox
 			// 
@@ -336,23 +340,25 @@ namespace RECIPEBOOK {
 			// 
 			this->previousStepButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->previousStepButton->Location = System::Drawing::Point(453, 667);
+			this->previousStepButton->Location = System::Drawing::Point(453, 663);
 			this->previousStepButton->Name = L"previousStepButton";
 			this->previousStepButton->Size = System::Drawing::Size(200, 30);
 			this->previousStepButton->TabIndex = 58;
 			this->previousStepButton->Text = L"<< Предыдущий шаг";
 			this->previousStepButton->UseVisualStyleBackColor = true;
+			this->previousStepButton->Click += gcnew System::EventHandler(this, &NEWRECIPE::previousStepButton_Click);
 			// 
 			// nextStepButton
 			// 
 			this->nextStepButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->nextStepButton->Location = System::Drawing::Point(702, 667);
+			this->nextStepButton->Location = System::Drawing::Point(702, 663);
 			this->nextStepButton->Name = L"nextStepButton";
 			this->nextStepButton->Size = System::Drawing::Size(200, 30);
 			this->nextStepButton->TabIndex = 60;
 			this->nextStepButton->Text = L"Следующий шаг >>";
 			this->nextStepButton->UseVisualStyleBackColor = true;
+			this->nextStepButton->Click += gcnew System::EventHandler(this, &NEWRECIPE::nextStepButton_Click);
 			// 
 			// finalButton
 			// 
@@ -364,6 +370,29 @@ namespace RECIPEBOOK {
 			this->finalButton->TabIndex = 61;
 			this->finalButton->Text = L"Сохранить рецепт";
 			this->finalButton->UseVisualStyleBackColor = true;
+			this->finalButton->Click += gcnew System::EventHandler(this, &NEWRECIPE::finalButton_Click);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label1->Location = System::Drawing::Point(180, 720);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(589, 112);
+			this->label1->TabIndex = 62;
+			this->label1->Text = resources->GetString(L"label1.Text");
+			// 
+			// correctStatusLabel
+			// 
+			this->correctStatusLabel->AutoSize = true;
+			this->correctStatusLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->correctStatusLabel->Location = System::Drawing::Point(762, 21);
+			this->correctStatusLabel->Name = L"correctStatusLabel";
+			this->correctStatusLabel->Size = System::Drawing::Size(140, 13);
+			this->correctStatusLabel->TabIndex = 63;
+			this->correctStatusLabel->Text = L"некорректные данные";
 			// 
 			// NEWRECIPE
 			// 
@@ -371,6 +400,8 @@ namespace RECIPEBOOK {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
 			this->ClientSize = System::Drawing::Size(984, 861);
+			this->Controls->Add(this->correctStatusLabel);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->finalButton);
 			this->Controls->Add(this->nextStepButton);
 			this->Controls->Add(this->previousStepButton);
@@ -404,5 +435,8 @@ namespace RECIPEBOOK {
 
 		}
 #pragma endregion
-	};
+	private: System::Void finalButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void previousStepButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void nextStepButton_Click(System::Object^ sender, System::EventArgs^ e);
+};
 }
