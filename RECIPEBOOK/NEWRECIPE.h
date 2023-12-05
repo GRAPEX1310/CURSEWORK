@@ -52,7 +52,7 @@ namespace RECIPEBOOK {
 	private: System::Windows::Forms::Label^ allTimeLabel;
 	private: System::Windows::Forms::TextBox^ allTimeTextBox;
 	private: System::Windows::Forms::Label^ commentSearchLabel;
-	private: System::Windows::Forms::TextBox^ commentTextBox;
+
 	private: System::Windows::Forms::Label^ currentRecipeStepLabel;
 	private: System::Windows::Forms::Label^ currentStepLabel;
 	private: System::Windows::Forms::RichTextBox^ stepEditTextBox;
@@ -61,6 +61,9 @@ namespace RECIPEBOOK {
 	private: System::Windows::Forms::Button^ finalButton;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ correctStatusLabel;
+	private: System::Windows::Forms::RichTextBox^ commentTextBox;
+	private: System::Windows::Forms::ListBox^ stepsListBox;
+	private: System::Windows::Forms::Button^ deleteStepButton;
 
 	protected:
 
@@ -98,7 +101,6 @@ namespace RECIPEBOOK {
 			this->allTimeLabel = (gcnew System::Windows::Forms::Label());
 			this->allTimeTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->commentSearchLabel = (gcnew System::Windows::Forms::Label());
-			this->commentTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->currentRecipeStepLabel = (gcnew System::Windows::Forms::Label());
 			this->currentStepLabel = (gcnew System::Windows::Forms::Label());
 			this->stepEditTextBox = (gcnew System::Windows::Forms::RichTextBox());
@@ -107,6 +109,9 @@ namespace RECIPEBOOK {
 			this->finalButton = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->correctStatusLabel = (gcnew System::Windows::Forms::Label());
+			this->commentTextBox = (gcnew System::Windows::Forms::RichTextBox());
+			this->stepsListBox = (gcnew System::Windows::Forms::ListBox());
+			this->deleteStepButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// dishNameSearchLabel
@@ -134,8 +139,8 @@ namespace RECIPEBOOK {
 			// nameSearchTextBox
 			// 
 			this->nameSearchTextBox->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->nameSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.749998F, System::Drawing::FontStyle::Bold,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->nameSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->nameSearchTextBox->ForeColor = System::Drawing::SystemColors::MenuText;
 			this->nameSearchTextBox->Location = System::Drawing::Point(110, 82);
 			this->nameSearchTextBox->Name = L"nameSearchTextBox";
@@ -155,7 +160,7 @@ namespace RECIPEBOOK {
 			// 
 			// categoriesSearchTextBox
 			// 
-			this->categoriesSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+			this->categoriesSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->categoriesSearchTextBox->Location = System::Drawing::Point(110, 147);
 			this->categoriesSearchTextBox->Name = L"categoriesSearchTextBox";
@@ -176,7 +181,7 @@ namespace RECIPEBOOK {
 			// ingridientsSearchTextBox
 			// 
 			this->ingridientsSearchTextBox->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->ingridientsSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold,
+			this->ingridientsSearchTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->ingridientsSearchTextBox->ForeColor = System::Drawing::SystemColors::MenuText;
 			this->ingridientsSearchTextBox->Location = System::Drawing::Point(110, 220);
@@ -197,7 +202,7 @@ namespace RECIPEBOOK {
 			// 
 			// markTextBox
 			// 
-			this->markTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->markTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->markTextBox->Location = System::Drawing::Point(110, 294);
 			this->markTextBox->Name = L"markTextBox";
@@ -217,7 +222,7 @@ namespace RECIPEBOOK {
 			// 
 			// ñaloriesTextBox
 			// 
-			this->ñaloriesTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->ñaloriesTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->ñaloriesTextBox->Location = System::Drawing::Point(110, 365);
 			this->ñaloriesTextBox->Name = L"ñaloriesTextBox";
@@ -237,7 +242,7 @@ namespace RECIPEBOOK {
 			// 
 			// preparingTimeTextBox
 			// 
-			this->preparingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold,
+			this->preparingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->preparingTimeTextBox->Location = System::Drawing::Point(110, 437);
 			this->preparingTimeTextBox->Name = L"preparingTimeTextBox";
@@ -257,8 +262,8 @@ namespace RECIPEBOOK {
 			// 
 			// cookingTimeTextBox
 			// 
-			this->cookingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->cookingTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->cookingTimeTextBox->Location = System::Drawing::Point(110, 513);
 			this->cookingTimeTextBox->Name = L"cookingTimeTextBox";
 			this->cookingTimeTextBox->Size = System::Drawing::Size(193, 20);
@@ -277,7 +282,7 @@ namespace RECIPEBOOK {
 			// 
 			// allTimeTextBox
 			// 
-			this->allTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->allTimeTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->allTimeTextBox->Location = System::Drawing::Point(110, 592);
 			this->allTimeTextBox->Name = L"allTimeTextBox";
@@ -294,15 +299,6 @@ namespace RECIPEBOOK {
 			this->commentSearchLabel->Size = System::Drawing::Size(197, 20);
 			this->commentSearchLabel->TabIndex = 42;
 			this->commentSearchLabel->Text = L"Ëè÷íûé êîììåíòàðèé ";
-			// 
-			// commentTextBox
-			// 
-			this->commentTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->commentTextBox->Location = System::Drawing::Point(110, 673);
-			this->commentTextBox->Name = L"commentTextBox";
-			this->commentTextBox->Size = System::Drawing::Size(193, 20);
-			this->commentTextBox->TabIndex = 43;
 			// 
 			// currentRecipeStepLabel
 			// 
@@ -332,9 +328,10 @@ namespace RECIPEBOOK {
 				static_cast<System::Byte>(204)));
 			this->stepEditTextBox->Location = System::Drawing::Point(453, 145);
 			this->stepEditTextBox->Name = L"stepEditTextBox";
-			this->stepEditTextBox->Size = System::Drawing::Size(449, 502);
+			this->stepEditTextBox->Size = System::Drawing::Size(450, 500);
 			this->stepEditTextBox->TabIndex = 57;
 			this->stepEditTextBox->Text = L"Ââåäèòå òåêñò òåêóùåãî øàãà";
+			this->stepEditTextBox->TextChanged += gcnew System::EventHandler(this, &NEWRECIPE::stepEditTextBox_TextChanged);
 			// 
 			// previousStepButton
 			// 
@@ -377,7 +374,7 @@ namespace RECIPEBOOK {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(180, 720);
+			this->label1->Location = System::Drawing::Point(383, 713);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(589, 112);
 			this->label1->TabIndex = 62;
@@ -390,9 +387,39 @@ namespace RECIPEBOOK {
 				static_cast<System::Byte>(204)));
 			this->correctStatusLabel->Location = System::Drawing::Point(762, 21);
 			this->correctStatusLabel->Name = L"correctStatusLabel";
-			this->correctStatusLabel->Size = System::Drawing::Size(140, 13);
+			this->correctStatusLabel->Size = System::Drawing::Size(135, 13);
 			this->correctStatusLabel->TabIndex = 63;
-			this->correctStatusLabel->Text = L"íåêîððåêòíûå äàííûå";
+			this->correctStatusLabel->Text = L"íåäîñòàòî÷íî äàííûõ";
+			// 
+			// commentTextBox
+			// 
+			this->commentTextBox->Location = System::Drawing::Point(84, 673);
+			this->commentTextBox->Name = L"commentTextBox";
+			this->commentTextBox->Size = System::Drawing::Size(253, 152);
+			this->commentTextBox->TabIndex = 64;
+			this->commentTextBox->Text = L"";
+			// 
+			// stepsListBox
+			// 
+			this->stepsListBox->FormattingEnabled = true;
+			this->stepsListBox->Location = System::Drawing::Point(343, 145);
+			this->stepsListBox->Name = L"stepsListBox";
+			this->stepsListBox->Size = System::Drawing::Size(105, 498);
+			this->stepsListBox->TabIndex = 65;
+			this->stepsListBox->Visible = false;
+			this->stepsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &NEWRECIPE::stepsListBox_SelectedIndexChanged);
+			// 
+			// deleteStepButton
+			// 
+			this->deleteStepButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->deleteStepButton->Location = System::Drawing::Point(527, 102);
+			this->deleteStepButton->Name = L"deleteStepButton";
+			this->deleteStepButton->Size = System::Drawing::Size(169, 25);
+			this->deleteStepButton->TabIndex = 66;
+			this->deleteStepButton->Text = L"Óäàëèòü øàã";
+			this->deleteStepButton->UseVisualStyleBackColor = true;
+			this->deleteStepButton->Click += gcnew System::EventHandler(this, &NEWRECIPE::deleteStepButton_Click);
 			// 
 			// NEWRECIPE
 			// 
@@ -400,6 +427,9 @@ namespace RECIPEBOOK {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
 			this->ClientSize = System::Drawing::Size(984, 861);
+			this->Controls->Add(this->deleteStepButton);
+			this->Controls->Add(this->stepsListBox);
+			this->Controls->Add(this->commentTextBox);
 			this->Controls->Add(this->correctStatusLabel);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->finalButton);
@@ -408,7 +438,6 @@ namespace RECIPEBOOK {
 			this->Controls->Add(this->stepEditTextBox);
 			this->Controls->Add(this->currentStepLabel);
 			this->Controls->Add(this->currentRecipeStepLabel);
-			this->Controls->Add(this->commentTextBox);
 			this->Controls->Add(this->commentSearchLabel);
 			this->Controls->Add(this->allTimeTextBox);
 			this->Controls->Add(this->allTimeLabel);
@@ -430,6 +459,7 @@ namespace RECIPEBOOK {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"NEWRECIPE";
 			this->Text = L"NEWRECIPE";
+			this->Load += gcnew System::EventHandler(this, &NEWRECIPE::NEWRECIPE_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -438,5 +468,9 @@ namespace RECIPEBOOK {
 	private: System::Void finalButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void previousStepButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void nextStepButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void NEWRECIPE_Load(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void stepsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void deleteStepButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void stepEditTextBox_TextChanged(System::Object^ sender, System::EventArgs^ e);
 };
 }

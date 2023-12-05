@@ -33,5 +33,6 @@ public:
 	static String^ ConvertToSysString(std::string givenString);
 	static std::string GetExtension(const fs::path& path);
 	static int GetCurrentStep(std::string step);
+	static int GetCurrentRecipeId(std::string currentRecipe);
 	
 };

@@ -11,3 +11,7 @@ C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\x64\Debug\RECIPEBOOK.vcxp
 C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\x64\Debug\RECIPEBOOK.GRAPHICS.resources
 C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\x64\Debug\RECIPEBOOK.NEWRECIPE.resources
 C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\x64\Debug\RECIPEBOOK.vcxproj.GenerateResource.cache
+C:\Users\sasha\OneDrive\Рабочий стол\CW\CURSEWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.vcxproj.AssemblyReference.cache
+C:\Users\sasha\OneDrive\Рабочий стол\CW\CURSEWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.GRAPHICS.resources
+C:\Users\sasha\OneDrive\Рабочий стол\CW\CURSEWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.NEWRECIPE.resources
+C:\Users\sasha\OneDrive\Рабочий стол\CW\CURSEWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.vcxproj.GenerateResource.cache

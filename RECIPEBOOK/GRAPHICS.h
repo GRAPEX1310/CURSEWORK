@@ -134,6 +134,7 @@ private: System::Windows::Forms::TextBox^ preparingTimeEditTextBox;
 private: System::Windows::Forms::TextBox^ caloriesEditTextBox;
 private: System::Windows::Forms::TextBox^ markEditTextBox;
 private: System::Windows::Forms::TextBox^ nameEditTextBox;
+private: System::Windows::Forms::Label^ idLabel;
 
 
 
@@ -225,6 +226,7 @@ private: System::Windows::Forms::TextBox^ nameEditTextBox;
 			this->caloriesEditTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->markEditTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->nameEditTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->idLabel = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentRecipePictureBox))->BeginInit();
 			this->radioButtonsGroupBox->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->currentStepPictureBox))->BeginInit();
@@ -951,12 +953,23 @@ private: System::Windows::Forms::TextBox^ nameEditTextBox;
 			this->nameEditTextBox->Visible = false;
 			this->nameEditTextBox->DoubleClick += gcnew System::EventHandler(this, &GRAPHICS::nameEditTextBox_DoubleClick);
 			// 
+			// idLabel
+			// 
+			this->idLabel->AutoSize = true;
+			this->idLabel->Location = System::Drawing::Point(314, 91);
+			this->idLabel->Name = L"idLabel";
+			this->idLabel->Size = System::Drawing::Size(15, 13);
+			this->idLabel->TabIndex = 67;
+			this->idLabel->Text = L"id";
+			this->idLabel->Visible = false;
+			// 
 			// GRAPHICS
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLightLight;
 			this->ClientSize = System::Drawing::Size(1904, 1041);
+			this->Controls->Add(this->idLabel);
 			this->Controls->Add(this->deleteCurrentRecipeButton);
 			this->Controls->Add(this->addNewRecipeButton);
 			this->Controls->Add(this->selectModeLabel);

@@ -1,9 +1,9 @@
 ﻿  GRAPHICS.cpp
   NEWRECIPE.cpp
   Recipe.cpp
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(152,32): warning C4101: 'ex': unreferenced local variable
-C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\RECIPEBOOK\Recipe.cpp(493,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sasha\OneDrive\Рабочий стол\CW\CURSEWORK\RECIPEBOOK\Recipe.cpp(152,32): warning C4101: ex: неиспользованная локальная переменная
+C:\Users\sasha\OneDrive\Рабочий стол\CW\CURSEWORK\RECIPEBOOK\Recipe.cpp(521,8): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   SearchEngine.cpp
-  Generating Code...
-  GRAPHICS.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  RECIPEBOOK.vcxproj -> C:\Users\sasha\Desktop\CURSEWORK\RECIPEBOOK\x64\Debug\RECIPEBOOK.exe
+  Создание кода...
+  GRAPHICS.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  RECIPEBOOK.vcxproj -> C:\Users\sasha\OneDrive\Рабочий стол\CW\CURSEWORK\x64\Debug\RECIPEBOOK.exe

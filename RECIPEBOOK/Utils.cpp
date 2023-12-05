@@ -68,3 +68,14 @@ int Utils::GetCurrentStep(std::string step)
 	}
 	return std::stoi(result);
 }
+
+int Utils::GetCurrentRecipeId(std::string currentRecipe)
+{
+	std::string result = "";
+
+	for (int i = 1; currentRecipe[i] != ')'; i++)
+	{
+		result += currentRecipe[i];
+	}
+	return std::stoi(result);
+}

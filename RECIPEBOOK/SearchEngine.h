@@ -29,13 +29,15 @@ struct SearchData
 	std::pair<std::string, std::string> allTime;
 
 	bool operationType;
+
+	int id;
 };
 
 class SearchEngine
 {
 public:
 	static std::vector<Recipe> Start(SearchData searchData);
-	static Recipe FindCurrentRecipe(std::string name);
+	static Recipe FindCurrentRecipe(int id);
 
 private:
 

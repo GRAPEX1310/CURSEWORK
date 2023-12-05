@@ -67,6 +67,8 @@ System::Void RECIPEBOOK::GRAPHICS::startSearchButton_Click(System::Object^ sende
 	if (selectUnionRadioButton->Checked) searchData.operationType = true;
 	else if (selectIntersectionRadioButton->Checked) searchData.operationType = false;
 
+	searchData.id = 0;
+
 	std::vector<Recipe> searchResult = SearchEngine::Start(searchData);
 
 	resultRecipeListBox->Items->Clear();
@@ -75,7 +77,7 @@ System::Void RECIPEBOOK::GRAPHICS::startSearchButton_Click(System::Object^ sende
 	{
 		for (int i = 0; i < searchResult.size(); i++)
 		{
-			resultRecipeListBox->Items->Add(Utils::ConvertToSysString(searchResult[i].dishName));
+			resultRecipeListBox->Items->Add(Utils::ConvertToSysString("(" + std::to_string(searchResult[i].id) + ") " + searchResult[i].dishName));
 		}
 	}
 
@@ -90,7 +92,7 @@ System::Void RECIPEBOOK::GRAPHICS::resultRecipeListBox_SelectedIndexChanged(Syst
 	
 	//get selected recipe
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 
 	//output recipe data init
 	currentRecipeLabel->Text = Utils::ConvertToSysString(currentRecipe.dishName);
@@ -137,7 +139,7 @@ System::Void RECIPEBOOK::GRAPHICS::nextStepButton_Click(System::Object^ sender, 
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 	int currentStep = Utils::GetCurrentStep(Utils::ConvertToSTDString(currentStepLabel->Text));
 	if (currentStep < currentRecipe.stepByStepManual.size())
 	{
@@ -167,7 +169,7 @@ System::Void RECIPEBOOK::GRAPHICS::previousStepButton_Click(System::Object^ send
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 	int currentStep = Utils::GetCurrentStep(Utils::ConvertToSTDString(currentStepLabel->Text));
 	if (currentStep > 1)
 	{
@@ -198,7 +200,7 @@ System::Void RECIPEBOOK::GRAPHICS::currentStepButton_Click(System::Object^ sende
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 	int currentStep = Utils::GetCurrentStep(Utils::ConvertToSTDString(currentStepLabel->Text));
 	stepEditTextBox->Text = Utils::ConvertToSysString(currentRecipe.stepByStepManual[currentStep - 1].stepText);
 	stepEditTextBox->Visible = true;
@@ -209,7 +211,7 @@ System::Void RECIPEBOOK::GRAPHICS::stepEditTextBox_TextChanged(System::Object^ s
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 	int currentStep = Utils::GetCurrentStep(Utils::ConvertToSTDString(currentStepLabel->Text));
 	currentRecipe.UpdateStepText(currentStep, Utils::ConvertToSTDString(stepEditTextBox->Text));
 	return System::Void();
@@ -223,12 +225,13 @@ System::Void RECIPEBOOK::GRAPHICS::addNewRecipeButton_Click(System::Object^ send
 	return System::Void();
 }
 
+//Delete current recipe
 System::Void RECIPEBOOK::GRAPHICS::deleteCurrentRecipeButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	/*
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 	currentRecipe.DeleteRecipe();
 
 	currentRecipeLabel->ResetText();
@@ -249,7 +252,7 @@ System::Void RECIPEBOOK::GRAPHICS::nameEditTextBox_DoubleClick(System::Object^ s
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 
 	nameEditTextBox->Visible = false;
 	currentRecipeLabel->Text = nameEditTextBox->Text;
@@ -274,7 +277,7 @@ System::Void RECIPEBOOK::GRAPHICS::categoryEditTextBox_DoubleClick(System::Objec
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 
 	categoryEditTextBox->Visible = false;
 	currentRecipeCategoryLabel->Text = categoryEditTextBox->Text;
@@ -298,7 +301,7 @@ System::Void RECIPEBOOK::GRAPHICS::markEditTextBox_DoubleClick(System::Object^ s
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 
 	markEditTextBox->Visible = false;
 	currentRecipeMarkLabel->Text = markEditTextBox->Text;
@@ -322,7 +325,7 @@ System::Void RECIPEBOOK::GRAPHICS::caloriesEditTextBox_DoubleClick(System::Objec
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 
 	caloriesEditTextBox->Visible = false;
 	currentRecipeCaloriesLabel->Text = caloriesEditTextBox->Text;
@@ -345,7 +348,7 @@ System::Void RECIPEBOOK::GRAPHICS::preparingTimeEditTextBox_DoubleClick(System::
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 
 	preparingTimeEditTextBox->Visible = false;
 	currentRecipePreparingTimeLabel->Text = preparingTimeEditTextBox->Text;
@@ -368,7 +371,7 @@ System::Void RECIPEBOOK::GRAPHICS::cookingTimeEditTextBox_DoubleClick(System::Ob
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 
 	cookingTimeEditTextBox->Visible = false;
 	currentRecipeCookingTimeLabel->Text = cookingTimeEditTextBox->Text;
@@ -391,7 +394,7 @@ System::Void RECIPEBOOK::GRAPHICS::allTimeEditTextBox_DoubleClick(System::Object
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 
 	allTimeEditTextBox->Visible = false;
 	currentRecipeAllTimeLabel->Text = allTimeEditTextBox->Text;
@@ -414,7 +417,7 @@ System::Void RECIPEBOOK::GRAPHICS::ingridientsEditTextBox_DoubleClick(System::Ob
 {
 	auto defaultPicture = Utils::ConvertToSysString((fs::current_path() / "default.jpg").string());
 	String^ name = resultRecipeListBox->GetItemText(resultRecipeListBox->SelectedItem);
-	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::ConvertToSTDString(name));
+	Recipe currentRecipe = SearchEngine::FindCurrentRecipe(Utils::GetCurrentRecipeId(Utils::ConvertToSTDString(name)));
 
 	ingridientsEditTextBox->Visible = false;
 	currentRecipeIngridientsLabel->Text = ingridientsEditTextBox->Text;

@@ -76,10 +76,10 @@ Recipe SearchEngine::SearchIntersection(SearchData searchData, const fs::directo
     return recipe;
 }
 
-Recipe SearchEngine::FindCurrentRecipe(std::string name)
+Recipe SearchEngine::FindCurrentRecipe(int id)
 {
     SearchData searchData;
-    searchData.name = name;
+    searchData.id = id;
     std::vector<Recipe> result = Start(searchData);
     if (!result.empty()) return result[0];
     else return Recipe();
@@ -126,6 +126,12 @@ bool SearchEngine::UnionComparator(Recipe recipe, SearchData searchData, const f
             recipe.mark <= std::stoi(searchData.dishMark.second))) {
         return false;
     }
+    
+    if (searchData.id != 0 && searchData.id != recipe.id)
+    {
+        return false;
+    }
+    
 
 
     auto recipeIngridients = recipe.ingridients;
@@ -177,6 +183,11 @@ bool SearchEngine::IntersectionComparator(Recipe recipe, SearchData searchData, 
         (recipe.mark >= std::stoi(searchData.dishMark.first) &&
             recipe.mark <= std::stoi(searchData.dishMark.second))) return true;
 
+
+    if (searchData.id != 0 && searchData.id == recipe.id)
+    {
+        return true;
+    }
 
     auto recipeIngridients = recipe.ingridients;
     auto searchIngridients = searchData.ingridients;
@@ -262,7 +273,7 @@ Recipe SearchEngine::ParseRecipeData(const fs::path& recipePath)
     std::string field;
     int fieldsCounter = 0;
 
-    while (std::getline(fstr, field) || fieldsCounter < 9)
+    while (std::getline(fstr, field) || fieldsCounter <= 9)
     {
         switch (fieldsCounter)
         {
@@ -292,6 +303,9 @@ Recipe SearchEngine::ParseRecipeData(const fs::path& recipePath)
             break;
         case 8:
             recipe.dishTypes = Utils::ConvertToArray(field);
+            break;
+        case 9:
+            recipe.id = std::stoi(field);
             break;
         default:
             break;

@@ -46,16 +46,18 @@ public:
 	bool DeleteRecipe();
 	bool UpdateStepText(int step, std::string text);
 	bool UpdateRecipeData(int mode, std::string text);
+	void SetNewId();
 
 	//Formatted output
 	static std::string MakeCategoryOutput(std::vector<std::string> givenArray);
 	static std::string MakeIngridientsOutput(std::vector<Ingridient> givenArray);
 
 	//MainData parsing
-	static std::string ParseCategories(std::string text);
-	static std::string ParseMark(std::string text);
-	static std::string ParseCaloriesAndTime(std::string text);
-	static std::string ParseIngridients(std::string text);
+	static std::string ParseCategories(std::string text, int mode);
+	static std::string ParseMark(std::string text, int mode);
+	static std::string ParseCaloriesAndTime(std::string text, int mode);
+	static std::string ParseIngridients(std::string text, int mode);
+	void ParseInstructionText(std::vector<std::string> stepsText);
 
 	//Converters
 	std::string ConvertFromIngridients();
